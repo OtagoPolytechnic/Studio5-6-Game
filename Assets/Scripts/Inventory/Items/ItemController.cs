@@ -109,6 +109,15 @@ public class ItemController : MonoBehaviour
                 }
                 
                 break;
+            case 13:
+                //PlayerHealth.hasLantern = true;
+                Debug.Log("Player has a lantern");
+            break;
+            case 14:
+                //PlayerHealth.coins ++;
+
+                Debug.Log("you picked up a coin");
+            break;
             default:
                 Debug.LogError("No item was given to the player, either, the item added to the list was not given a case, or the id does not match a current case.");
             break;
