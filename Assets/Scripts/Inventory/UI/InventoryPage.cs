@@ -10,6 +10,7 @@ public class Item
     public string desc;
     public rarity rarity;
     public int stacks;
+    public Action itemAction;
 }
 
 public enum rarity{

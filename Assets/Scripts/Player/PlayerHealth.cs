@@ -104,4 +104,16 @@ public class PlayerHealth : MonoBehaviour
         GameObject damageTextInst = Instantiate(damageText, gameObject.transform);
         damageTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString();
     }
+
+        public static void UpgradeStat(float stat, float value, bool percentageUpgrade = false)
+    {
+        if (percentageUpgrade)
+        {
+            stat *= value;
+        }
+        else
+        {
+            stat += value;
+        }
+    }
 }
