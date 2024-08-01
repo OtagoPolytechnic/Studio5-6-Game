@@ -76,10 +76,16 @@ public class ItemController : MonoBehaviour
 
     }
 
-    public void AddItemStack(int id) => InventoryPage.itemList[id].stacks ++; //Add 1 to selected item stack
-
+    public void AddItemStack(int id) 
+    {
+        if (InventoryPage.itemList[id].isStackable) //If the item is stackable
+        {
+            InventoryPage.itemList[id].stacks ++; //Add 1 to selected item stack
+        }
+    }
     
 
+//Should be Deleted once all references are removed
     public void ItemPicked(int itemID)
     {
         Debug.Log(itemID);
