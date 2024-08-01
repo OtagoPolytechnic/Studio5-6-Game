@@ -9,23 +9,37 @@ public class InventoryController : MonoBehaviour
     public Timer timer;
     [SerializeField]
     private InventoryPage inventoryUI;
+    public static InventoryController instance;
     [HideInInspector]
     public int inventorySize = 3;
 
+    void Awake()
+    {
+        instance = this;
+    }
     public void Start() 
     {
         timer = timerManager.GetComponent<Timer>();
     }
 
+    public void ShowInventory()
+    {
+        inventoryUI.Show();
+        inventoryUI.InitializeInventoryUI(3);
+    }
+    public void HideInventory()
+    {
+        inventoryUI.Hide();
+    }
     public void Update() 
     {
-        if (!timer.running)
-        {
-            inventoryUI.Show();
-        }
-        else
-        {     
-            inventoryUI.Hide();
-        }
+        // if (!timer.running)
+        // {
+        //     inventoryUI.Show();
+        // }
+        // else
+        // {     
+        //     inventoryUI.Hide();
+        // }
     }
 }

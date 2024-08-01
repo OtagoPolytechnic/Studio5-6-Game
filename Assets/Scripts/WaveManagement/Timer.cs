@@ -51,7 +51,7 @@ public class Timer : MonoBehaviour
                 if (inventoryItems[i].itemChosen)
                 {
                     Debug.Log("Item Picked!");
-                    NextWave();
+                    //NextWave();
                 }
             }
 
