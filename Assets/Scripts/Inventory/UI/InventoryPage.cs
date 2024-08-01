@@ -12,6 +12,8 @@ public class Item
     public int stacks;
     public int baseCost;
     public Action itemAction;
+    public bool isStackable = true;
+    public bool isInShop = true;
 }
 
 public enum rarity{
@@ -55,8 +57,8 @@ public class InventoryPage : MonoBehaviour
         new() { id = 10, name = "Glass Cannon", desc = "Halves your health to double your damage", rarity = rarity.Epic, stacks = 0,itemAction = () => { ItemController.instance.GlassCannon(); } , baseCost = 8},
         new() { id = 11, name = "Shotgun", desc = "You shoot a spread of bullets instead of one", rarity = rarity.Epic, stacks = 0 ,itemAction = () => { ItemController.instance.IncreaseBulletAmount(); } , baseCost = 8},
         new() { id = 12, name = "Lucky Dive", desc = "Gain two random basic stats at half strength", rarity = rarity.Uncommon, stacks = 0, itemAction = () => { ItemController.instance.LuckyDive(); } , baseCost = 1},
-        new() { id = 13, name = "Lantern", desc = "Allows you to see in the dark", rarity = rarity.Uncommon, stacks = 0, itemAction = () => { Debug.Log("Lantern = true"); } , baseCost = 3},
-        new() { id = 14, name = "Coin", desc = "Spend it", rarity = rarity.Common, stacks = 0,itemAction = () => { Debug.Log("playerCoins++"); } , baseCost = 4},
+        new() { id = 13, name = "Lantern", desc = "Allows you to see in the dark", rarity = rarity.Uncommon, stacks = 0, itemAction = () => { Debug.Log("Lantern = true"); } , baseCost = 3, isStackable = false},
+        new() { id = 14, name = "Coin", desc = "Spend it", rarity = rarity.Common, stacks = 0,itemAction = () => { Debug.Log("playerCoins++"); } , baseCost = 4 , isInShop = false},
     };
     //in this list, there cannot be less than 3 of each rarity for the case that 3 of one rarity is picked on the item selection. 
 
@@ -91,8 +93,18 @@ public class InventoryPage : MonoBehaviour
         return roll;
     }
 
-    public void InitializeInventoryUI(int inventorySize) //this is called every time the inventory ui pops up
+    public void InitializeInventoryUI(int inventorySize, bool shop = false) //this is called every time the inventory ui pops up
     { 
+        if (shop)
+        {
+            foreach (Item i in itemList)
+            {
+                if (!i.isInShop)
+                {
+                    itemList.Remove(i);
+                }
+            }
+        }
         for (int i = preGeneratedItems.Count - 1; i >= 0; i--) //makes sure the items previously generated are cleared to not bunch up on the inventory window
         {
             Destroy(preGeneratedItems[i].gameObject); //removes item
