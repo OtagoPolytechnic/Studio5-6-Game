@@ -64,6 +64,7 @@ public class InventoryItem : MonoBehaviour
        // itemController.ItemPicked(itemID); //activate the item selected's code
         clicked(); //activate the item's action
         itemChosen = true; 
+        itemController.AddItemStack(itemID);
         InventoryController.instance.HideInventory();
 
     }

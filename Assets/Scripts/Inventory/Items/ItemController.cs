@@ -9,10 +9,7 @@ public class ItemController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this);
+        instance = this;
     }
 
     public void IncreaseLives()
@@ -78,6 +75,10 @@ public class ItemController : MonoBehaviour
                 }
 
     }
+
+    public void AddItemStack(int id) => InventoryPage.itemList[id].stacks ++; //Add 1 to selected item stack
+
+    
 
     public void ItemPicked(int itemID)
     {

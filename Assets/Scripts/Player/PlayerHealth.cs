@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using PlasticPipe.PlasticProtocol.Messages;
 
 public class PlayerHealth : MonoBehaviour
 {
     //health vars
+    public float playerGold;
     public static float maxHealth = 100;
     public static float currentHealth;
     float regenTick = 3f;
@@ -74,6 +76,7 @@ public class PlayerHealth : MonoBehaviour
     
     void Start()
     {
+        playerGold = 50;
         currentHealth = maxHealth;
     }
 

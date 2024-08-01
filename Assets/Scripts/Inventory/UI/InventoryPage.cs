@@ -30,6 +30,7 @@ public class InventoryPage : MonoBehaviour
     [SerializeField]
     private RectTransform contentPanel;
 
+
     private int index;
     private rarity roll;    
     private List<InventoryItem> preGeneratedItems = new List<InventoryItem>();
