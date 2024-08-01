@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public GameObject damageText;
     public GameObject critText;
+    public Coin coinDrop;
     public int baseHealth;
     [HideInInspector] public int health;
     public float bleedTick = 1f;
@@ -24,6 +25,8 @@ public class EnemyHealth : MonoBehaviour
             ScoreManager.Instance.IncreasePoints(10);
             EnemySpawner.currentEnemies.Remove(gameObject);
             Destroy(gameObject);
+            //drop coin on death
+            Instantiate(coinDrop, transform.position, Quaternion.identity);
         }
     }
     void Bleed() //this function needs to be reworked to be able to stack bleed on the target
