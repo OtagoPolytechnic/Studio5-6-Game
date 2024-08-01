@@ -12,20 +12,65 @@ public class PlayerHealth : MonoBehaviour
     float regenTick = 3f;
     float regenInterval = 3f;
     public static float regenAmount = 0;
-    public static bool regenTrue = false;
+    public static bool regenTrue { //The bool will check if the regen amount is greater than 0, if it is, regen is true
+        get
+        {
+            return regenAmount > 0;
+        }
+
+    }
     public static float lifestealAmount = 0;
     //damage vars
     public static int damage = 20;
     public static int explosionSize = 0;
-    public static bool explosiveBullets = false;
+    public static bool explosiveBullets {
+        get
+        {
+            return explosionSize > 0;
+        }
+    }
+
+    public static float CritChance     {
+        get
+        {
+            return critChance;
+        }
+        set
+        {
+            if (value > 1) //If the crit chance is greater than 1, set it to 1
+            {
+                critChance = 1;
+            }
+            else
+            {
+                critChance = value;
+            }
+        }
+    }
+
     public static bool bleedTrue = false;
-    public static float critChance = 0.01f;
+
+    private static float critChance;
     public static bool hasShotgun = false;
     public static int bulletAmount = 0; //this is for the extra bullets spawned by the shotgun item - it should always be even
     //other vars
     public GameObject damageText;
     public List<GameObject> lifeEggs;
     public UnityEvent onPlayerRespawn = new UnityEvent();
+    public static PlayerHealth instance;
+
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     
     void Start()
     {
@@ -105,7 +150,7 @@ public class PlayerHealth : MonoBehaviour
         damageTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString();
     }
 
-        public static void UpgradeStat(float stat, float value, bool percentageUpgrade = false)
+    public  void UpgradeStat(float stat, float value, bool percentageUpgrade = false)
     {
         if (percentageUpgrade)
         {
