@@ -97,12 +97,18 @@ public class InventoryPage : MonoBehaviour
     { 
         if (shop)
         {
+            List<Item> itemsToRemove = new List<Item>();
             foreach (Item i in itemList)
             {
                 if (!i.isInShop)
                 {
-                    itemList.Remove(i);
+                    itemsToRemove.Add(i);
+   
                 }
+            }
+            foreach (Item i in itemsToRemove)
+            {
+                itemList.Remove(i);
             }
         }
         for (int i = preGeneratedItems.Count - 1; i >= 0; i--) //makes sure the items previously generated are cleared to not bunch up on the inventory window

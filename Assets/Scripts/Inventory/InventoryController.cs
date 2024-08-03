@@ -25,7 +25,7 @@ public class InventoryController : MonoBehaviour
     public void ShowInventory()
     {
         inventoryUI.Show();
-        inventoryUI.InitializeInventoryUI(3);
+        inventoryUI.InitializeInventoryUI(3,true);
     }
     public void HideInventory()
     {

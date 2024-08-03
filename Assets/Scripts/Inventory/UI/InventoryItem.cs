@@ -65,7 +65,7 @@ public class InventoryItem : MonoBehaviour
         clicked(); //activate the item's action
         itemChosen = true; 
         itemController.AddItemStack(itemID);
-        InventoryController.instance.HideInventory();
+        CatShop.instance.CloseShop();
 
     }
 }
