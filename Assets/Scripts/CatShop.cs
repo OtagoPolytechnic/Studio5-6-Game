@@ -12,11 +12,10 @@ public class CatShop : MonoBehaviour
     {
         instance = this;
     }
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Player entered shop");
             playerInShop = true;
         }
     }
@@ -24,7 +23,6 @@ public class CatShop : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Player left the shop");
             playerInShop = false;
         }
     }
