@@ -10,10 +10,10 @@ public class Item
     public string desc;
     public rarity rarity;
     public int stacks;
-    public int baseCost;
-    public Action itemAction;
-    public bool isStackable = true;
-    public bool isInShop = true;
+    public int baseCost; //Initial cost of the item
+    public Action itemAction; //This can be called to apply the item's effect such as increasing player health or damage
+    public bool isStackable = true; //Whether the item can be stacked in the inventory
+    public bool isInShop = true; //Whether the item can be found in the shop
 }
 
 public enum rarity{
@@ -97,6 +97,7 @@ public class InventoryPage : MonoBehaviour
     { 
         if (shop)
         {
+            /// Remove any items that shouldn't be in the shop
             List<Item> itemsToRemove = new List<Item>();
             foreach (Item i in itemList)
             {
