@@ -6,6 +6,8 @@ public class Coin : MonoBehaviour
 {
     [SerializeField]
     public int coinValue;
+
+    //adds to points and destroys coin on collection
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
