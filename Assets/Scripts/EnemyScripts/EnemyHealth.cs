@@ -22,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             SFXManager.Instance.EnemyDieSound();
-            ScoreManager.Instance.IncreasePoints(10);
             EnemySpawner.currentEnemies.Remove(gameObject);
             Destroy(gameObject);
             //drop coin on death
