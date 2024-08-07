@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lantern : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool isActive = false; // Track lantern state
+    public Light lanternLight; // Reference to the Point Light
+
     void Start()
     {
-        
+        lanternLight.enabled = isActive;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleLantern()
     {
-        
+        isActive = !isActive;
+        lanternLight.enabled = isActive;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            ToggleLantern();
+        }
     }
 }
