@@ -33,13 +33,13 @@ public class RoomGeneration : MonoBehaviour
         return roomPrefabs[Random.Range(0, roomPrefabs.Length)];
     }
 
-    private void PlaceRoom(GameObject room)
+    private void PlaceRoom(GameObject roomPrefab)
     {
         if (currentRooms.Count == 0)
         {
             Debug.Log("Placing Room at 0,0");
-            room.transform.position = Vector3.zero;
-            currentRooms.Add(room);
+            Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
+            currentRooms.Add(roomPrefab);
         }
         else
         {
@@ -47,35 +47,32 @@ public class RoomGeneration : MonoBehaviour
             switch(Random.Range(1, 5)) // 1 left, 2, up, 3 right, 4 down
             {
                 case 1:
-                    room.transform.position = new Vector3(currentRooms[currentRooms.Count - 1].transform.position.x - 10, currentRooms[currentRooms.Count - 1].transform.position.y, 0); // the x position of the last room placed - 10
-                    CheckPosition(room);
-                    break;
-                case 2:
-                    room.transform.position = new Vector3(currentRooms[currentRooms.Count - 1].transform.position.x, currentRooms[currentRooms.Count - 1].transform.position.y + 10, 0); // the y position of the last room placed + 10
-                    CheckPosition(room);
+                    // check the room position 25 units left, if any room in the currentRoom list has that vector2, while check room is false, keep checking and increase the x value by 25
+                    if (CheckPosition(new Vector2(-25, 0)))
+                    {
+                        Instantiate(roomPrefab, new Vector3(-25, 0, 0), Quaternion.identity);
+                    }
                     break;
                 case 3:
-                    room.transform.position = new Vector3(currentRooms[currentRooms.Count - 1].transform.position.x + 10, currentRooms[currentRooms.Count - 1].transform.position.y, 0); // the x position of the last room placed + 10
-                    CheckPosition(room);
                     break;
                 case 4:
-                    room.transform.position = new Vector3(currentRooms[currentRooms.Count - 1].transform.position.x, currentRooms[currentRooms.Count - 1].transform.position.y - 10, 0); // the y position of the last room placed - 10
-                    CheckPosition(room);
                     break;
             }
         }
 
     }
 
-    private void CheckPosition(GameObject room) //gets called in place room
+    private bool CheckPosition(Vector2 pos) //gets called in place room
     {
-        for (int i = 0; i < currentRooms.Count; i++) // check through the list of currently placed rooms
+        for (int i = 0; i < currentRooms.Count; i++)
         {
-            // if none of the current rooms overlap with the next room, place the room
-            if (room.transform.position != currentRooms[i].transform.position)
+            if (currentRooms[i].transform.position == pos)
             {
-                room.transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
-                currentRooms.Add(room);
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
