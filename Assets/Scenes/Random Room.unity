@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4148070552407258895, guid: 244a6eb36582e1844b1f118cb0834077, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 244a6eb36582e1844b1f118cb0834077, type: 3}
 --- !u!1 &519420028
@@ -569,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1020626fbdc2ccc4b953a41c846fc9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms:
+  roomPrefabs:
   - {fileID: 4148070552407258895, guid: 244a6eb36582e1844b1f118cb0834077, type: 3}
   - {fileID: 7818005104325042211, guid: adcab2dca8d3e4249b8118e51f92a6e5, type: 3}
   - {fileID: 461846563397244472, guid: 08315d9e752bcde4aa444581474b8f66, type: 3}
