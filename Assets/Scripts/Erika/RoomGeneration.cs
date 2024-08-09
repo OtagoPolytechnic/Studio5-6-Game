@@ -13,18 +13,12 @@ public class RoomGeneration : MonoBehaviour
 {
     [SerializeField] private GameObject[] roomPrefabs; // A list of the rooms that will be pulled from the prefabs
     private List<GameObject> currentRooms = new List<GameObject>(); // A list of the generated rooms so none overlap
-    //private List<Vector3> placedRoomPos = new List<Vector3>();
+    private List<Vector2> placedRoomPos = new List<Vector2>();
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateRoom();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private GameObject ChooseRoom()
@@ -35,46 +29,69 @@ public class RoomGeneration : MonoBehaviour
 
     private void PlaceRoom(GameObject roomPrefab)
     {
+        Vector2 newPos;
+
         if (currentRooms.Count == 0)
         {
             Debug.Log("Placing Room at 0,0");
-            Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
-            currentRooms.Add(roomPrefab);
+            newPos = Vector2.zero;
         }
         else
         {
             Debug.Log("Placing Room at Random Position");
-            switch(Random.Range(1, 5)) // 1 left, 2, up, 3 right, 4 down
-            {
-                case 1:
-                    // check the room position 25 units left, if any room in the currentRoom list has that vector2, while check room is false, keep checking and increase the x value by 25
-                    if (CheckPosition(new Vector2(-25, 0)))
-                    {
-                        Instantiate(roomPrefab, new Vector3(-25, 0, 0), Quaternion.identity);
-                    }
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-            }
+            Vector2 lastRoomPos = placedRoomPos[placedRoomPos.Count - 1];
+            newPos = CheckNewPosition(lastRoomPos);
         }
 
+        Instantiate(roomPrefab, newPos, Quaternion.identity);
+        currentRooms.Add(roomPrefab);
+        placedRoomPos.Add(newPos);
+    }
+
+    private Vector2 CheckNewPosition(Vector2 lastRoomPos)
+    {
+        Vector2 newPos = lastRoomPos;
+
+        while (true)
+        {
+            switch(Random.Range(1,5))
+            {
+                case 1:
+                    newPos = new Vector2(lastRoomPos.x - 25, lastRoomPos.y); // left
+                    break;
+                case 2:
+                    newPos = new Vector2(lastRoomPos.x, lastRoomPos.y + 25); // above
+                    break;
+                case 3:
+                    newPos = new Vector2(lastRoomPos.x + 25, lastRoomPos.y); // right
+                    break;
+                case 4:
+                    newPos = new Vector2(lastRoomPos.x, lastRoomPos.y - 25); // below
+                    break;
+            
+            }
+
+            if (!CheckPosition(newPos))
+            {
+                return newPos;
+            }
+            else
+            {
+                lastRoomPos = newPos;
+            }
+        }
     }
 
     private bool CheckPosition(Vector2 pos) //gets called in place room
     {
-        for (int i = 0; i < currentRooms.Count; i++)
+        foreach (Vector2 placedPos in placedRoomPos)
         {
-            if (currentRooms[i].transform.position == pos)
-            {
-                return false;
-            }
-            else
+            if (placedPos == pos)
             {
                 return true;
             }
         }
+        return false;
     }
 
     private void GenerateRoom()
