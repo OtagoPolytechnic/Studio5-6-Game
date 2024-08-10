@@ -2,23 +2,34 @@ using UnityEngine;
 
 public class Lantern : MonoBehaviour
 {
-    public bool isActive = false; // Track lantern state
-    public Light lanternLight; // Reference to the Point Light
+    public bool isActive = false; // Lantern state
+    public GameObject blackOverlay; // Reference to the black overlay
 
-    void Start()
-    {
-        lanternLight.enabled = isActive;
-    }
-
-    public void ToggleLantern()
+    void ToggleLantern()
     {
         isActive = !isActive;
-        lanternLight.enabled = isActive;
+
+        if (isActive)
+        {
+            blackOverlay.SetActive(false); // Disable overlay
+        }
+        else
+        {
+            blackOverlay.SetActive(true); // Enable overlay
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ToggleLantern();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
             ToggleLantern();
         }
