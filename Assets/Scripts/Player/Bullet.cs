@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
         float critRoll = Random.Range(0f,1f);
         
         //crit damage calculation
-        if (critRoll < PlayerHealth.critChance)
+        if (critRoll < PlayerHealth.CritChance)
         {
             critDamage += Mathf.RoundToInt(PlayerHealth.damage * 1.50f);
             critTrue = true;

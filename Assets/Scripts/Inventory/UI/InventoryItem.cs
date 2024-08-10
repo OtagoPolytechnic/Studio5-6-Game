@@ -20,19 +20,26 @@ public class InventoryItem : MonoBehaviour
     public rarity itemRarity;
     [HideInInspector]
     public int itemStacks;
+
+    [HideInInspector]
+    public int cost;
+
+    [SerializeField]
     public GameObject inventory;
-    public TextMeshProUGUI textName, textDesc, textStacks;
+    public TextMeshProUGUI textName, textDesc, textStacks,costText;
     public Image borderColor;
     public Color32 commonColor, uncommonColor, rareColor, epicColor;
     public GameObject timerManager;
     public Timer timer;
     public ItemController itemController;
+    public Action clicked;
 
     void Start()
     {
         timer = timerManager.GetComponent<Timer>();
         textName.text = itemName;
         textDesc.text = itemDesc;
+        costText.text = cost.ToString();
         textStacks.text = itemStacks.ToString();
 
         if (itemRarity == rarity.Uncommon) //sets background color
@@ -54,7 +61,11 @@ public class InventoryItem : MonoBehaviour
     }
     public void Click()
     {
-        itemController.ItemPicked(itemID); //activate the item selected's code
+       // itemController.ItemPicked(itemID); //activate the item selected's code
+        clicked(); //activate the item's action
         itemChosen = true; 
+        itemController.AddItemStack(itemID);
+        CatShop.instance.CloseShop();
+
     }
 }
