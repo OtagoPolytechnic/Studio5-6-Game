@@ -45,12 +45,10 @@ public class GameManager : MonoBehaviour
         //Player variables
         PlayerHealth.maxHealth = 100;
         PlayerHealth.regenAmount = 0;
-        PlayerHealth.regenTrue = false;
         PlayerHealth.lifestealAmount = 0;
         PlayerHealth.damage = 20;
         PlayerHealth.explosionSize = 0;
-        PlayerHealth.explosiveBullets = false;
-        PlayerHealth.critChance = 0.01f;
+        PlayerHealth.CritChance = 0.01f;
         PlayerHealth.hasShotgun = false;
         PlayerHealth.bulletAmount = 0;
 

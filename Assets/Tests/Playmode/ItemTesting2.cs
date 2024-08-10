@@ -117,7 +117,7 @@ public class ItemTesting2
         }
 
         // Store the initial initialCritChance amount
-        float initialCritChance = PlayerHealth.critChance;
+        float initialCritChance = PlayerHealth.CritChance;
 
         PlayerHealth bulletAmount = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
 
@@ -140,7 +140,7 @@ public class ItemTesting2
         Assert.Greater(EnemyHealth.bleedAmount, initialBleedAmount, "BleedAmount did not increase");
         Assert.Greater(PlayerHealth.lifestealAmount, initialLifestealAmount, "LifestealAmount did not increase");
         Assert.Greater(PlayerHealth.explosionSize, initialexplosionSize, "ExplosionSize did not increase");
-        Assert.Greater(PlayerHealth.critChance, initialCritChance, "CritChance did not increase");
+        Assert.Greater(PlayerHealth.CritChance, initialCritChance, "CritChance did not increase");
         Assert.Greater(PlayerHealth.bulletAmount, initialShotgun, "initialShotgun did not increase");
     }
 }

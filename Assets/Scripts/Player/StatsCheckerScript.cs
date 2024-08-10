@@ -32,7 +32,7 @@ public class StatsCheckerScript : MonoBehaviour
         initialBleedAmount = EnemyHealth.bleedAmount;
         initialBleedAmount = PlayerHealth.lifestealAmount;
         initialExplosiveBullets = PlayerHealth.explosionSize;
-        initialCritChance = PlayerHealth.critChance;
+        initialCritChance = PlayerHealth.CritChance;
         initialMaxHelath = PlayerHealth.maxHealth;
         initialShotgun = PlayerHealth.bulletAmount;
 
