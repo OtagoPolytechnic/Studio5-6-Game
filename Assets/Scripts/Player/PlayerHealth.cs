@@ -160,7 +160,7 @@ public class PlayerHealth : MonoBehaviour
     /// <param name="stat">What is being upgraded</param>
     /// <param name="value">The ammount to be applied </param>
     /// <param name="percentageUpgrade">Whether the value should be treated as a percentage</param>
-    public  void UpgradeStat(float stat, float value, bool percentageUpgrade = false) 
+    public  float UpgradeStat(float stat, float value, bool percentageUpgrade = false) 
     {
         if (percentageUpgrade)
         {
@@ -170,5 +170,6 @@ public class PlayerHealth : MonoBehaviour
         {
             stat += value;
         }
+        return stat;
     }
 }
