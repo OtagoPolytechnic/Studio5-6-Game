@@ -63,7 +63,11 @@ public class CatShop : MonoBehaviour
         upgradeBtnImage.color = selected;
         itemsBtnImage.color = unSelected;
         ClearUI();
-        Instantiate(upgradeUIPrefab,containerParent);
+        for (int i = 0; i < 3; i++)
+        {
+            StatUpgrade statUpgrade = Instantiate(upgradeUIPrefab,containerParent).GetComponent<StatUpgrade>();
+            statUpgrade.stat = (Stats)i;
+        }
     }
     private void LoadItems()
     {
