@@ -66,7 +66,7 @@ public class ShopItem : MonoBehaviour
         if (level == MAXLEVEL)
         {
             button.interactable = false;
-            costText.text = "OUT OF STOCK";
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "OUT OF STOCK";
         }
         
     }
