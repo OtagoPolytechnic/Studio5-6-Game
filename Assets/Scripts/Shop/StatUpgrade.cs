@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StatUpgrade : MonoBehaviour
 {
     public int level = 1;
+    private const int MAXLEVEL = 10;
     public float baseCost = 2f;
     public Stats stat;
     public float value;
@@ -53,9 +54,13 @@ public class StatUpgrade : MonoBehaviour
     }
     public void UpgradeClicked()
     {
-        SetStatValue(stat, PlayerHealth.instance.UpgradeStat(GetStatValue(stat), upgradeModifier, percentUpgrade));
-        baseCost += level;
-        UpdateUI();
+        if (level < MAXLEVEL)
+        {
+            SetStatValue(stat, PlayerHealth.instance.UpgradeStat(GetStatValue(stat), upgradeModifier, percentUpgrade));
+            baseCost += level;
+            level++;
+            UpdateUI();
+        }
     }
     private void Start()
     {
@@ -105,6 +110,11 @@ public class StatUpgrade : MonoBehaviour
         nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(stat) ,upgradeModifier,percentUpgrade)).ToString("F2");
         costText.text = "$" + baseCost.ToString();
         titleText.text = ConvertStatToString(stat);
+        if (level >= MAXLEVEL)
+        {
+            button.interactable = false;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "MAX";
+        }
     }
 
 }
