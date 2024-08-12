@@ -22,6 +22,10 @@ public class TopDownMovement : MonoBehaviour
 
     void Update()
     {
+        if(CatShop.instance.ShopMenuOpen)
+        {
+            return;
+        }
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 

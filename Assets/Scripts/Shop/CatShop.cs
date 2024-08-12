@@ -13,6 +13,7 @@ public class CatShop : MonoBehaviour
 
     private bool playerInShop = false;
     private bool shopMenuOpen = false;
+    public bool ShopMenuOpen { get => shopMenuOpen; set => shopMenuOpen = value; }
     public static CatShop instance;
     private ShopTabs activeTab = ShopTabs.UPGRADES;
     [SerializeField]
@@ -30,6 +31,11 @@ public class CatShop : MonoBehaviour
     public GameObject itemUIPrefab;
     public Transform containerParent;
 
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -86,10 +92,6 @@ public class CatShop : MonoBehaviour
     {
         activeTab = ShopTabs.ITEMS;
     }
-    void Awake()
-    {
-        instance = this;
-    }
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.tag == "Player")
@@ -110,7 +112,7 @@ public class CatShop : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (!shopMenuOpen)
+                if (!ShopMenuOpen)
                 {
                     OpenShop();
                 }
@@ -126,12 +128,12 @@ public class CatShop : MonoBehaviour
     {
         // InventoryController.instance.ShowInventory();
         panel.SetActive(true);
-        shopMenuOpen = true;
+        ShopMenuOpen = true;
     }
     public void CloseShop()
     {
         // InventoryController.instance.HideInventory();
-        shopMenuOpen = false;
+        ShopMenuOpen = false;
         panel.SetActive(false);
 
     }

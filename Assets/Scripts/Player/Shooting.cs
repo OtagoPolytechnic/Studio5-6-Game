@@ -36,6 +36,10 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
+        if(CatShop.instance.ShopMenuOpen)
+        {
+            return;
+        }
         lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         lookDirection = new Vector2(lookDirection.x - transform.position.x, lookDirection.y - transform.position.y);
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
