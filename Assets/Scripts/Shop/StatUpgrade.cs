@@ -22,18 +22,19 @@ public class StatUpgrade : MonoBehaviour
 
     private float GetStatValue(Stats stat)
     {
-        switch(stat)
+        if (stat == Stats.SPEED)
         {
-            case Stats.SPEED:
-                return TopDownMovement.moveSpeed;
-                break;
-            case Stats.DAMAGE:
-                return PlayerHealth.damage;
-                break;
-            case Stats.HEALTH:
-                return PlayerHealth.maxHealth;
-                break;
+            return TopDownMovement.moveSpeed;
         }
+        else if (stat == Stats.DAMAGE)
+        {
+            return PlayerHealth.damage;
+        }
+        else if (stat == Stats.HEALTH)
+        {
+            return PlayerHealth.maxHealth;
+        }
+
         return -1;
 
     }
@@ -86,27 +87,28 @@ public class StatUpgrade : MonoBehaviour
 
     private string ConvertStatToString(Stats stat)
     {
+        string output = null;
         switch(stat)
         {
             case Stats.SPEED:
-                return "Speed";
+                output = "Speed";
                 break;
             case Stats.DAMAGE:
-                return "Damage";
+                output = "Damage";
                 break;
             case Stats.HEALTH:
-                return "Health";
+                output = "Health";
                 break;
             default:
-                return "Null";
+                output = "Null";
                 break;
         }
-        return "Null";
+        return output;
     }
 
     private void UpdateUI()
     {
-            currentLevelText.text = GetStatValue(Stat).ToString("F2");
+        currentLevelText.text = GetStatValue(Stat).ToString("F2");
         nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(Stat) ,upgradeModifier,percentUpgrade)).ToString("F2");
         costText.text = "$" + baseCost.ToString("F2");
         titleText.text = ConvertStatToString(Stat);
