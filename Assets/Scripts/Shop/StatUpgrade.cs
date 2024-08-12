@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class StatUpgrade : MonoBehaviour
 {
-    public int level = 1;
+    private int level = 1;
     private const int MAXLEVEL = 10;
-    public float baseCost = 2f;
-    public Stats stat;
-    public float value;
-    public bool percentUpgrade;
-    public float upgradeModifier;
+    private float baseCost = 25f;
+    private Stats stat;
+    public Stats Stat { get => stat; set => stat = value; }
+    private bool percentUpgrade;
+    private float upgradeModifier;
     public TextMeshProUGUI currentLevelText;
     public Button button;
     public TextMeshProUGUI nextLevelText;
@@ -56,8 +56,8 @@ public class StatUpgrade : MonoBehaviour
     {
         if (level < MAXLEVEL)
         {
-            SetStatValue(stat, PlayerHealth.instance.UpgradeStat(GetStatValue(stat), upgradeModifier, percentUpgrade));
-            baseCost += level;
+            SetStatValue(Stat, PlayerHealth.instance.UpgradeStat(GetStatValue(Stat), upgradeModifier, percentUpgrade));
+            baseCost *= 1.25f;
             level++;
             UpdateUI();
         }
@@ -66,7 +66,7 @@ public class StatUpgrade : MonoBehaviour
     {
    
 
-        switch(stat)
+        switch(Stat)
         {
             case Stats.SPEED:
                 upgradeModifier = 1.05f;
@@ -106,10 +106,10 @@ public class StatUpgrade : MonoBehaviour
 
     private void UpdateUI()
     {
-            currentLevelText.text = GetStatValue(stat).ToString("F2");
-        nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(stat) ,upgradeModifier,percentUpgrade)).ToString("F2");
-        costText.text = "$" + baseCost.ToString();
-        titleText.text = ConvertStatToString(stat);
+            currentLevelText.text = GetStatValue(Stat).ToString("F2");
+        nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(Stat) ,upgradeModifier,percentUpgrade)).ToString("F2");
+        costText.text = "$" + baseCost.ToString("F2");
+        titleText.text = ConvertStatToString(Stat);
         if (level >= MAXLEVEL)
         {
             button.interactable = false;

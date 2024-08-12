@@ -72,7 +72,7 @@ public class CatShop : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             StatUpgrade statUpgrade = Instantiate(upgradeUIPrefab,containerParent).GetComponent<StatUpgrade>();
-            statUpgrade.stat = (Stats)i;
+            statUpgrade.Stat = (Stats)i;
         }
     }
     private void LoadItems()
