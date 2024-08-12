@@ -66,7 +66,6 @@ public class StatUpgrade : MonoBehaviour
     private void Start()
     {
    
-
         switch(Stat)
         {
             case Stats.SPEED:

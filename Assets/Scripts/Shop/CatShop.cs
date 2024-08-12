@@ -26,11 +26,9 @@ public class CatShop : MonoBehaviour
     private Color selected;
         [SerializeField]
     private Color unSelected;
-
     public GameObject upgradeUIPrefab;
     public GameObject itemUIPrefab;
     public Transform containerParent;
-
 
     void Awake()
     {
@@ -79,9 +77,9 @@ public class CatShop : MonoBehaviour
     {
         upgradeBtnImage.color = unSelected;
         itemsBtnImage.color = selected;
-                ClearUI();
-
-        Instantiate(itemUIPrefab,containerParent);
+        ClearUI();
+        ShopItem item = Instantiate(itemUIPrefab,containerParent).GetComponent<ShopItem>();
+        item.itemName = "Shotgun";
     }
     public void SetUpgradesActive()
     {
