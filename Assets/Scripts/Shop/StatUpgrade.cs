@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class StatUpgrade : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class StatUpgrade : MonoBehaviour
     public bool percentUpgrade;
     public float upgradeModifier;
     public TextMeshProUGUI currentLevelText;
-
+    public Button button;
     public TextMeshProUGUI nextLevelText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI titleText;
@@ -35,20 +36,47 @@ public class StatUpgrade : MonoBehaviour
         return -1;
 
     }
+    private void SetStatValue(Stats stat, float value)
+    {
+        switch(stat)
+        {
+            case Stats.SPEED:
+                TopDownMovement.moveSpeed = value;
+                break;
+            case Stats.DAMAGE:
+                PlayerHealth.damage =(int) value;
+                break;
+            case Stats.HEALTH:
+                PlayerHealth.maxHealth = value;
+                break;
+        }
+    }
+    public void UpgradeClicked()
+    {
+        SetStatValue(stat, PlayerHealth.instance.UpgradeStat(GetStatValue(stat), upgradeModifier, percentUpgrade));
+        baseCost += level;
+        UpdateUI();
+    }
     private void Start()
     {
-        if (GetStatValue(stat) != -1)
+   
+
+        switch(stat)
         {
-            value = GetStatValue(stat);
+            case Stats.SPEED:
+                upgradeModifier = 1.05f;
+                percentUpgrade = true;
+                break;
+            case Stats.DAMAGE:
+                upgradeModifier = 10f;
+                percentUpgrade = false;
+                break;
+            case Stats.HEALTH:
+                upgradeModifier = 1.1f;
+                percentUpgrade = true;
+                break;
         }
-        else
-        {
-            value = 0;
-        }
-        currentLevelText.text = value.ToString();
-        nextLevelText.text = (PlayerHealth.instance.UpgradeStat(value,upgradeModifier,percentUpgrade)).ToString();
-        costText.text = "$" + baseCost.ToString();
-        titleText.text = ConvertStatToString(stat);
+        UpdateUI();
     }
 
     private string ConvertStatToString(Stats stat)
@@ -69,6 +97,14 @@ public class StatUpgrade : MonoBehaviour
                 break;
         }
         return "Null";
+    }
+
+    private void UpdateUI()
+    {
+            currentLevelText.text = GetStatValue(stat).ToString("F2");
+        nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(stat) ,upgradeModifier,percentUpgrade)).ToString("F2");
+        costText.text = "$" + baseCost.ToString();
+        titleText.text = ConvertStatToString(stat);
     }
 
 }
