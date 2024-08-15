@@ -36,33 +36,33 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (!gotItems) //function is needed because unity cannot parse tags on same frame as instantiation 
-        {     
-            GetItems();
-        }
-        if(running)
-        {
-            currentTime -= Time.deltaTime;
-        }
-        else 
-        {
-            for (int i = 0; i < inventoryItems.Count; i++)
-            {
-                if (inventoryItems[i].itemChosen)
-                {
-                    Debug.Log("Item Picked!");
-                    //NextWave();
-                }
-            }
+    //     if (!gotItems) //function is needed because unity cannot parse tags on same frame as instantiation 
+    //     {     
+    //         GetItems();
+    //     }
+    //     if(running)
+    //     {
+    //         currentTime -= Time.deltaTime;
+    //     }
+    //     else 
+    //     {
+    //         for (int i = 0; i < inventoryItems.Count; i++)
+    //         {
+    //             if (inventoryItems[i].itemChosen)
+    //             {
+    //                 Debug.Log("Item Picked!");
+    //                 //NextWave();
+    //             }
+    //         }
 
-        }
+    //     }
         
-        if(currentTime <= 0)
-        {
-            EndWave();
-        }
+    //     if(currentTime <= 0)
+    //     {
+    //         EndWave();
+    //     }
 
-        setTimerText();
+    //     setTimerText();
     }
 
     private void GetItems()

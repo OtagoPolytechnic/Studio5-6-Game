@@ -8,27 +8,40 @@ public enum ShopTabs
     ITEMS,
     UPGRADES
 }
+
 public class CatShop : MonoBehaviour
 {
-
     private bool playerInShop = false;
     private bool shopMenuOpen = false;
-    public bool ShopMenuOpen { get => shopMenuOpen; set => shopMenuOpen = value; }
+    public bool ShopMenuOpen
+    {
+        get => shopMenuOpen;
+        set => shopMenuOpen = value;
+    }
     public static CatShop instance;
     private ShopTabs activeTab = ShopTabs.UPGRADES;
+
     [SerializeField]
     private Image upgradeBtnImage;
+
     [SerializeField]
     private Image itemsBtnImage;
+
     [SerializeField]
     private GameObject panel;
+
     [SerializeField]
     private Color selected;
-        [SerializeField]
+
+    [SerializeField]
     private Color unSelected;
     public GameObject upgradeUIPrefab;
     public GameObject itemUIPrefab;
     public Transform containerParent;
+    public Transform upgradeContainer;
+    public Transform itemContainer;
+
+    public List<ItemData> items = new List<ItemData>();
 
     void Awake()
     {
@@ -37,12 +50,38 @@ public class CatShop : MonoBehaviour
 
     void Start()
     {
+        ClearUI();
         UpdateUI();
+        foreach (ItemData item in items)
+        {
+            ShopItem shopItem = Instantiate(itemUIPrefab, itemContainer).GetComponent<ShopItem>();
+            shopItem.SetItem(item);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            StatUpgrade statUpgrade = Instantiate(upgradeUIPrefab, upgradeContainer)
+                .GetComponent<StatUpgrade>();
+            statUpgrade.Stat = (Stats)i;
+        }
+    }
+
+    public void ClearUI()
+    {
+        foreach (Transform child in itemContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in upgradeContainer)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public void UpdateUI()
     {
-        switch(activeTab)
+        switch (activeTab)
         {
             case ShopTabs.ITEMS:
                 LoadItems();
@@ -55,32 +94,38 @@ public class CatShop : MonoBehaviour
         }
     }
 
-    private void ClearUI()
+    private void ShowUI(ShopTabs tab)
     {
-        while (containerParent.childCount > 0) {
-        DestroyImmediate(containerParent.GetChild(0).gameObject);
+        switch (tab)
+        {
+            case ShopTabs.ITEMS:
+                itemContainer.gameObject.SetActive(true);
+                upgradeContainer.gameObject.SetActive(false);
+                break;
+            case ShopTabs.UPGRADES:
+                itemContainer.gameObject.SetActive(false);
+                upgradeContainer.gameObject.SetActive(true);
+                break;
+            default:
+                break;
         }
-
     }
+
     private void LoadUpgrades()
     {
         upgradeBtnImage.color = selected;
         itemsBtnImage.color = unSelected;
-        ClearUI();
-        for (int i = 0; i < 3; i++)
-        {
-            StatUpgrade statUpgrade = Instantiate(upgradeUIPrefab,containerParent).GetComponent<StatUpgrade>();
-            statUpgrade.Stat = (Stats)i;
-        }
+        ShowUI(ShopTabs.UPGRADES);
     }
+
     private void LoadItems()
     {
         upgradeBtnImage.color = unSelected;
         itemsBtnImage.color = selected;
-        ClearUI();
-        ShopItem item = Instantiate(itemUIPrefab,containerParent).GetComponent<ShopItem>();
-        item.itemName = "Shotgun";
+        ShowUI(ShopTabs.ITEMS);
+
     }
+
     public void SetUpgradesActive()
     {
         activeTab = ShopTabs.UPGRADES;
@@ -90,13 +135,15 @@ public class CatShop : MonoBehaviour
     {
         activeTab = ShopTabs.ITEMS;
     }
-    void OnTriggerEnter2D(Collider2D other) 
+
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             playerInShop = true;
         }
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -104,6 +151,7 @@ public class CatShop : MonoBehaviour
             playerInShop = false;
         }
     }
+
     void Update()
     {
         if (playerInShop)
@@ -128,11 +176,11 @@ public class CatShop : MonoBehaviour
         panel.SetActive(true);
         ShopMenuOpen = true;
     }
+
     public void CloseShop()
     {
         // InventoryController.instance.HideInventory();
         ShopMenuOpen = false;
         panel.SetActive(false);
-
     }
 }

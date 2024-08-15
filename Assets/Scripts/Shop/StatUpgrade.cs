@@ -20,7 +20,7 @@ public class StatUpgrade : MonoBehaviour
     public TextMeshProUGUI titleText;
 
 
-    private float GetStatValue(Stats stat)
+    public static float GetStatValue(Stats stat)
     {
         if (stat == Stats.SPEED)
         {
@@ -38,7 +38,7 @@ public class StatUpgrade : MonoBehaviour
         return -1;
 
     }
-    private void SetStatValue(Stats stat, float value)
+    public static void SetStatValue(Stats stat, float value)
     {
         switch(stat)
         {

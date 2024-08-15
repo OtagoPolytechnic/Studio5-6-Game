@@ -6,21 +6,33 @@ using UnityEngine.UI;
 using TMPro;
 public class ShopItem : MonoBehaviour 
 {
-    public string itemName;
-    public float cost;
-    public bool upgradeable;
+    private string itemName, itemDesc;
+    private float cost;
+    private bool upgradeable;
     private const int MAXLEVEL = 5;
     private int level = 1;
-    public TextMeshProUGUI itemNameText;
-    public TextMeshProUGUI costText;
-    public Button button;
+    private TextMeshProUGUI itemNameText,costText , descText;
+    private Button button;
+
+    private List<UpgradeData> upgrades = new List<UpgradeData>();
 
 
+    public void SetItem(ItemData item)
+    {
+        this.itemName = item.itemName;
+        this.cost = item.baseCost;
+        this.upgradeable = item.upgradeable;
+        this.itemDesc = item.desc;
+        this.upgrades = item.upgrades;
+    }
     private void Start()
     {
         itemNameText = transform.Find("title").GetComponent<TextMeshProUGUI>();
-        itemNameText.text = itemName + " " + RomanNumeral(level);
+        costText = transform.Find("cost").GetComponent<TextMeshProUGUI>();
+        descText = transform.Find("desc").GetComponent<TextMeshProUGUI>();
         button = transform.Find("BT_Purchase").GetComponent<Button>();
+        UpdateUI();
+
     }
 
     private string RomanNumeral(int number)
@@ -56,6 +68,13 @@ public class ShopItem : MonoBehaviour
         if (level < MAXLEVEL)
         {
             level++;
+            cost *= 1.1f;
+            foreach (UpgradeData data in upgrades)
+            {
+                StatUpgrade.SetStatValue(data.stat, PlayerHealth.instance.UpgradeStat(StatUpgrade.GetStatValue(data.stat), data.modifier, data.percentUpgrade));
+                Debug.Log("Upgrading " + data.stat + " to " + StatUpgrade.GetStatValue(data.stat));
+            }
+
             UpdateUI();
         }
     }
@@ -63,6 +82,9 @@ public class ShopItem : MonoBehaviour
     private void UpdateUI()
     {
         itemNameText.text = itemName + " " + RomanNumeral(level);
+        costText.text = cost.ToString("F2");
+        descText.text = itemDesc;
+
         if (level == MAXLEVEL)
         {
             button.interactable = false;
