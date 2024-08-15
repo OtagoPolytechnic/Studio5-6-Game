@@ -46,7 +46,7 @@ public class StatUpgrade : MonoBehaviour
                 TopDownMovement.moveSpeed = value;
                 break;
             case Stats.DAMAGE:
-                PlayerHealth.damage =(int) value;
+                PlayerHealth.damage = value;
                 break;
             case Stats.HEALTH:
                 PlayerHealth.maxHealth = value;
@@ -116,6 +116,12 @@ public class StatUpgrade : MonoBehaviour
             button.interactable = false;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "MAX";
         }
+    }
+
+    public void OnEnable()
+    {
+        UpdateUI();
+        Debug.Log("THE  " + GetStatValue(Stat));
     }
 
 }

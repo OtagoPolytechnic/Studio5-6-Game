@@ -1,21 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-public class ShopItem : MonoBehaviour 
+
+public class ShopItem : MonoBehaviour
 {
-    private string itemName, itemDesc;
+    private string itemName,
+        itemDesc;
     private float cost;
     private bool upgradeable;
     private const int MAXLEVEL = 5;
     private int level = 1;
-    private TextMeshProUGUI itemNameText,costText , descText;
+    private TextMeshProUGUI itemNameText,
+        costText,
+        descText;
     private Button button;
 
     private List<UpgradeData> upgrades = new List<UpgradeData>();
-
 
     public void SetItem(ItemData item)
     {
@@ -25,6 +28,7 @@ public class ShopItem : MonoBehaviour
         this.itemDesc = item.desc;
         this.upgrades = item.upgrades;
     }
+
     private void Start()
     {
         itemNameText = transform.Find("title").GetComponent<TextMeshProUGUI>();
@@ -32,7 +36,6 @@ public class ShopItem : MonoBehaviour
         descText = transform.Find("desc").GetComponent<TextMeshProUGUI>();
         button = transform.Find("BT_Purchase").GetComponent<Button>();
         UpdateUI();
-
     }
 
     private string RomanNumeral(int number)
@@ -62,7 +65,6 @@ public class ShopItem : MonoBehaviour
         return roman;
     }
 
-
     public void UpgradeClicked()
     {
         if (level < MAXLEVEL)
@@ -71,8 +73,28 @@ public class ShopItem : MonoBehaviour
             cost *= 1.1f;
             foreach (UpgradeData data in upgrades)
             {
-                StatUpgrade.SetStatValue(data.stat, PlayerHealth.instance.UpgradeStat(StatUpgrade.GetStatValue(data.stat), data.modifier, data.percentUpgrade));
-                Debug.Log("Upgrading " + data.stat + " to " + StatUpgrade.GetStatValue(data.stat));
+                StatUpgrade.SetStatValue(
+                    data.stat,
+                    PlayerHealth.instance.UpgradeStat(
+                        StatUpgrade.GetStatValue(data.stat),
+                        data.modifier,
+                        data.percentUpgrade
+                    )
+                );
+                Debug.Log(
+                    "Upgrading "
+                        + data.stat
+                        + " to "
+                        + StatUpgrade.GetStatValue(data.stat)
+                        + " and "
+                );
+                Debug.Log(
+                    PlayerHealth.instance.UpgradeStat(
+                        StatUpgrade.GetStatValue(data.stat),
+                        data.modifier,
+                        data.percentUpgrade
+                    )
+                );
             }
 
             UpdateUI();
@@ -90,6 +112,10 @@ public class ShopItem : MonoBehaviour
             button.interactable = false;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "OUT OF STOCK";
         }
-        
+    }
+
+    public void OnEnable()
+    {
+        Debug.Log("Enabling " + itemName);
     }
 }

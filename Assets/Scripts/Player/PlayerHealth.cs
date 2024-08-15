@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public static float lifestealAmount = 0;
     //damage vars
-    public static int damage = 20;
+    public static float damage = 20;
     public static int explosionSize = 0;
     public static bool explosiveBullets {
         get
@@ -81,6 +81,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        Debug.Log($"Player Damage: {damage}");
         Regen();
         if (currentHealth <= 0)
         {
