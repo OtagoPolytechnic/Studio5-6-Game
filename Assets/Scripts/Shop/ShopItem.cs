@@ -19,14 +19,17 @@ public class ShopItem : MonoBehaviour
     private Button button;
 
     private List<UpgradeData> upgrades = new List<UpgradeData>();
+    private ItemData item;
 
     public void SetItem(ItemData item)
     {
         this.itemName = item.itemName;
-        this.cost = item.baseCost;
+        this.cost = CatShop.instance.GetRarityToPrice(item.rarity);
+    
         this.upgradeable = item.upgradeable;
         this.itemDesc = item.desc;
         this.upgrades = item.upgrades;
+        this.item = item;
     }
 
     private void Start()
@@ -82,20 +85,7 @@ public class ShopItem : MonoBehaviour
                         data.percentUpgrade
                     )
                 );
-                Debug.Log(
-                    "Upgrading "
-                        + data.stat
-                        + " to "
-                        + StatUpgrade.GetStatValue(data.stat)
-                        + " and "
-                );
-                Debug.Log(
-                    PlayerHealth.instance.UpgradeStat(
-                        StatUpgrade.GetStatValue(data.stat),
-                        data.modifier,
-                        data.percentUpgrade
-                    )
-                );
+                item.triggerEvent.Invoke();
             }
 
             UpdateUI();

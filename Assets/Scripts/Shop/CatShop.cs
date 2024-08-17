@@ -48,6 +48,26 @@ public class CatShop : MonoBehaviour
         instance = this;
     }
 
+    public float GetRarityToPrice(rarity r)
+    {
+        float price = 0;
+        switch (r)
+        {
+            case rarity.Common:
+                price = 15;
+                break;
+            case rarity.Uncommon:
+                price = 20;
+                break;
+            case rarity.Rare:
+                price = 25;
+                break;
+            case rarity.Epic:
+                price = 35;
+                break;
+        }
+        return price;
+    }
     void Start()
     {
         ClearUI();
