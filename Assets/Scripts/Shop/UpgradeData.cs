@@ -7,5 +7,5 @@ public class UpgradeData
 {
     public Stats stat;
     public float modifier;
-    public bool percentUpgrade; 
+    public bool applyAsMultiple; 
 }

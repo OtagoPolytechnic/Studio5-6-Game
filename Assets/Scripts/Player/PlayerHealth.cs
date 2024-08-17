@@ -155,14 +155,14 @@ public class PlayerHealth : MonoBehaviour
 
 
     /// <summary>
-    /// Upgrades a stat by a given value. If percentageUpgrade is true, the value is multiplied by the stat, otherwise it is added to the stat.
+    /// Upgrades a stat by a given value. If applyAsMultiple is true, the value is multiplied by the stat, otherwise it is added to the stat.
     /// </summary>
     /// <param name="stat">What is being upgraded</param>
     /// <param name="value">The ammount to be applied </param>
-    /// <param name="percentageUpgrade">Whether the value should be treated as a percentage</param>
-    public  float UpgradeStat(float stat, float value, bool percentageUpgrade = false) 
+    /// <param name="applyAsMultiple">Whether the value should be treated as a percentage</param>
+    public  float UpgradeStat(float stat, float value, bool applyAsMultiple = false) 
     {
-        if (percentageUpgrade)
+        if (applyAsMultiple)
         {
             stat *= value;
         }

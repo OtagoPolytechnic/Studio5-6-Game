@@ -11,7 +11,7 @@ public class StatUpgrade : MonoBehaviour
     private float baseCost = 25f;
     private Stats stat;
     public Stats Stat { get => stat; set => stat = value; }
-    private bool percentUpgrade;
+    private bool applyAsMultiple;
     private float upgradeModifier;
     public TextMeshProUGUI currentLevelText;
     public Button button;
@@ -57,7 +57,7 @@ public class StatUpgrade : MonoBehaviour
     {
         if (level < MAXLEVEL && PlayerHealth.instance.playerGold >= baseCost)
         {
-            SetStatValue(Stat, PlayerHealth.instance.UpgradeStat(GetStatValue(Stat), upgradeModifier, percentUpgrade));
+            SetStatValue(Stat, PlayerHealth.instance.UpgradeStat(GetStatValue(Stat), upgradeModifier, applyAsMultiple));
             ScoreManager.Instance.SpendGold((int)baseCost);
             baseCost += 10;
             level++;
@@ -71,15 +71,15 @@ public class StatUpgrade : MonoBehaviour
         {
             case Stats.SPEED:
                 upgradeModifier = 1.05f;
-                percentUpgrade = true;
+                applyAsMultiple = true;
                 break;
             case Stats.DAMAGE:
                 upgradeModifier = 10f;
-                percentUpgrade = false;
+                applyAsMultiple = false;
                 break;
             case Stats.HEALTH:
                 upgradeModifier = 1.1f;
-                percentUpgrade = true;
+                applyAsMultiple = true;
                 break;
         }
         UpdateUI();
@@ -109,7 +109,7 @@ public class StatUpgrade : MonoBehaviour
     private void UpdateUI()
     {
         currentLevelText.text = GetStatValue(Stat).ToString("F2");
-        nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(Stat) ,upgradeModifier,percentUpgrade)).ToString("F2");
+        nextLevelText.text = (PlayerHealth.instance.UpgradeStat(GetStatValue(Stat) ,upgradeModifier,applyAsMultiple)).ToString("F2");
         costText.text = "$" + baseCost.ToString("F2");
         titleText.text = ConvertStatToString(Stat);
         if (level >= MAXLEVEL)
