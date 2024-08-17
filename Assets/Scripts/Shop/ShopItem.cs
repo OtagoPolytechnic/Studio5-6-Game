@@ -86,8 +86,8 @@ public class ShopItem : MonoBehaviour
                         data.applyAsMultiple
                     )
                 );
-                item.triggerEvent.Invoke();
             }
+                item.triggerEvent.Invoke();
 
             UpdateUI();
         }
