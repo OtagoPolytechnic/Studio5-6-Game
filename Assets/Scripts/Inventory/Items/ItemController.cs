@@ -23,18 +23,11 @@ public class ItemController : MonoBehaviour
         newEgg.transform.localScale = new Vector3(0.3333333f, 0.3333333f, 0.3333333f);
     }
 
-    public void GlassCannon() //Halves health and Doubles Strength
+
+
+    public void UpgradeRegen()
     {
-        PlayerHealth.instance.UpgradeStat(PlayerHealth.maxHealth, 0.5f, true);
-        if (PlayerHealth.maxHealth <= PlayerHealth.currentHealth) //If the player's current health is greater than their max health, set their current health to their max health
-        {
-            PlayerHealth.currentHealth = PlayerHealth.maxHealth;
-        }
-        else //Otherwise, halve their current health
-        {
-            PlayerHealth.instance.UpgradeStat(PlayerHealth.currentHealth, 0.5f, true);
-        }
-        PlayerHealth.instance.UpgradeStat(PlayerHealth.damage, 2f, true);
+        PlayerHealth.regenAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.regenAmount,1f);
     }
 
     public void IncreaseBulletAmount() //Generalised the name because of the new theme
@@ -44,37 +37,7 @@ public class ItemController : MonoBehaviour
         Debug.Log($"Shotgun bullets: {PlayerHealth.bulletAmount}");
     }
 
-    public void LuckyDive()
-    {
-        for (int i = 0; i < 2; i++)
-                {
-                    int randomRoll = UnityEngine.Random.Range(0, 4);
-                    if (randomRoll == 0)
-                    {
-                        PlayerHealth.instance.UpgradeStat(PlayerHealth.damage, 5);
-                        Debug.Log($"Damage: {PlayerHealth.damage}");
-                    }
-                    else if (randomRoll == 1)
-                    {
-                        float current2 = PlayerHealth.maxHealth;
-                        PlayerHealth.instance.UpgradeStat(PlayerHealth.maxHealth, 1.05f, true);
-                        Mathf.RoundToInt(PlayerHealth.maxHealth);
-                        PlayerHealth.currentHealth += PlayerHealth.maxHealth - current2;
-                        Debug.Log($"Max health: {PlayerHealth.maxHealth}");
-                    }
-                    else if (randomRoll == 2)
-                    {
-                        PlayerHealth.instance.UpgradeStat(TopDownMovement.moveSpeed, 1.025f, true);
-                        Debug.Log($"Speed: {TopDownMovement.moveSpeed}");
-                    }
-                    else if (randomRoll == 3)
-                    {
-                        PlayerHealth.instance.UpgradeStat(Shooting.firerate, 0.95f, true);
-                        Debug.Log($"Firerate: {Shooting.firerate}");
-                    }
-                }
 
-    }
 
     public void AddItemStack(int id) 
     {

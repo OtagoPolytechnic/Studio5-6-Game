@@ -56,7 +56,7 @@ public class InventoryPage : MonoBehaviour
         new() { id = 09, name = "Lucky Feather", desc = "You have an increased chance to deal critical damage" , rarity = rarity.Uncommon, stacks = 0, itemAction = () => {PlayerHealth.CritChance = PlayerHealth.instance.UpgradeStat(PlayerHealth.CritChance,0.07f); }, baseCost = 1 },
         // new() { id = 10, name = "Glass Cannon", desc = "Halves your health to double your damage", rarity = rarity.Epic, stacks = 0,itemAction = () => { ItemController.instance.GlassCannon(); } , baseCost = 8},
         // new() { id = 11, name = "Shotgun", desc = "You shoot a spread of bullets instead of one", rarity = rarity.Epic, stacks = 0 ,itemAction = () => { ItemController.instance.IncreaseBulletAmount(); } , baseCost = 8},
-        new() { id = 12, name = "Lucky Dive", desc = "Gain two random basic stats at half strength", rarity = rarity.Uncommon, stacks = 0, itemAction = () => { ItemController.instance.LuckyDive(); } , baseCost = 1},
+        // new() { id = 12, name = "Lucky Dive", desc = "Gain two random basic stats at half strength", rarity = rarity.Uncommon, stacks = 0, itemAction = () => { ItemController.instance.LuckyDive(); } , baseCost = 1},
     };
     //in this list, there cannot be less than 3 of each rarity for the case that 3 of one rarity is picked on the item selection. 
 
