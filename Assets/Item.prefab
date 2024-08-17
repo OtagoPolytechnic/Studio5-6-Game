@@ -504,7 +504,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -788,6 +788,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec683b69b42ac24c834adc72d750e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemNameText: {fileID: 0}
-  costText: {fileID: 0}
-  button: {fileID: 0}

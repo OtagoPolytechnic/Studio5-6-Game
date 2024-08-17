@@ -14,10 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Shotgun
   desc: Its a Shotgun
-  rarity: 1
-  baseCost: 25
+  rarity: 3
   upgradeable: 1
   upgrades:
   - stat: 1
     modifier: 0.75
-    percentUpgrade: 0
+    applyAsMultiple: 0
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8201821395946054257, guid: 556f888338dca14468638a40756d30f9, type: 3}
+        m_TargetAssemblyTypeName: ItemController, Scripts
+        m_MethodName: IncreaseBulletAmount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
