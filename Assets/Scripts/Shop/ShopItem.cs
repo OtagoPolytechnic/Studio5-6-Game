@@ -72,7 +72,8 @@ public class ShopItem : MonoBehaviour
     {
         if (level < MAXLEVEL && PlayerHealth.instance.playerGold >= cost)
         {
-            level++;
+            if(upgradeable)
+                level++;
             ScoreManager.Instance.SpendGold((int)cost);
             cost += 5;
             foreach (UpgradeData data in upgrades)
@@ -82,7 +83,7 @@ public class ShopItem : MonoBehaviour
                     PlayerHealth.instance.UpgradeStat(
                         StatUpgrade.GetStatValue(data.stat),
                         data.modifier,
-                        data.percentUpgrade
+                        data.applyAsMultiple
                     )
                 );
                 item.triggerEvent.Invoke();
