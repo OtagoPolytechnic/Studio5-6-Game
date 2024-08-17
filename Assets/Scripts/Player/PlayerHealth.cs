@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     //health vars
-    public float playerGold;
+    public float playerGold = 50000;
     public static float maxHealth = 100;
     public static float currentHealth;
     float regenTick = 3f;
@@ -75,7 +75,7 @@ public class PlayerHealth : MonoBehaviour
     
     void Start()
     {
-        playerGold = 0;
+        playerGold = 50000;
         currentHealth = maxHealth;
     }
 
