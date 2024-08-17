@@ -58,7 +58,8 @@ public class StatUpgrade : MonoBehaviour
         if (level < MAXLEVEL && PlayerHealth.instance.playerGold >= baseCost)
         {
             SetStatValue(Stat, PlayerHealth.instance.UpgradeStat(GetStatValue(Stat), upgradeModifier, percentUpgrade));
-            baseCost *= 1.25f;
+            ScoreManager.Instance.SpendGold((int)baseCost);
+            baseCost += 10;
             level++;
             UpdateUI();
         }
