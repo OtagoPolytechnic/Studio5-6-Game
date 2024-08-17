@@ -120,6 +120,7 @@ public class CatShop : MonoBehaviour
         {
             case ShopTabs.ITEMS:
                 itemContainer.gameObject.SetActive(true);
+                itemContainer.gameObject.transform.parent.gameObject.transform.Find("Scrollbar").GetComponent<Scrollbar>().value = 1;
                 upgradeContainer.gameObject.SetActive(false);
                 break;
             case ShopTabs.UPGRADES:

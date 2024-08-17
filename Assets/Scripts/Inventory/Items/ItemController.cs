@@ -23,14 +23,21 @@ public class ItemController : MonoBehaviour
         newEgg.transform.localScale = new Vector3(0.3333333f, 0.3333333f, 0.3333333f);
     }
 
+    public void IncreaseEnemyBleed()  => EnemyHealth.bleedAmount = (int)PlayerHealth.instance.UpgradeStat(EnemyHealth.bleedAmount, 5);
+    
+    public void IncreaseLifeSteal()  => PlayerHealth.lifestealAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.lifestealAmount, 1f); 
+        
+    public void UpgradeCritChance()  => PlayerHealth.CritChance = PlayerHealth.instance.UpgradeStat(PlayerHealth.CritChance, 0.07f);
+    
+
+    public void ExplosiveBullets()  => PlayerHealth.explosionSize = (int)PlayerHealth.instance.UpgradeStat(PlayerHealth.explosionSize, 1); 
+    
+    public void UpgradeFireRate() => Shooting.firerate = PlayerHealth.instance.UpgradeStat(Shooting.firerate, 0.9f, true);
+
+    public void UpgradeRegen() => PlayerHealth.regenAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.regenAmount, 1f);
 
 
-    public void UpgradeRegen()
-    {
-        PlayerHealth.regenAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.regenAmount,1f);
-    }
-
-    public void IncreaseBulletAmount() //Generalised the name because of the new theme
+    public void IncreaseBulletAmount() 
     {
         PlayerHealth.hasShotgun = true;
         PlayerHealth.bulletAmount += 2;
@@ -39,16 +46,16 @@ public class ItemController : MonoBehaviour
 
 
 
-    public void AddItemStack(int id) 
+    public void AddItemStack(int id)
     {
         if (InventoryPage.itemList[id].isStackable) //If the item is stackable
         {
-            InventoryPage.itemList[id].stacks ++; //Add 1 to selected item stack
+            InventoryPage.itemList[id].stacks++; //Add 1 to selected item stack
         }
     }
-    
 
-//Should be Deleted once all references are removed
+
+    //Should be Deleted once all references are removed
     public void ItemPicked(int itemID)
     {
         Debug.Log(itemID);

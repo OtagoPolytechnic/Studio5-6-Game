@@ -12,11 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17348d7ad3eb684c8ca83e86fc4bee4, type: 3}
   m_Name: Band-Aid
   m_EditorClassIdentifier: 
-  itemName: 
-  desc: 
-  rarity: 0
-  upgradeable: 0
+  itemName: Band-Aid
+  desc: Your health slowly regenerates over time
+  rarity: 2
+  upgradeable: 1
   upgrades: []
   triggerEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8201821395946054257, guid: 556f888338dca14468638a40756d30f9, type: 3}
+        m_TargetAssemblyTypeName: ItemController, Scripts
+        m_MethodName: UpgradeRegen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
