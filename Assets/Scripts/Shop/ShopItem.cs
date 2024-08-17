@@ -67,10 +67,11 @@ public class ShopItem : MonoBehaviour
 
     public void UpgradeClicked()
     {
-        if (level < MAXLEVEL)
+        if (level < MAXLEVEL && PlayerHealth.instance.playerGold >= cost)
         {
             level++;
-            cost *= 1.1f;
+            ScoreManager.Instance.SpendGold((int)cost);
+            cost += 5;
             foreach (UpgradeData data in upgrades)
             {
                 StatUpgrade.SetStatValue(
@@ -111,6 +112,17 @@ public class ShopItem : MonoBehaviour
         {
             button.interactable = false;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "OUT OF STOCK";
+        }
+        else if (PlayerHealth.instance.playerGold < cost)
+        {
+            button.interactable = false;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Purchase";
+
+        }
+        else
+        {
+            button.interactable = true;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Purchase";
         }
     }
 
