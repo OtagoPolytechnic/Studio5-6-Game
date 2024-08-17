@@ -28,7 +28,14 @@ public class ScoreManager : MonoBehaviour
     public void IncreasePoints(int amount)
     {
         score += amount;
-        pointsText.text = "Points: " + score.ToString();
+        // pointsText.text = "Points: " + score.ToString();
+        PlayerHealth.instance.playerGold += amount;
+        pointsText.text = "Gold: " + PlayerHealth.instance.playerGold.ToString();
+    }
+    public void SpendGold(int amount)
+    {
+        PlayerHealth.instance.playerGold -= amount;
+        pointsText.text = "Gold: " + PlayerHealth.instance.playerGold.ToString();
     }
 
     public void FinalScore()

@@ -55,7 +55,7 @@ public class StatUpgrade : MonoBehaviour
     }
     public void UpgradeClicked()
     {
-        if (level < MAXLEVEL)
+        if (level < MAXLEVEL && PlayerHealth.instance.playerGold >= baseCost)
         {
             SetStatValue(Stat, PlayerHealth.instance.UpgradeStat(GetStatValue(Stat), upgradeModifier, percentUpgrade));
             baseCost *= 1.25f;
@@ -116,6 +116,18 @@ public class StatUpgrade : MonoBehaviour
             button.interactable = false;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "MAX";
         }
+        else if (PlayerHealth.instance.playerGold < baseCost)
+        {
+            button.interactable = false;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Upgrade";
+
+        }
+        else
+        {
+            button.interactable = true;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "Upgrade";
+        }
+
     }
 
     public void OnEnable()
