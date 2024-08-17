@@ -8,7 +8,29 @@ public class PlayerHealth : MonoBehaviour
 {
     //health vars
     public float playerGold = 50000;
-    public static float maxHealth = 100;
+    public static float maxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+        set
+        {
+            if (value < 1) //If the max health is less than 1, set it to 1
+            {
+                maxHealth = 1;
+            }
+            else
+            {
+                maxHealth = value;
+            }
+            if (currentHealth > maxHealth) //If the current health is greater than the max health, set it to the max health
+            {
+                currentHealth = maxHealth;
+            }
+        }
+    }
+
     public static float currentHealth;
     float regenTick = 3f;
     float regenInterval = 3f;
