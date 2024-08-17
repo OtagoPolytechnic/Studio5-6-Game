@@ -67,11 +67,11 @@ public class ItemController : MonoBehaviour
                 Debug.Log($"Damage: {PlayerHealth.damage}");
                 break;
             case 01:
-                float current = PlayerHealth.maxHealth;
-                PlayerHealth.maxHealth *= 1.10f;
-                Mathf.RoundToInt(PlayerHealth.maxHealth);
-                PlayerHealth.currentHealth += PlayerHealth.maxHealth - current;
-                Debug.Log($"Max health: {PlayerHealth.maxHealth}");
+                float current = PlayerHealth.instance.MaxHealth;
+                PlayerHealth.instance.MaxHealth *= 1.10f;
+                Mathf.RoundToInt(PlayerHealth.instance.MaxHealth);
+                PlayerHealth.currentHealth += PlayerHealth.instance.MaxHealth - current;
+                Debug.Log($"Max health: {PlayerHealth.instance.MaxHealth}");
                 break;
             case 02:
                 TopDownMovement.moveSpeed *= 1.05f;
@@ -113,10 +113,10 @@ public class ItemController : MonoBehaviour
                 Debug.Log($"Crit Chance: {PlayerHealth.CritChance}");
                 break;
             case 10:
-                PlayerHealth.maxHealth /= 2f;
-                if (PlayerHealth.maxHealth <= PlayerHealth.currentHealth)
+                PlayerHealth.instance.MaxHealth /= 2f;
+                if (PlayerHealth.instance.MaxHealth <= PlayerHealth.currentHealth)
                 {
-                    PlayerHealth.currentHealth = PlayerHealth.maxHealth;
+                    PlayerHealth.currentHealth = PlayerHealth.instance.MaxHealth;
                 }
                 else
                 {
@@ -124,7 +124,7 @@ public class ItemController : MonoBehaviour
                 }
                 PlayerHealth.damage *= 2;
                 Debug.Log(
-                    $"Players max health as been cut in half to:{PlayerHealth.maxHealth}. Their current health is: {PlayerHealth.currentHealth}. Their damage has been doubled to: {PlayerHealth.damage}"
+                    $"Players max health as been cut in half to:{PlayerHealth.instance.MaxHealth}. Their current health is: {PlayerHealth.currentHealth}. Their damage has been doubled to: {PlayerHealth.damage}"
                 );
                 break;
             case 11:
@@ -143,11 +143,11 @@ public class ItemController : MonoBehaviour
                     }
                     else if (randomRoll == 1)
                     {
-                        float current2 = PlayerHealth.maxHealth;
-                        PlayerHealth.maxHealth *= 1.05f;
-                        Mathf.RoundToInt(PlayerHealth.maxHealth);
-                        PlayerHealth.currentHealth += PlayerHealth.maxHealth - current2;
-                        Debug.Log($"Max health: {PlayerHealth.maxHealth}");
+                        float current2 = PlayerHealth.instance.MaxHealth;
+                        PlayerHealth.instance.MaxHealth *= 1.05f;
+                        Mathf.RoundToInt(PlayerHealth.instance.MaxHealth);
+                        PlayerHealth.currentHealth += PlayerHealth.instance.MaxHealth - current2;
+                        Debug.Log($"Max health: {PlayerHealth.instance.MaxHealth}");
                     }
                     else if (randomRoll == 2)
                     {

@@ -8,7 +8,9 @@ public class PlayerHealth : MonoBehaviour
 {
     //health vars
     public float playerGold = 50000;
-    public static float maxHealth
+
+    private  float maxHealth = 100;
+    public  float MaxHealth
     {
         get
         {
@@ -24,9 +26,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 maxHealth = value;
             }
-            if (currentHealth > maxHealth) //If the current health is greater than the max health, set it to the max health
+            if (currentHealth > value) //If the current health is greater than the max health, set it to the max health
             {
-                currentHealth = maxHealth;
+                currentHealth = value;
             }
         }
     }
@@ -98,7 +100,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         playerGold = 50000;
-        currentHealth = maxHealth;
+        currentHealth = MaxHealth;
     }
 
     void Update()
@@ -121,13 +123,13 @@ public class PlayerHealth : MonoBehaviour
     void Regen() //currently will regen players health even when paused
     {
         regenTick -= Time.deltaTime;
-        if (regenTick <= 0 && regenTrue && currentHealth < maxHealth) //only works if the player is missing health
+        if (regenTick <= 0 && regenTrue && currentHealth < MaxHealth) //only works if the player is missing health
         {
             regenTick = regenInterval;
             currentHealth += regenAmount;
-            if (currentHealth > maxHealth)//if the player will regen too much health
+            if (currentHealth > MaxHealth)//if the player will regen too much health
             {
-                currentHealth = maxHealth;
+                currentHealth = MaxHealth;
 
             }
             Debug.Log($"Regen: {currentHealth}");
@@ -146,7 +148,7 @@ public class PlayerHealth : MonoBehaviour
             lifeEggs.Remove(lifeEggs[lifeEggs.Count - 1]);
         }
         //Debug.Log("Player health before collisions turned off: " + currentHealth);
-        currentHealth = maxHealth;
+        currentHealth = MaxHealth;
         StartCoroutine(DisableCollisionForDuration(2f));
     }
 

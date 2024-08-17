@@ -32,7 +32,7 @@ public class StatUpgrade : MonoBehaviour
         }
         else if (stat == Stats.HEALTH)
         {
-            return PlayerHealth.maxHealth;
+            return PlayerHealth.instance.MaxHealth;
         }
 
         return -1;
@@ -49,7 +49,7 @@ public class StatUpgrade : MonoBehaviour
                 PlayerHealth.damage = value;
                 break;
             case Stats.HEALTH:
-                PlayerHealth.maxHealth = value;
+                PlayerHealth.instance.MaxHealth = value;
                 break;
         }
     }
