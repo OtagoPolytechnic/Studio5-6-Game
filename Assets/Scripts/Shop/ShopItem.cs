@@ -74,6 +74,8 @@ public class ShopItem : MonoBehaviour
         {
             if(upgradeable)
                 level++;
+            else
+                level = 2;
             ScoreManager.Instance.SpendGold((int)cost);
             cost += 5;
             foreach (UpgradeData data in upgrades)
@@ -95,11 +97,14 @@ public class ShopItem : MonoBehaviour
 
     private void UpdateUI()
     {
-        itemNameText.text = itemName + " " + RomanNumeral(level);
+        if(upgradeable)
+            itemNameText.text = itemName + " " + RomanNumeral(level);
+        else
+            itemNameText.text = itemName;
         costText.text = cost.ToString("F2");
         descText.text = itemDesc;
 
-        if (level == MAXLEVEL)
+        if ((upgradeable && level == MAXLEVEL) || (!upgradeable && level == 2))
         {
             button.interactable = false;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "OUT OF STOCK";
