@@ -9,11 +9,20 @@ public class Treasure : MonoBehaviour
     private float spawnRadius = 1;
     public GameObject spawnCircle;
 
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            SpawnCoins(5);
+            animator.SetTrigger("Open");
+            StartCoroutine(WaitBeforeDestroy());
+            
         }
     }
 
@@ -32,5 +41,12 @@ public class Treasure : MonoBehaviour
         Instantiate(coinDrop, spawnCircle.transform.position, Quaternion.identity);
     }
 
-    
+    private IEnumerator WaitBeforeDestroy()
+    {
+        SpawnCoins(5);
+
+        yield return new WaitForSeconds(2);
+
+        Destroy(this.gameObject);
+    }
 }
