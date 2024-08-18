@@ -8,21 +8,19 @@ public class Treasure : MonoBehaviour
     [SerializeField]
     private float spawnRadius = 1;
     public GameObject spawnCircle;
-
-    private Animator animator;
-
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+    [SerializeField]
+    private Sprite chestOpen;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.tag == "Player")
         {
-            animator.SetTrigger("Open");
-            StartCoroutine(WaitBeforeDestroy());
-            
+            if (gameObject.GetComponent<SpriteRenderer>().sprite != chestOpen)
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = chestOpen;
+                StartCoroutine(WaitBeforeDestroy());
+            }
         }
     }
 
