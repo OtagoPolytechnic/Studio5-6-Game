@@ -363,10 +363,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 24.85
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -768,11 +768,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 23.3
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 12
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -1332,12 +1332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9269dd5fbee1a441821fa54953489a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
-  baseCost: 2
-  stat: 0
-  value: 0
-  percentUpgrade: 0
-  upgradeModifier: 0
   currentLevelText: {fileID: 1103652484}
   button: {fileID: 8100723318401156597}
   nextLevelText: {fileID: 589028278}
