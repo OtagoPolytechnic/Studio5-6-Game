@@ -16,16 +16,13 @@ MonoBehaviour:
   desc: Hits on Enemies heal you
   rarity: 2
   upgradeable: 1
-  upgrades:
-  - stat: 1
-    modifier: 0.75
-    applyAsMultiple: 0
+  upgrades: []
   triggerEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8201821395946054257, guid: 556f888338dca14468638a40756d30f9, type: 3}
         m_TargetAssemblyTypeName: ItemController, Scripts
-        m_MethodName: IncreaseBulletAmount
+        m_MethodName: IncreaseLifeSteal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
