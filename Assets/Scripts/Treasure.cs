@@ -18,6 +18,7 @@ public class Treasure : MonoBehaviour
         {
             if (gameObject.GetComponent<SpriteRenderer>().sprite != chestOpen)
             {
+                //change to chest open sprite
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = chestOpen;
                 StartCoroutine(WaitBeforeDestroy());
             }
@@ -34,13 +35,15 @@ public class Treasure : MonoBehaviour
 
     void SpawnRandomCoin()
     {
-        Vector2 randomPos = Random.insideUnitCircle * spawnRadius;
-        spawnCircle.transform.position += new Vector3(randomPos.x, 0, randomPos.y);
-        Instantiate(coinDrop, spawnCircle.transform.position, Quaternion.identity);
+        //spawns a coin randomly inside a circle around the chest
+        Vector3 randomPos = Random.insideUnitCircle * spawnRadius;
+        Instantiate(coinDrop, transform.position + randomPos, Quaternion.identity);
     }
 
     private IEnumerator WaitBeforeDestroy()
     {
+        //spawns coins and then waits before removing chest
+        //could change this to a variable in the editor if needed
         SpawnCoins(5);
 
         yield return new WaitForSeconds(2);
