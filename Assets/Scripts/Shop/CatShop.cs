@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ShopTabs
+public enum ShopTabs //Tabs available in the shop
 {
     ITEMS,
     UPGRADES
@@ -48,7 +48,7 @@ public class CatShop : MonoBehaviour
         instance = this;
     }
 
-    public float GetRarityToPrice(rarity r)
+    public float GetRarityToPrice(rarity r) //Get the price of an item based on its rarity
     {
         float price = 0;
         switch (r)
@@ -75,18 +75,18 @@ public class CatShop : MonoBehaviour
         foreach (ItemData item in items)
         {
             ShopItem shopItem = Instantiate(itemUIPrefab, itemContainer).GetComponent<ShopItem>();
-            shopItem.SetItem(item);
+            shopItem.SetItem(item); //Iterate through the items and set them in the shop
         }
 
         for (int i = 0; i < 3; i++)
         {
             StatUpgrade statUpgrade = Instantiate(upgradeUIPrefab, upgradeContainer)
                 .GetComponent<StatUpgrade>();
-            statUpgrade.Stat = (Stats)i;
+            statUpgrade.Stat = (Stats)i; //iterates for 3 times and sets the stats in the shop based on the index
         }
     }
 
-    public void ClearUI()
+    public void ClearUI() //Used to clear the template items in the UI on run time
     {
         foreach (Transform child in itemContainer)
         {
@@ -99,7 +99,7 @@ public class CatShop : MonoBehaviour
         }
     }
 
-    public void UpdateUI()
+    public void UpdateUI() //Update the UI based on the active tab
     {
         switch (activeTab)
         {
@@ -114,7 +114,7 @@ public class CatShop : MonoBehaviour
         }
     }
 
-    private void ShowUI(ShopTabs tab)
+    private void ShowUI(ShopTabs tab) //Show the UI based on the tab
     {
         switch (tab)
         {
@@ -132,14 +132,14 @@ public class CatShop : MonoBehaviour
         }
     }
 
-    private void LoadUpgrades()
+    private void LoadUpgrades() //Load the upgrades in the shop
     {
         upgradeBtnImage.color = selected;
         itemsBtnImage.color = unSelected;
         ShowUI(ShopTabs.UPGRADES);
     }
 
-    private void LoadItems()
+     private void LoadItems() //Load the items in the shop
     {
         upgradeBtnImage.color = unSelected;
         itemsBtnImage.color = selected;
@@ -147,12 +147,12 @@ public class CatShop : MonoBehaviour
 
     }
 
-    public void SetUpgradesActive()
+    public void SetUpgradesActive() //Set the upgrades tab active
     {
         activeTab = ShopTabs.UPGRADES;
     }
 
-    public void SetItemsActive()
+    public void SetItemsActive() //Set the items tab active
     {
         activeTab = ShopTabs.ITEMS;
     }
@@ -191,16 +191,14 @@ public class CatShop : MonoBehaviour
         }
     }
 
-    public void OpenShop()
+    public void OpenShop() //Open the shop
     {
-        // InventoryController.instance.ShowInventory();
         panel.SetActive(true);
         ShopMenuOpen = true;
     }
 
-    public void CloseShop()
+    public void CloseShop() //Close the shop
     {
-        // InventoryController.instance.HideInventory();
         ShopMenuOpen = false;
         panel.SetActive(false);
     }

@@ -21,7 +21,7 @@ public class ShopItem : MonoBehaviour
     private List<UpgradeData> upgrades = new List<UpgradeData>();
     private ItemData item;
 
-    public void SetItem(ItemData item)
+    public void SetItem(ItemData item) //Set all the required data for the item
     {
         this.itemName = item.itemName;
         this.cost = CatShop.instance.GetRarityToPrice(item.rarity);
@@ -41,7 +41,7 @@ public class ShopItem : MonoBehaviour
         UpdateUI();
     }
 
-    private string RomanNumeral(int number)
+    private string RomanNumeral(int number) //Convert a number to a roman numeral for the level of that item
     {
         string roman;
         switch (number)
@@ -72,12 +72,12 @@ public class ShopItem : MonoBehaviour
     {
         if (level < MAXLEVEL && PlayerHealth.instance.playerGold >= cost)
         {
-            if(upgradeable)
+            if(upgradeable) //If the item is upgradeable, increase the level otherwise set it to 2 as it is a one time purchase
                 level++;
             else
                 level = 2;
             ScoreManager.Instance.SpendGold((int)cost);
-            cost += 5;
+            cost += 5; //Increase the cost of the item by a fixed amount
             foreach (UpgradeData data in upgrades)
             {
                 StatUpgrade.SetStatValue(
@@ -95,7 +95,7 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    private void UpdateUI() //Update the UI based on the level of the item or if it is out of stock
     {
         if(upgradeable)
             itemNameText.text = itemName + " " + RomanNumeral(level);
@@ -122,8 +122,4 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void OnEnable()
-    {
-        Debug.Log("Enabling " + itemName);
-    }
 }

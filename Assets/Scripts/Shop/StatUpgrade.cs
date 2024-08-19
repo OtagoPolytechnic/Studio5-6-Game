@@ -20,6 +20,12 @@ public class StatUpgrade : MonoBehaviour
     public TextMeshProUGUI titleText;
 
 
+    /// <summary>
+    /// Get the variable that is linked to the specific stat
+    /// </summary>
+    /// <param name="stat"></param>
+    /// <returns>The current value of that variable</returns>
+
     public static float GetStatValue(Stats stat)
     {
         if (stat == Stats.SPEED)
@@ -38,6 +44,11 @@ public class StatUpgrade : MonoBehaviour
         return -1;
 
     }
+    /// <summary>
+    /// Set the variable that is linked to the specific stat to a new value
+    /// </summary>
+    /// <param name="stat"></param>
+    /// <param name="value"></param>
     public static void SetStatValue(Stats stat, float value)
     {
         switch(stat)
@@ -85,7 +96,12 @@ public class StatUpgrade : MonoBehaviour
         UpdateUI();
     }
 
-    private string ConvertStatToString(Stats stat)
+/// <summary>
+/// Converts the stat enum to a string for display
+/// </summary>
+/// <param name="stat"></param>
+/// <returns>The string value of a stat</returns>
+    private string ConvertStatToString(Stats stat) 
     {
         string output = null;
         switch(stat)
@@ -131,10 +147,6 @@ public class StatUpgrade : MonoBehaviour
 
     }
 
-    public void OnEnable()
-    {
-        UpdateUI();
-        Debug.Log("THE  " + GetStatValue(Stat));
-    }
+
 
 }
