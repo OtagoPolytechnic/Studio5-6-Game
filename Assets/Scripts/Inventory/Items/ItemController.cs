@@ -41,7 +41,6 @@ public class ItemController : MonoBehaviour
     {
         PlayerHealth.hasShotgun = true;
         PlayerHealth.bulletAmount += 2;
-        Debug.Log($"Shotgun bullets: {PlayerHealth.bulletAmount}");
     }
 
 

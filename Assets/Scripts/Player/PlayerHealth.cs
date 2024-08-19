@@ -105,7 +105,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"Player Damage: {damage}");
         Regen();
         if (currentHealth <= 0)
         {
@@ -132,7 +131,6 @@ public class PlayerHealth : MonoBehaviour
                 currentHealth = MaxHealth;
 
             }
-            Debug.Log($"Regen: {currentHealth}");
         }
     }
 
