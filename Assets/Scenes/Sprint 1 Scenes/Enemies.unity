@@ -236,8 +236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f662101925706f4ab0e022c5b95e786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meeleEnemy1: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
-  rangedEnemy2: {fileID: 5656455698361903583, guid: 70e29cb3f36869e49ba6761acacc67cd, type: 3}
+  meleeEnemy: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
+  rangedEnemy: {fileID: 5656455698361903583, guid: 70e29cb3f36869e49ba6761acacc67cd, type: 3}
+  heavyEnemy: {fileID: 1948659391888186601, guid: d4f32e33858970941b798accb2a10994, type: 3}
+  fastEnemy: {fileID: 2082846883476094595, guid: 419028b7155917d4091d1ecbe7379b37, type: 3}
+  minDistance: 3
 --- !u!4 &1932569588
 Transform:
   m_ObjectHideFlags: 0
