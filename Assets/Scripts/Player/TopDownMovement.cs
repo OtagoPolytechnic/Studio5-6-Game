@@ -24,6 +24,7 @@ public class TopDownMovement : MonoBehaviour
     {
         if(CatShop.instance.ShopMenuOpen)
         {
+            hitBox.velocity = Vector2.zero;
             return;
         }
         moveInput.x = Input.GetAxisRaw("Horizontal");
