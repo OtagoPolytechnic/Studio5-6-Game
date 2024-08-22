@@ -7,10 +7,10 @@ public class Shooting : MonoBehaviour
     public GameObject bullet;
     public Transform sprite;
     public Transform firePoint;
-    public float bulletSpeed = 50;
+    private float bulletSpeed = 50;
 
     public static float firerate = 0.5f;
-    public float shootingInterval = 0;
+    private float shootingInterval = 0;
 
     Vector2 lookDirection;
     float lookAngle;
