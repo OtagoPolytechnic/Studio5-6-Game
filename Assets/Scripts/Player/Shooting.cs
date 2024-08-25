@@ -7,10 +7,10 @@ public class Shooting : MonoBehaviour
     public GameObject bullet;
     public Transform sprite;
     public Transform firePoint;
-    public float bulletSpeed = 50;
+    private float bulletSpeed = 50;
 
     public static float firerate = 0.5f;
-    public float shootingInterval = 0;
+    private float shootingInterval = 0;
 
     Vector2 lookDirection;
     float lookAngle;
@@ -36,6 +36,10 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
+        if(CatShop.instance.ShopMenuOpen)
+        {
+            return;
+        }
         lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         lookDirection = new Vector2(lookDirection.x - transform.position.x, lookDirection.y - transform.position.y);
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;

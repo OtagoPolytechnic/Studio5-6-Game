@@ -7,8 +7,32 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     //health vars
-    public float playerGold;
-    public static float maxHealth = 100;
+    [HideInInspector] public float playerGold = 50000;
+
+    private  float maxHealth = 100;
+    public  float MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+        set
+        {
+            if (value < 1) //If the max health is less than 1, set it to 1
+            {
+                maxHealth = 1;
+            }
+            else
+            {
+                maxHealth = value;
+            }
+            if (currentHealth > value) //If the current health is greater than the max health, set it to the max health
+            {
+                currentHealth = value;
+            }
+        }
+    }
+
     public static float currentHealth;
     float regenTick = 3f;
     float regenInterval = 3f;
@@ -22,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public static float lifestealAmount = 0;
     //damage vars
-    public static int damage = 20;
+    public static float damage = 20;
     public static int explosionSize = 0;
     public static bool explosiveBullets {
         get
@@ -75,8 +99,8 @@ public class PlayerHealth : MonoBehaviour
     
     void Start()
     {
-        playerGold = 50;
-        currentHealth = maxHealth;
+        playerGold = 50000;
+        currentHealth = MaxHealth;
     }
 
     void Update()
@@ -98,16 +122,15 @@ public class PlayerHealth : MonoBehaviour
     void Regen() //currently will regen players health even when paused
     {
         regenTick -= Time.deltaTime;
-        if (regenTick <= 0 && regenTrue && currentHealth < maxHealth) //only works if the player is missing health
+        if (regenTick <= 0 && regenTrue && currentHealth < MaxHealth) //only works if the player is missing health
         {
             regenTick = regenInterval;
             currentHealth += regenAmount;
-            if (currentHealth > maxHealth)//if the player will regen too much health
+            if (currentHealth > MaxHealth)//if the player will regen too much health
             {
-                currentHealth = maxHealth;
+                currentHealth = MaxHealth;
 
             }
-            Debug.Log($"Regen: {currentHealth}");
         }
     }
 
@@ -123,7 +146,7 @@ public class PlayerHealth : MonoBehaviour
             lifeEggs.Remove(lifeEggs[lifeEggs.Count - 1]);
         }
         //Debug.Log("Player health before collisions turned off: " + currentHealth);
-        currentHealth = maxHealth;
+        currentHealth = MaxHealth;
         StartCoroutine(DisableCollisionForDuration(2f));
     }
 
@@ -154,14 +177,14 @@ public class PlayerHealth : MonoBehaviour
 
 
     /// <summary>
-    /// Upgrades a stat by a given value. If percentageUpgrade is true, the value is multiplied by the stat, otherwise it is added to the stat.
+    /// Upgrades a stat by a given value. If applyAsMultiple is true, the value is multiplied by the stat, otherwise it is added to the stat.
     /// </summary>
     /// <param name="stat">What is being upgraded</param>
     /// <param name="value">The ammount to be applied </param>
-    /// <param name="percentageUpgrade">Whether the value should be treated as a percentage</param>
-    public  float UpgradeStat(float stat, float value, bool percentageUpgrade = false) 
+    /// <param name="applyAsMultiple">Whether the value should be treated as a percentage</param>
+    public  float UpgradeStat(float stat, float value, bool applyAsMultiple = false) 
     {
-        if (percentageUpgrade)
+        if (applyAsMultiple)
         {
             stat *= value;
         }
