@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     //health vars
-    [HideInInspector] public float playerGold = 50000;
+    [HideInInspector] public float playerGold = 0;
 
     private  float maxHealth = 100;
     public  float MaxHealth
@@ -99,7 +99,7 @@ public class PlayerHealth : MonoBehaviour
     
     void Start()
     {
-        playerGold = 50000;
+        playerGold = 0;
         currentHealth = MaxHealth;
     }
 
