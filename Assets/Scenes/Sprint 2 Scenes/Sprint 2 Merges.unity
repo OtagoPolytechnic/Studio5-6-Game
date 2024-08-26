@@ -7594,6 +7594,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7453912712769046822, guid: 3986c943992478345ad7ff319725e418, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453912712769046822, guid: 3986c943992478345ad7ff319725e418, type: 3}
       propertyPath: blackOverlay
       value: 
       objectReference: {fileID: 16534103}

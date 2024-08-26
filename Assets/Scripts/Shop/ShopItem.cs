@@ -32,7 +32,7 @@ public class ShopItem : MonoBehaviour
         this.item = item;
     }
 
-    private void Start()
+    private void Awake()
     {
         itemNameText = transform.Find("title").GetComponent<TextMeshProUGUI>();
         costText = transform.Find("cost").GetComponent<TextMeshProUGUI>();
@@ -120,6 +120,11 @@ public class ShopItem : MonoBehaviour
             button.interactable = true;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "Purchase";
         }
+    }
+
+    void OnEnable()
+    {
+        UpdateUI();
     }
 
 }

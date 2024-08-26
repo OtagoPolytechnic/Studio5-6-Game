@@ -147,6 +147,11 @@ public class StatUpgrade : MonoBehaviour
 
     }
 
+    void OnEnable()
+    {
+        UpdateUI();
+    }
+
 
 
 }

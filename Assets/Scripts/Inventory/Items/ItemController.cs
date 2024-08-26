@@ -36,7 +36,7 @@ public class ItemController : MonoBehaviour
 
     public void UpgradeRegen() => PlayerHealth.regenAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.regenAmount, 1f);
 
-
+    public void ShowLantern() => GameObject.Find("Lantern").GetComponent<Lantern>().enabled = true;
     public void IncreaseBulletAmount() 
     {
         PlayerHealth.hasShotgun = true;
