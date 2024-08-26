@@ -23,69 +23,38 @@ public class ItemController : MonoBehaviour
         newEgg.transform.localScale = new Vector3(0.3333333f, 0.3333333f, 0.3333333f);
     }
 
-    public void GlassCannon() //Halves health and Doubles Strength
-    {
-        PlayerHealth.instance.UpgradeStat(PlayerHealth.maxHealth, 0.5f, true);
-        if (PlayerHealth.maxHealth <= PlayerHealth.currentHealth) //If the player's current health is greater than their max health, set their current health to their max health
-        {
-            PlayerHealth.currentHealth = PlayerHealth.maxHealth;
-        }
-        else //Otherwise, halve their current health
-        {
-            PlayerHealth.instance.UpgradeStat(PlayerHealth.currentHealth, 0.5f, true);
-        }
-        PlayerHealth.instance.UpgradeStat(PlayerHealth.damage, 2f, true);
-    }
+    public void IncreaseEnemyBleed()  => EnemyHealth.bleedAmount = (int)PlayerHealth.instance.UpgradeStat(EnemyHealth.bleedAmount, 5);
+    
+    public void IncreaseLifeSteal()  => PlayerHealth.lifestealAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.lifestealAmount, 1f); 
+        
+    public void UpgradeCritChance()  => PlayerHealth.CritChance = PlayerHealth.instance.UpgradeStat(PlayerHealth.CritChance, 0.07f);
+    
 
-    public void IncreaseBulletAmount() //Generalised the name because of the new theme
+    public void ExplosiveBullets()  => PlayerHealth.explosionSize = (int)PlayerHealth.instance.UpgradeStat(PlayerHealth.explosionSize, 1); 
+    
+    public void UpgradeFireRate() => Shooting.firerate = PlayerHealth.instance.UpgradeStat(Shooting.firerate, 0.9f, true);
+
+    public void UpgradeRegen() => PlayerHealth.regenAmount = PlayerHealth.instance.UpgradeStat(PlayerHealth.regenAmount, 1f);
+
+    public void ShowLantern() => GameObject.Find("Lantern").GetComponent<Lantern>().enabled = true;
+    public void IncreaseBulletAmount() 
     {
         PlayerHealth.hasShotgun = true;
         PlayerHealth.bulletAmount += 2;
-        Debug.Log($"Shotgun bullets: {PlayerHealth.bulletAmount}");
     }
 
-    public void LuckyDive()
-    {
-        for (int i = 0; i < 2; i++)
-                {
-                    int randomRoll = UnityEngine.Random.Range(0, 4);
-                    if (randomRoll == 0)
-                    {
-                        PlayerHealth.instance.UpgradeStat(PlayerHealth.damage, 5);
-                        Debug.Log($"Damage: {PlayerHealth.damage}");
-                    }
-                    else if (randomRoll == 1)
-                    {
-                        float current2 = PlayerHealth.maxHealth;
-                        PlayerHealth.instance.UpgradeStat(PlayerHealth.maxHealth, 1.05f, true);
-                        Mathf.RoundToInt(PlayerHealth.maxHealth);
-                        PlayerHealth.currentHealth += PlayerHealth.maxHealth - current2;
-                        Debug.Log($"Max health: {PlayerHealth.maxHealth}");
-                    }
-                    else if (randomRoll == 2)
-                    {
-                        PlayerHealth.instance.UpgradeStat(TopDownMovement.moveSpeed, 1.025f, true);
-                        Debug.Log($"Speed: {TopDownMovement.moveSpeed}");
-                    }
-                    else if (randomRoll == 3)
-                    {
-                        PlayerHealth.instance.UpgradeStat(Shooting.firerate, 0.95f, true);
-                        Debug.Log($"Firerate: {Shooting.firerate}");
-                    }
-                }
 
-    }
 
-    public void AddItemStack(int id) 
+    public void AddItemStack(int id)
     {
         if (InventoryPage.itemList[id].isStackable) //If the item is stackable
         {
-            InventoryPage.itemList[id].stacks ++; //Add 1 to selected item stack
+            InventoryPage.itemList[id].stacks++; //Add 1 to selected item stack
         }
     }
-    
 
-//Should be Deleted once all references are removed
+
+    //Should be Deleted once all references are removed
     public void ItemPicked(int itemID)
     {
         Debug.Log(itemID);
@@ -97,11 +66,11 @@ public class ItemController : MonoBehaviour
                 Debug.Log($"Damage: {PlayerHealth.damage}");
                 break;
             case 01:
-                float current = PlayerHealth.maxHealth;
-                PlayerHealth.maxHealth *= 1.10f;
-                Mathf.RoundToInt(PlayerHealth.maxHealth);
-                PlayerHealth.currentHealth += PlayerHealth.maxHealth - current;
-                Debug.Log($"Max health: {PlayerHealth.maxHealth}");
+                float current = PlayerHealth.instance.MaxHealth;
+                PlayerHealth.instance.MaxHealth *= 1.10f;
+                Mathf.RoundToInt(PlayerHealth.instance.MaxHealth);
+                PlayerHealth.currentHealth += PlayerHealth.instance.MaxHealth - current;
+                Debug.Log($"Max health: {PlayerHealth.instance.MaxHealth}");
                 break;
             case 02:
                 TopDownMovement.moveSpeed *= 1.05f;
@@ -143,10 +112,10 @@ public class ItemController : MonoBehaviour
                 Debug.Log($"Crit Chance: {PlayerHealth.CritChance}");
                 break;
             case 10:
-                PlayerHealth.maxHealth /= 2f;
-                if (PlayerHealth.maxHealth <= PlayerHealth.currentHealth)
+                PlayerHealth.instance.MaxHealth /= 2f;
+                if (PlayerHealth.instance.MaxHealth <= PlayerHealth.currentHealth)
                 {
-                    PlayerHealth.currentHealth = PlayerHealth.maxHealth;
+                    PlayerHealth.currentHealth = PlayerHealth.instance.MaxHealth;
                 }
                 else
                 {
@@ -154,7 +123,7 @@ public class ItemController : MonoBehaviour
                 }
                 PlayerHealth.damage *= 2;
                 Debug.Log(
-                    $"Players max health as been cut in half to:{PlayerHealth.maxHealth}. Their current health is: {PlayerHealth.currentHealth}. Their damage has been doubled to: {PlayerHealth.damage}"
+                    $"Players max health as been cut in half to:{PlayerHealth.instance.MaxHealth}. Their current health is: {PlayerHealth.currentHealth}. Their damage has been doubled to: {PlayerHealth.damage}"
                 );
                 break;
             case 11:
@@ -173,11 +142,11 @@ public class ItemController : MonoBehaviour
                     }
                     else if (randomRoll == 1)
                     {
-                        float current2 = PlayerHealth.maxHealth;
-                        PlayerHealth.maxHealth *= 1.05f;
-                        Mathf.RoundToInt(PlayerHealth.maxHealth);
-                        PlayerHealth.currentHealth += PlayerHealth.maxHealth - current2;
-                        Debug.Log($"Max health: {PlayerHealth.maxHealth}");
+                        float current2 = PlayerHealth.instance.MaxHealth;
+                        PlayerHealth.instance.MaxHealth *= 1.05f;
+                        Mathf.RoundToInt(PlayerHealth.instance.MaxHealth);
+                        PlayerHealth.currentHealth += PlayerHealth.instance.MaxHealth - current2;
+                        Debug.Log($"Max health: {PlayerHealth.instance.MaxHealth}");
                     }
                     else if (randomRoll == 2)
                     {

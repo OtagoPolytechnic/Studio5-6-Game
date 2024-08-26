@@ -10,6 +10,9 @@ assignees: ''
 **Description**
 Describe the new feature or improvement and why it is needed.
 
+**User Story**
+Provide a User story for your issue
+
 **Screenshots**
 If applicable, add screenshots to help explain your idea.
 

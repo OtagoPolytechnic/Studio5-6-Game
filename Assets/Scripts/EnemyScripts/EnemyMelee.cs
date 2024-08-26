@@ -14,14 +14,14 @@ public class EnemyMelee : MonoBehaviour
 
     void Awake()
     {
-        mapManager = FindObjectOfType<MapManager>();
+        //mapManager = FindObjectOfType<MapManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         attack = gameObject.transform.GetChild(0).GetChild(0).gameObject;
     }
 
     void Update()
     {
-        float tileSpeedModifier = mapManager.GetTileWalkingSpeed(transform.position);
+        //float tileSpeedModifier = mapManager.GetTileWalkingSpeed(transform.position);
 
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = player.transform.position - transform.position;
@@ -32,7 +32,7 @@ public class EnemyMelee : MonoBehaviour
 
         if (!attacking) //This enemy type stops moving to attack
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (speed * tileSpeedModifier) * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (speed ) * Time.deltaTime);
             transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
 
             if (distance <= attackRange)
