@@ -29,7 +29,7 @@ public class EnemiesSpawner : MonoBehaviour
             {
                 chosenPrefab = rangedEnemy;
             }
-            else if (enemyType == 2)
+            else if (enemyType == 1)
             {
                 chosenPrefab = heavyEnemy;
             }
