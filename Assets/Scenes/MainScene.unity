@@ -7582,8 +7582,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7453912712769046817, guid: 3986c943992478345ad7ff319725e418, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453912712769046817, guid: 3986c943992478345ad7ff319725e418, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7453912712769046819, guid: 3986c943992478345ad7ff319725e418, type: 3}
       propertyPath: m_Name
@@ -7935,7 +7939,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_FlipX: 0
@@ -15716,6 +15720,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6300385405140103751, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
+      propertyPath: playerGold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300385405140103751, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
       propertyPath: lifeEggs.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -23104,7 +23112,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_FlipX: 0
