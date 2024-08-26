@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu/Titlescreen.unity
     guid: 4c779bdc074401749b4c6e9fe456c0e2
   - enabled: 1
-    path: Assets/Scenes/Sprint 2 Scenes/Lantern.unity
-    guid: a6585367cb398b84ca1badd3bff1b677
+    path: Assets/Scenes/Main Scene.unity
+    guid: 2998f514f7eeec848a70c4f14a62f149
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: a0aff754e0ac03d4fb947e6490c20d66
