@@ -1,17 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+    /// <summary>
+    /// This class will manage all the keys in the level and manages spawning them in the rooms and assigning them to unlockable objects.
+    /// </summary>
+    /// <remarks>
+    /// Author: Chase Bennett-Hill
+    /// Date: 29 / 08 / 2024
+    /// </remarks>
 
 public class KeysManager : MonoBehaviour
 {
-    /// <summary>
-    /// This will manage all the keys in the level and manages spawning them in the rooms and assigning them to unlockable objects.
-    /// </summary>
     [SerializeField] private GameObject roomParent;
 
+    /// <summary>
+    /// The instance of the KeysManager class that can be referenced in other classes.
+    /// </summary>
     public static KeysManager Instance;
 
+    /// <summary>
+    /// The list of keys in the level.
+    /// </summary>
    private List<Key> keys = new List<Key>();
+   /// <summary>
+   ///  The list of unlockable objects in the level.
+   /// </summary>
     private List<UnlockableObject> unlockableObjects = new List<UnlockableObject>();
 
     void Awake()
