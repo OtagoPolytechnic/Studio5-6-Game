@@ -21,6 +21,11 @@ public class UnlockableObject : MonoBehaviour
     /// Whether or not this object is currently locked.
     /// </summary>
     public bool isLocked = true;
+
+    void Awake()
+    {
+        KeysManager.Instance.AddUnlockableObject(this); //  Adds this object to the KeysManager list of unlockable objects.
+    }
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

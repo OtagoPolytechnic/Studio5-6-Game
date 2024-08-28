@@ -15,6 +15,10 @@ public class Key : MonoBehaviour
     /// </summary>
     [HideInInspector] public UnlockableObject targetObject; 
 
+    void Awake()
+    {
+        KeysManager.Instance.AddKey(this); // Adds this key to the KeysManager list of keys.
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
