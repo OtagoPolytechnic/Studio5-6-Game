@@ -21,11 +21,11 @@ public class KeysManager : MonoBehaviour
     /// <summary>
     /// The list of keys in the level.
     /// </summary>
-   private List<Key> keys = new List<Key>();
+   public List<Key> keys = new List<Key>();
    /// <summary>
    ///  The list of unlockable objects in the level.
    /// </summary>
-    private List<UnlockableObject> unlockableObjects = new List<UnlockableObject>();
+    public List<UnlockableObject> unlockableObjects = new List<UnlockableObject>();
 
     void Awake()
     {
@@ -42,6 +42,15 @@ public class KeysManager : MonoBehaviour
     void Start()
     {
 
+        foreach (Key key in keys)
+        {
+            if (!VerifyUniqueUnlockable(key))
+            {
+                Debug.LogError("The Key" + key.gameObject.name + " is assigned to more than one unlockable object.");
+                continue;
+            }
+        }
+
         if (!CheckEnoughRooms())
         {
             Debug.LogError("Not enough rooms to place keys.");
@@ -50,6 +59,23 @@ public class KeysManager : MonoBehaviour
        RandomizeKeys();
     }
 
+
+    public bool VerifyUniqueUnlockable(Key key)
+    {
+        int count = 0;
+        foreach (UnlockableObject unlockableObject in unlockableObjects)
+        {
+            if (unlockableObject.requiredKeys.Contains(key))
+            {
+                count++;
+            }
+        }
+        if (count > 1)
+        {
+            return false;
+        }
+        return true;
+    }
 
     /// <summary>
     /// Checks if there are enough rooms to place the keys. so that one key is placed in one room.
