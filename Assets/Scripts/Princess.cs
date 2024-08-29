@@ -17,6 +17,7 @@ public class Princess : MonoBehaviour
         }
     }
 
+    //temp until bugs in Game Manager are fixed
     private void Victory()
     {
         victoryText.color = Color.green;

@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         Timer.CullEnemies();
    }
 
+    //call this in Princess script when bugs are fixed
     public void Victory()
     {
         gameOverText.color = Color.green;
