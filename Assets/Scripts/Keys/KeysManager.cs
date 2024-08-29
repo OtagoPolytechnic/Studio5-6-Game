@@ -11,6 +11,9 @@ using UnityEngine;
 
 public class KeysManager : MonoBehaviour
 {
+    /// <summary>
+    /// The parent object that holds all the rooms in the level.
+    /// </summary>
     [SerializeField] private GameObject roomParent;
 
     /// <summary>
@@ -21,11 +24,12 @@ public class KeysManager : MonoBehaviour
     /// <summary>
     /// The list of keys in the level.
     /// </summary>
-   public List<Key> keys = new List<Key>();
+   private List<Key> keys = new List<Key>();
+   
    /// <summary>
    ///  The list of unlockable objects in the level.
    /// </summary>
-    public List<UnlockableObject> unlockableObjects = new List<UnlockableObject>();
+    private List<UnlockableObject> unlockableObjects = new List<UnlockableObject>();
 
     void Awake()
     {
@@ -60,6 +64,11 @@ public class KeysManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Verifies that a key is only assigned to one unlockable object.
+    /// </summary>
+    /// <param name="key">The Key to check</param>
+    /// <returns>True if the key is unique to one object</returns>
     public bool VerifyUniqueUnlockable(Key key)
     {
         int count = 0;

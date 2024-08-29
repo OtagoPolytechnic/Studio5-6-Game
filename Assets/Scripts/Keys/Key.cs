@@ -24,12 +24,12 @@ public class Key : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (targetObject == null)
+            if (targetObject == null) //If the key doesn't have a target it will not be able to unlock anything.
             {
                 Debug.LogError("Key does not have a target object.");
                 return;
             }
-            targetObject.UseKey(this);
+            targetObject.UseKey(this); // Uses the key on the target object.
         }
     }
 

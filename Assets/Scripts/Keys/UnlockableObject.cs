@@ -14,8 +14,20 @@ public class UnlockableObject : MonoBehaviour
     /// The set of keys that are required to unlock this object.
     /// </summary>
     public List<Key> requiredKeys;
-    public Sprite unlockedSprite;
-    public Sprite lockedSprite;
+
+    /// <summary>
+    /// The sprite that is displayed when the object is unlocked.
+    /// </summary>
+    [SerializeField] private Sprite unlockedSprite;
+
+    /// <summary>
+    ///     The sprite that is displayed when the object is locked.
+    /// </summary>
+    [SerializeField] private Sprite lockedSprite;
+
+    /// <summary>
+    /// The sprite renderer component of this object.
+    /// </summary>
     private SpriteRenderer spriteRenderer;
     /// <summary>
     /// Whether or not this object is currently locked.
@@ -40,6 +52,11 @@ public class UnlockableObject : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Uses a key on the object if the key is in the required keys list.
+    /// </summary>
+    /// <param name="key">Which key is going to be used</param>
     public void UseKey(Key key)
     {
         if (requiredKeys.Contains(key))
@@ -61,6 +78,9 @@ public class UnlockableObject : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// When all keys are used, the object is unlocked.
+    /// </summary>
     public void Unlock()
     {
         isLocked = false;
