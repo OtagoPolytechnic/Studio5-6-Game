@@ -16,29 +16,27 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject timerManager;
 
-    Timer timer;
 
     void Awake()
     {
         timerManager = GameObject.Find("TimerManager");
-        timer = timerManager.GetComponent<Timer>();
         lastSpawn = spawnTimer;
     }
 
     void Update()
     {
-        if(timer.running)
-        {
-            if (lastSpawn > spawnTimer && currentEnemies.Count < enemyCap)
-            {
-                Spawn(Random.Range(0, enemies.Length));
-                lastSpawn = 0;
-            }
-            else
-            {
-                lastSpawn += Time.deltaTime;
-            }
-        }
+        // if(timer.running)
+        // {
+        //     if (lastSpawn > spawnTimer && currentEnemies.Count < enemyCap)
+        //     {
+        //         Spawn(Random.Range(0, enemies.Length));
+        //         lastSpawn = 0;
+        //     }
+        //     else
+        //     {
+        //         lastSpawn += Time.deltaTime;
+        //     }
+        // }
     }
 
     void Spawn(int enemyNum)
