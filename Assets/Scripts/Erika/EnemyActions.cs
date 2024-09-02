@@ -37,13 +37,13 @@ public class EnemyActions : MonoBehaviour
 
     // assign the player object from the scene to this in the prefab
     // so that it doesn't have to search through every object in the scene
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -52,6 +52,9 @@ public class EnemyActions : MonoBehaviour
         Movement();
     }
 
+    /// <summary>
+    /// Moves the enemy towards the player
+    /// </summary>
     private void Movement()
     {
         distance = Vector2.Distance(transform.position, player.transform.position);
@@ -63,9 +66,9 @@ public class EnemyActions : MonoBehaviour
         {
             switch (enemyType)
             {
-                case EnemyTypes.Melee:
-                    // StartCoroutine(MeleeAttack());
-                    break;
+                // case EnemyTypes.Melee:
+                //     // StartCoroutine(MeleeAttack());
+                //     break;
                 case EnemyTypes.Ranged:
                     // StartCoroutine(RangedAttack());
                     break;
@@ -87,6 +90,11 @@ public class EnemyActions : MonoBehaviour
 
     private IEnumerator MeleeAttack()
     {
+        if (SFXManager.Instance != null)
+        {
+            SFXManager.Instance.EnemyBiteSound();
+        }
+        PlayerHealth.instance.ReceiveDamage(10);
         // attack animation
         yield return new WaitForSeconds(1f); //Attack duration
     }
@@ -103,21 +111,19 @@ public class EnemyActions : MonoBehaviour
         yield return new WaitForSeconds(1f); //Attack duration
     }
 
-    // !!!!
-    // this coroutine checks which enemy type in the coroutine, negating the need for multiple coroutines
-    // !!!!
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player" && enemyType == EnemyTypes.Melee)
+        {
+            StartCoroutine(MeleeAttack());
+        }
+    }
 
-    // private IEnumerator Attack()
-    // {
-    //     switch (enemyType)
-    //     {
-    //         case EnemyTypes.Melee:
-    //             break;
-    //         case EnemyTypes.Ranged:
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     yield return new WaitForSeconds(1f); //Attack duration
-    // }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player" && enemyType == EnemyTypes.Melee)
+        {
+            StopCoroutine(MeleeAttack());
+        }
+    }
 }
