@@ -76,20 +76,23 @@ public class EnemyActions : MonoBehaviour
                     break;
             }
         }
-        else
+        //else
         {
             // move towards player
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (1f) * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (2f) * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
     }
 
-    // !!!!
-    // The enemy type check is done in movement, so that it doesn't keep checking every time the coroutine is called
-    // !!!!
-
+    /// <summary>
+    /// Coroutine for the melee enemy to attack the player
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator MeleeAttack()
     {
+        while(true)
+        {
+
         if (SFXManager.Instance != null)
         {
             SFXManager.Instance.EnemyBiteSound();
@@ -97,13 +100,13 @@ public class EnemyActions : MonoBehaviour
         PlayerHealth.instance.ReceiveDamage(10);
         // attack animation
         yield return new WaitForSeconds(1f); //Attack duration
+        }
     }
 
-    // both the melee enemy and the bullet prefab
-    // could use a scrip that deals damage to the player
-    // by first checking the enemy type
-    // enemy types could use a struct so that it is assigned health and damage values
-
+    /// <summary>
+    /// Coroutine for the ranged enemy to attack the player
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RangedAttack()
     {
         // attack animation
@@ -111,6 +114,10 @@ public class EnemyActions : MonoBehaviour
         yield return new WaitForSeconds(1f); //Attack duration
     }
 
+    /// <summary>
+    /// Checks if the player is in range of the melee enemy who attacks on contact
+    /// </summary>
+    /// <param name="other"> The other game object </param>
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player" && enemyType == EnemyTypes.Melee)
@@ -119,6 +126,10 @@ public class EnemyActions : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops the melee enemy from attacking when the player is out of range
+    /// </summary>
+    /// <param name="other"> The other game object </param>
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player" && enemyType == EnemyTypes.Melee)

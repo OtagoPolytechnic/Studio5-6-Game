@@ -37,33 +37,27 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //destroys bullet on hit with player and lowers health
-        // if (other.gameObject.CompareTag("Enemy"))
-        // {
-        //     //lifesteal addition and cap
-        //     PlayerHealth.currentHealth += PlayerHealth.lifestealAmount;
-        //     if (PlayerHealth.currentHealth > PlayerHealth.instance.MaxHealth)
-        //     {
-        //         PlayerHealth.currentHealth = PlayerHealth.instance.MaxHealth;
-        //     }
-        //     //explosive bullets size calculation
-        //     if (PlayerHealth.explosiveBullets)
-        //     {
-        //         transform.localScale = new Vector3(transform.localScale.x * (2 + 0.2f * PlayerHealth.explosionSize), transform.localScale.y * (2 + 0.2f * PlayerHealth.explosionSize), 1);
-        //     }
-        //     if (critTrue)
-        //     {
-        //         other.gameObject.GetComponent<EnemyHealth>().ReceiveDamage((int) PlayerHealth.damage + critDamage, true);
-        //     }
-        //     else
-        //     {
-        //         other.gameObject.GetComponent<EnemyHealth>().ReceiveDamage((int) PlayerHealth.damage, false);
-        //     }
-        //     Destroy(gameObject);
-        // }
-
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            PlayerHealth.currentHealth -= 10;
+            //lifesteal addition and cap
+            PlayerHealth.currentHealth += PlayerHealth.lifestealAmount;
+            if (PlayerHealth.currentHealth > PlayerHealth.instance.MaxHealth)
+            {
+                PlayerHealth.currentHealth = PlayerHealth.instance.MaxHealth;
+            }
+            //explosive bullets size calculation
+            if (PlayerHealth.explosiveBullets)
+            {
+                transform.localScale = new Vector3(transform.localScale.x * (2 + 0.2f * PlayerHealth.explosionSize), transform.localScale.y * (2 + 0.2f * PlayerHealth.explosionSize), 1);
+            }
+            if (critTrue)
+            {
+                other.gameObject.GetComponent<EnemyHealth>().ReceiveDamage((int) PlayerHealth.damage + critDamage, true);
+            }
+            else
+            {
+                other.gameObject.GetComponent<EnemyHealth>().ReceiveDamage((int) PlayerHealth.damage, false);
+            }
             Destroy(gameObject);
         }
     }
