@@ -10,6 +10,7 @@ public class EnemyMelee : MonoBehaviour
     private bool attacking = false;
     [SerializeField] private float attackRange;
     [SerializeField] private float speed;
+    [SerializeField] private float detectionRange; // Distance at which the enemy detects the player
     private GameObject attack;
 
     void Awake()
@@ -21,18 +22,26 @@ public class EnemyMelee : MonoBehaviour
 
     void Update()
     {
-        //float tileSpeedModifier = mapManager.GetTileWalkingSpeed(transform.position);
+        if (player == null)
+            return;
 
         distance = Vector2.Distance(transform.position, player.transform.position);
+
+        if (distance > detectionRange)
+        {
+            // Player is outside detection range, so enemy stays in place
+            return;
+        }
+
         Vector2 direction = player.transform.position - transform.position;
-        
-        //turns enemy towards player
+
+        // Turns enemy towards player
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (!attacking) //This enemy type stops moving to attack
+        if (!attacking) // This enemy type stops moving to attack
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (speed ) * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
 
             if (distance <= attackRange)
@@ -45,9 +54,10 @@ public class EnemyMelee : MonoBehaviour
     IEnumerator Attack()
     {
         attacking = true;
-        attack.SetActive(true); //show the attack
-        attack.GetComponent<BoxCollider2D>().enabled = true; //enable the collider
-                                                             // Play the enemy bite sound
+        attack.SetActive(true); // Show the attack
+        attack.GetComponent<BoxCollider2D>().enabled = true; // Enable the collider
+
+        // Play the enemy bite sound
         if (SFXManager.Instance != null)
         {
             SFXManager.Instance.EnemyBiteSound();
@@ -57,7 +67,7 @@ public class EnemyMelee : MonoBehaviour
             Debug.LogError("SFXManager instance is null in EnemyMelee.Attack().");
         }
 
-        yield return new WaitForSeconds(1f); //Attack duration
+        yield return new WaitForSeconds(1f); // Attack duration
 
         attack.SetActive(false);
         attacking = false;
