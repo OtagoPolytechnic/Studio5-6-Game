@@ -5839,6 +5839,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 736349133}
     m_Modifications:
+    - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
+      propertyPath: meeleEnemy
+      value: 
+      objectReference: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
+    - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
+      propertyPath: rangedEnemy
+      value: 
+      objectReference: {fileID: 5656455698361903583, guid: 70e29cb3f36869e49ba6761acacc67cd, type: 3}
     - target: {fileID: 1348227428977795, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
       propertyPath: m_Name
       value: Spawner
@@ -7593,8 +7601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f662101925706f4ab0e022c5b95e786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meeleEnemy1: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
-  rangedEnemy2: {fileID: 5656455698361903583, guid: 70e29cb3f36869e49ba6761acacc67cd, type: 3}
+  meeleEnemy: {fileID: 0}
+  rangedEnemy: {fileID: 0}
+  fastEnemy: {fileID: 0}
+  heavyEnemy: {fileID: 0}
 --- !u!1001 &661782987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14098,8 +14108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f662101925706f4ab0e022c5b95e786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meeleEnemy1: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
-  rangedEnemy2: {fileID: 5656455698361903583, guid: 70e29cb3f36869e49ba6761acacc67cd, type: 3}
+  meeleEnemy: {fileID: 0}
+  rangedEnemy: {fileID: 0}
+  fastEnemy: {fileID: 0}
+  heavyEnemy: {fileID: 0}
 --- !u!4 &1173835824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4043444901413562695, guid: 2c64df07091bf91469406911a53d6caa, type: 3}
