@@ -30,6 +30,7 @@ public class EnemyActions : MonoBehaviour
     private float distance;
     private Vector2 direction;
     private float angle;
+    private bool isAttacking = false;
     private const float ATTACK_RANGE = 10f;
 
     //ranged enemy variables
@@ -38,6 +39,7 @@ public class EnemyActions : MonoBehaviour
     // assign the player object from the scene to this in the prefab
     // so that it doesn't have to search through every object in the scene
     private GameObject player;
+    private Coroutine meleeCoroutine;
 
 
     // Start is called before the first frame update
@@ -66,9 +68,6 @@ public class EnemyActions : MonoBehaviour
         {
             switch (enemyType)
             {
-                // case EnemyTypes.Melee:
-                //     // StartCoroutine(MeleeAttack());
-                //     break;
                 case EnemyTypes.Ranged:
                     // StartCoroutine(RangedAttack());
                     break;
@@ -92,14 +91,12 @@ public class EnemyActions : MonoBehaviour
     {
         while(true)
         {
-
-        if (SFXManager.Instance != null)
-        {
-            SFXManager.Instance.EnemyBiteSound();
-        }
-        PlayerHealth.instance.ReceiveDamage(10);
-        // attack animation
-        yield return new WaitForSeconds(1f); //Attack duration
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.EnemyBiteSound();
+            }
+            PlayerHealth.instance.ReceiveDamage(10);
+            yield return new WaitForSeconds(1f); //Attack duration
         }
     }
 
@@ -122,7 +119,10 @@ public class EnemyActions : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && enemyType == EnemyTypes.Melee)
         {
-            StartCoroutine(MeleeAttack());
+            if (meleeCoroutine == null)
+            {
+                meleeCoroutine = StartCoroutine(MeleeAttack());
+            }
         }
     }
 
@@ -134,7 +134,11 @@ public class EnemyActions : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && enemyType == EnemyTypes.Melee)
         {
-            StopCoroutine(MeleeAttack());
+            if (meleeCoroutine != null)
+            {
+                StopCoroutine(meleeCoroutine);
+                meleeCoroutine = null;
+            }
         }
     }
 }
