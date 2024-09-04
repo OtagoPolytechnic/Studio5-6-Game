@@ -16,6 +16,15 @@ public class HeavyEnemy : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("Children count: " + gameObject.transform.childCount);
+        if (gameObject.transform.childCount > 0)
+        {
+            Debug.Log("First child: " + gameObject.transform.GetChild(0).name);
+            if (gameObject.transform.GetChild(0).childCount > 0)
+            {
+                Debug.Log("First child of first child: " + gameObject.transform.GetChild(0).GetChild(0).name);
+            }
+        }
         // Find the player object
         player = GameObject.FindGameObjectWithTag("Player");
         // Get the attack object
