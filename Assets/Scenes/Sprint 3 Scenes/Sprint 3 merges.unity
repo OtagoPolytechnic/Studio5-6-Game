@@ -5563,6 +5563,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 736349133}
     m_Modifications:
+    - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
+      propertyPath: fastEnemy
+      value: 
+      objectReference: {fileID: 2159695078905307730, guid: d84653f6a57079e4caf9df7876ee8a9f, type: 3}
+    - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
+      propertyPath: heavyEnemy
+      value: 
+      objectReference: {fileID: 7280987266282750996, guid: 10d6965fbdb3ec34ebd8dc25862c076d, type: 3}
+    - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
+      propertyPath: meeleEnemy
+      value: 
+      objectReference: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
+    - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
+      propertyPath: rangedEnemy
+      value: 
+      objectReference: {fileID: 5656455698361903583, guid: 70e29cb3f36869e49ba6761acacc67cd, type: 3}
     - target: {fileID: 1348227428977795, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
       propertyPath: m_Name
       value: Spawner
