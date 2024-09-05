@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
     //call this in Princess script when bugs are fixed
     public void Victory()
     {
+                    //disables shooting and movement
+            FindObjectOfType<Shooting>().enabled = false;
+            FindObjectOfType<TopDownMovement>().enabled = false;
+            scoreManager.FinalScore();
         gameOverText.color = Color.green;
         gameOverText.text = "Victory!";
         gameOverUI.SetActive(true);
