@@ -6,7 +6,6 @@ public class InventoryController : MonoBehaviour
 {
     //this is the controller for the inventory panel's control.
     public GameObject timerManager;
-    public Timer timer;
     [SerializeField]
     private InventoryPage inventoryUI;
     public static InventoryController instance;
@@ -19,7 +18,6 @@ public class InventoryController : MonoBehaviour
     }
     public void Start() 
     {
-        timer = timerManager.GetComponent<Timer>();
     }
 
     public void ShowInventory()

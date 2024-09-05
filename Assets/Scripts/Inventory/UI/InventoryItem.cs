@@ -30,13 +30,11 @@ public class InventoryItem : MonoBehaviour
     public Image borderColor;
     public Color32 commonColor, uncommonColor, rareColor, epicColor;
     public GameObject timerManager;
-    public Timer timer;
     public ItemController itemController;
     public Action clicked;
 
     void Start()
     {
-        timer = timerManager.GetComponent<Timer>();
         textName.text = itemName;
         textDesc.text = itemDesc;
         costText.text = cost.ToString();

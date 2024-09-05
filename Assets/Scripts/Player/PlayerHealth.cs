@@ -109,11 +109,6 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
 
-            if (lifeEggs.Count > 0)
-            {
-                Respawn();
-            }
-            else
             {
                 FindObjectOfType<GameManager>().GameOver();
             }

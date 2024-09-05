@@ -14,20 +14,31 @@ public class GameManager : MonoBehaviour
         if (!playerDead)
         {
             playerDead = true;
-            //disables shooting, movement and timer on game over
+            //disables shooting and movement
             FindObjectOfType<Shooting>().enabled = false;
-            FindObjectOfType<Timer>().enabled = false;
             FindObjectOfType<TopDownMovement>().enabled = false;
-            FindObjectOfType<EnemySpawner>().enabled = false;
-            //call game over UI
-            //SFXManager.Instance.StopBackgroundMusic();
             SFXManager.Instance.GameOverSound();
             scoreManager.FinalScore();
             gameOverUI.SetActive(true);
         }
         //call kill all active enemies
-        Timer.CullEnemies();
+            CullEnemies();
    }
+    public void CullEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+
+        foreach (GameObject enemy in enemies)
+        {
+            EnemySpawner.currentEnemies.Remove(enemy);
+            Destroy(enemy);
+        }
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
+        }
+    }
 
     public void Restart() 
     {
