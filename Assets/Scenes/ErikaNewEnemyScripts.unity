@@ -9763,7 +9763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
-  bullet: {fileID: 1970858085864543839, guid: 699c37d916ee4864c970c209d0813901, type: 3}
+  bullet: {fileID: 5418265743146168994, guid: 666dd07e95d1a744fbd4e79265df9d46, type: 3}
 --- !u!1001 &799160243
 PrefabInstance:
   m_ObjectHideFlags: 0
