@@ -22,6 +22,7 @@ public class EnemyActions : MonoBehaviour
     private bool isAttacking = false;
     private const float ATTACK_RANGE = 10f;
     private const float WAIT_TIME = 1f;
+    private const float WALK_SPEED = 5f;
 
     //ranged enemy variables
     [SerializeField] private GameObject bullet;
@@ -78,7 +79,7 @@ public class EnemyActions : MonoBehaviour
             }
         }
         // move towards player
-        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, f * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, WALK_SPEED * Time.deltaTime);
         transform.rotation = Quaternion.Euler(Vector3.forward * angle);
     }
 
