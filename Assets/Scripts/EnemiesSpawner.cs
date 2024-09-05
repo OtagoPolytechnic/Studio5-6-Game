@@ -40,7 +40,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     private GameObject GetRandomEnemyPrefab()
     {
-        GameObject[] enemyPrefabs = { meeleEnemy, rangedEnemy, fastEnemy, heavyEnemy };
+        GameObject[] enemyPrefabs = { meeleEnemy, rangedEnemy, fastEnemy };
         int randomIndex = Random.Range(0, enemyPrefabs.Length);
         return enemyPrefabs[randomIndex];
     }
