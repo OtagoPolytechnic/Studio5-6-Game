@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     public GameObject gameOverUI;
     public ScoreManager scoreManager;
+    public TMP_Text gameOverText;
    private bool playerDead = false;
-   public void GameOver()
+
+    void Awake()
+    {
+        Instance = this;
+    }
+    public void GameOver()
    {
     //This should be handled under a game state end or dead
         if (!playerDead)
@@ -38,6 +46,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bullet);
         }
+    }
+
+    //call this in Princess script when bugs are fixed
+    public void Victory()
+    {
+        gameOverText.color = Color.green;
+        gameOverText.text = "Victory!";
+        gameOverUI.SetActive(true);
     }
 
     public void Restart() 
