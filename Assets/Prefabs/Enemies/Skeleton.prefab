@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5780045538639981437}
   - component: {fileID: -8319887638390923246}
   - component: {fileID: -7996986953160223524}
+  - component: {fileID: 804430801567072519}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,8 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 391528759432483411, guid: aa150d6d100764d45af1b8790d3f8c9c, type: 3}
   critText: {fileID: 391528759432483411, guid: f288eb3865634874f8d46dff2686a205, type: 3}
-  coinDrop: {fileID: 0}
-  baseHealth: 100
+  coinDrop: {fileID: 5686009799246297078, guid: fba12674b4be1f84287823832f6f41b7, type: 3}
+  baseHealth: 200
   health: 0
   bleedTick: 1
   bleedInterval: 1
@@ -123,8 +124,33 @@ MonoBehaviour:
   speed: 1
   attackRange: 2
   detectionRange: 5
-  health: 200
   damage: 50
+--- !u!61 &804430801567072519
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280987266282750996}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5, y: 1.5}
+    newSize: {x: 1.5, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &7721092299203357280
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +250,7 @@ GameObject:
   - component: {fileID: 7567567547758009428}
   m_Layer: 0
   m_Name: attack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -306,7 +332,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

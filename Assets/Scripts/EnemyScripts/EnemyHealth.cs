@@ -10,12 +10,16 @@ public class EnemyHealth : MonoBehaviour
     public GameObject critText;
     public Coin coinDrop;
     public int baseHealth;
-    [HideInInspector] public int health;
+    public int health;
     public float bleedTick = 1f;
     public float bleedInterval = 1f;
     public bool bleedTrue;
     public static int bleedAmount = 0;
 
+    void Start()
+    {
+        health = baseHealth;
+    }
     void Update()
     {
         Bleed();
@@ -23,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
         {
             SFXManager.Instance.EnemyDieSound();
             EnemySpawner.currentEnemies.Remove(gameObject);
+            Debug.Log("Enemy  died " + gameObject.name);
             Destroy(gameObject);
             //drop coin on death
             Instantiate(coinDrop, transform.position, Quaternion.identity);

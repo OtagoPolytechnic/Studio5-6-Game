@@ -9,7 +9,6 @@ public class HeavyEnemy : MonoBehaviour
     [SerializeField] private float speed = 1f; // Movement speed of the enemy
     [SerializeField] private float attackRange = 2f; // Range within which the enemy attacks
     [SerializeField] private float detectionRange = 5f; // Range within which the enemy detects the player
-    [SerializeField] private int health = 200; // Health of the enemy
     [SerializeField] private int damage = 50; // Damage dealt by the enemy
     private bool attacking = false; // Flag to determine if the enemy is attacking
     private GameObject attack; // Reference to the attack object
@@ -82,11 +81,11 @@ public class HeavyEnemy : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         // Reduce health by the damage amount
-        health -= damageAmount;
-        if (health <= 0)
-        {
-            // Destroy the enemy if health is depleted
-            Destroy(gameObject);
-        }
+        // health -= damageAmount;
+        // if (health <= 0)
+        // {
+        //     // Destroy the enemy if health is depleted
+        //     Destroy(gameObject);
+        // }
     }
 }
