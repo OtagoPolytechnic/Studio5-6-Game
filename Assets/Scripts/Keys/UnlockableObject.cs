@@ -41,8 +41,11 @@ public class UnlockableObject : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         if (isLocked)
         {
+            spriteRenderer.enabled = true;
+            boxCollider.enabled = true;
             spriteRenderer.sprite = lockedSprite;
         }
 
@@ -84,7 +87,11 @@ public class UnlockableObject : MonoBehaviour
     public void Unlock()
     {
         isLocked = false;
-        spriteRenderer.sprite = unlockedSprite;
+        spriteRenderer.enabled = false;
+        if (GetComponent<BoxCollider2D>() != null)
+        {
+            GetComponent<BoxCollider2D>().enabled = false;
+        }
         Debug.Log("You have unlocked the " + gameObject.name );
 
     }
