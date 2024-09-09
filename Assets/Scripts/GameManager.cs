@@ -2,32 +2,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     public GameObject gameOverUI;
     public ScoreManager scoreManager;
+    public TMP_Text gameOverText;
    private bool playerDead = false;
-   public void GameOver()
+
+    void Awake()
+    {
+        Instance = this;
+    }
+    public void GameOver()
    {
     //This should be handled under a game state end or dead
         if (!playerDead)
         {
             playerDead = true;
-            //disables shooting, movement and timer on game over
+            //disables shooting and movement
             FindObjectOfType<Shooting>().enabled = false;
-            FindObjectOfType<Timer>().enabled = false;
             FindObjectOfType<TopDownMovement>().enabled = false;
-            FindObjectOfType<EnemySpawner>().enabled = false;
-            //call game over UI
-            //SFXManager.Instance.StopBackgroundMusic();
+            FindObjectOfType<TopDownMovement>().gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             SFXManager.Instance.GameOverSound();
             scoreManager.FinalScore();
             gameOverUI.SetActive(true);
         }
         //call kill all active enemies
-        Timer.CullEnemies();
+            CullEnemies();
    }
+    public void CullEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+
+        foreach (GameObject enemy in enemies)
+        {
+            EnemySpawner.currentEnemies.Remove(enemy);
+            Destroy(enemy);
+        }
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
+        }
+    }
+
+    //call this in Princess script when bugs are fixed
+    public void Victory()
+    {
+                    //disables shooting and movement
+        FindObjectOfType<Shooting>().enabled = false;
+        FindObjectOfType<TopDownMovement>().enabled = false;
+        FindObjectOfType<TopDownMovement>().gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        scoreManager.FinalScore();
+        gameOverText.color = Color.green;
+        gameOverText.text = "Victory!";
+        gameOverUI.SetActive(true);
+    }
 
     public void Restart() 
     {

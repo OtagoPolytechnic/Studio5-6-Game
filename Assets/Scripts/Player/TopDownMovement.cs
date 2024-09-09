@@ -6,9 +6,9 @@ public class TopDownMovement : MonoBehaviour
 {
     public static float moveSpeed = 10f;
     [HideInInspector] public Rigidbody2D hitBox;
-    private Vector2 moveInput;
+    [SerializeField] private Vector2 moveInput;
 
-    private MapManager mapManager;
+   private MapManager mapManager;
 
     private void Awake()
     {

@@ -11,45 +11,75 @@ public class EnemyRanged : MonoBehaviour
     [SerializeField] private Transform bulletPosition;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackInterval;
+    [SerializeField] private float detectionRange; // Distance at which the enemy detects the player
     private float attackCooldown;
-    
+
     private MapManager mapManager;
+
     private void Awake()
     {
         mapManager = FindObjectOfType<MapManager>();
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("Player object not found in EnemyRanged.Awake().");
+        }
         attackCooldown = 0;
     }
 
     void Update()
     {
-        // float tileSpeedModifier = mapManager.GetTileWalkingSpeed(transform.position);
+        if (player == null)
+            return;
 
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 playerPosition = player.transform.position;
+        distance = Vector2.Distance(transform.position, playerPosition);
 
-        //turns enemy towards player
-        direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
+        if (distance > detectionRange)
+        {
+            // Player is outside detection range, so enemy stays in place
+            return;
+        }
+
+        Vector2 direction = playerPosition - (Vector2)transform.position;
+
+        // Turns enemy towards player
+        RotateTowardsPlayer(direction);
 
         if (distance >= attackRange)
-        { 
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (speed ) * Time.deltaTime);
+        {
+            MoveTowardsPlayer(playerPosition);
         }
         else
         {
-            if( attackCooldown <= 0)
-            {
-                Shoot();
-            }
-            else
-            {
-                attackCooldown -= Time.deltaTime;
-            }
+            HandleAttack();
         }
-        
     }
+
+    private void RotateTowardsPlayer(Vector2 direction)
+    {
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
+    }
+
+    private void MoveTowardsPlayer(Vector2 playerPosition)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
+    }
+
+    private void HandleAttack()
+    {
+        if (attackCooldown <= 0)
+        {
+            Shoot();
+        }
+        else
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+    }
+
     void Shoot()
     {
         Instantiate(bullet, bulletPosition.position, Quaternion.identity);
@@ -64,7 +94,5 @@ public class EnemyRanged : MonoBehaviour
         {
             Debug.LogError("SFXManager instance is null in EnemyRanged.Shoot().");
         }
-
-        attackCooldown = attackInterval;
     }
 }
