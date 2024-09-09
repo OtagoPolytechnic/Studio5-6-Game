@@ -4,28 +4,29 @@ public class BossController : MonoBehaviour
 {
     public int maxHealth = 500;
     public float moveSpeed = 3.0f;
+    public float attackRange = 1.5f;
     private int currentHealth;
     private Transform player;
-    private bool isPhaseTwo = false;
-
-    // Animator reference
-    private Animator animator;
+    private bool isAttacking = false;
 
     void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponent<Animator>(); // Get the Animator component
     }
 
     void Update()
     {
-        Move();
-
-        // Check if it's time to enter phase two
-        if (currentHealth <= maxHealth / 2 && !isPhaseTwo)
+        if (player != null)
         {
-            EnterPhaseTwo();
+            Move();
+
+
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distanceToPlayer <= attackRange && !isAttacking)
+            {
+                Attack();
+            }
         }
     }
 
@@ -33,34 +34,18 @@ public class BossController : MonoBehaviour
     {
         if (player != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-
-            // Set moving animation
-            animator.SetBool("isMoving", true);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distanceToPlayer > attackRange)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            }
         }
-        else
-        {
-            // Set idle animation
-            animator.SetBool("isMoving", false);
-        }
-    }
-
-    void EnterPhaseTwo()
-    {
-        isPhaseTwo = true;
-        moveSpeed *= 4.0f; // Increase speed drastically
-        Debug.Log("Boss has entered Phase Two!");
-
-        // Optionally, change animation for phase two if any
-        animator.SetBool("isPhaseTwo", true);
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
-        // Play damage animation
-        animator.SetTrigger("TakeDamage");
+        Debug.Log("Boss takes damage: " + damage);
 
         if (currentHealth <= 0)
         {
@@ -68,14 +53,25 @@ public class BossController : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        isAttacking = true;
+        Debug.Log("Boss is attacking the player!");
+
+
+        Invoke("ResetAttack", 1.0f);
+    }
+
+    void ResetAttack()
+    {
+        isAttacking = false;
+    }
+
     void Die()
     {
-        Debug.Log("Boss is dead!");
+        Debug.Log("Boss is dead!");//hello
 
-        // Trigger death animation
-        animator.SetTrigger("Die");
 
-        // Destroy the boss object after death animation (adjust the delay as needed)
         Destroy(gameObject, 2.0f);
     }
 }
