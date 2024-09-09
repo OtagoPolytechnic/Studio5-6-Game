@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
             //disables shooting and movement
             FindObjectOfType<Shooting>().enabled = false;
             FindObjectOfType<TopDownMovement>().enabled = false;
+            FindObjectOfType<TopDownMovement>().gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             SFXManager.Instance.GameOverSound();
             scoreManager.FinalScore();
             gameOverUI.SetActive(true);
@@ -52,9 +53,10 @@ public class GameManager : MonoBehaviour
     public void Victory()
     {
                     //disables shooting and movement
-            FindObjectOfType<Shooting>().enabled = false;
-            FindObjectOfType<TopDownMovement>().enabled = false;
-            scoreManager.FinalScore();
+        FindObjectOfType<Shooting>().enabled = false;
+        FindObjectOfType<TopDownMovement>().enabled = false;
+        FindObjectOfType<TopDownMovement>().gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        scoreManager.FinalScore();
         gameOverText.color = Color.green;
         gameOverText.text = "Victory!";
         gameOverUI.SetActive(true);
