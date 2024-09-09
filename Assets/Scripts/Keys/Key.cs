@@ -13,11 +13,24 @@ public class Key : MonoBehaviour
     /// <summary>
     /// The UnlockableObject that this key unlocks.
     /// </summary>
-    [HideInInspector] public UnlockableObject targetObject; 
+    [HideInInspector] public UnlockableObject targetObject;
 
+    private SpriteRenderer spriteRenderer;
+    private Collider2D keyCollider;
+
+    
     void Awake()
     {
-        KeysManager.Instance.AddKey(this); // Adds this key to the KeysManager list of keys.
+        if (KeysManager.Instance == null)
+        {
+            Debug.LogError("KeysManager instance is missing.");
+            return;
+        }
+
+        KeysManager.Instance.AddKey(this);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        keyCollider = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +43,15 @@ public class Key : MonoBehaviour
                 return;
             }
             targetObject.UseKey(this); // Uses the key on the target object.
+
+            Debug.Log("Key collected!");
+
+            if (spriteRenderer != null) spriteRenderer.enabled = false;
+            if (keyCollider != null) keyCollider.enabled = false;
+
+            Destroy(gameObject, 0.5f); // Optional: Delay destruction for effects
         }
     }
-
 }
+
+
