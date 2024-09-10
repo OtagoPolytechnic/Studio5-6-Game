@@ -20383,6 +20383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyMelee
       objectReference: {fileID: 0}
+    - target: {fileID: 5656455698361903583, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 69292089992521618, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8706ab13d9d71794593b43187a8a3537, type: 3}

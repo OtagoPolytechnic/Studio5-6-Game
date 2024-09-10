@@ -69,7 +69,7 @@ public class EnemyActions : MonoBehaviour
             switch (enemyType)
             {
                 case EnemyTypes.Ranged:
-                    // StartCoroutine(RangedAttack());
+                    StartCoroutine(RangedAttack());
                     break;
                 default:
                     break;
