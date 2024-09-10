@@ -2,22 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// [Serializable]
-// public struct EnemyTypes
-// {
-   
-// }
-
-/*
-* Attached to every enemy
-* Must have a movement method
-* Attack method that contains two different types of attacks
-
-*/
-
-
 public class EnemyActions : MonoBehaviour
 {
+    /// <summary>
+    /// Numerator for different enemy types
+    /// </summary>
     enum EnemyTypes
     {
         Melee,
@@ -32,6 +21,8 @@ public class EnemyActions : MonoBehaviour
     private float angle;
     private bool isAttacking = false;
     private const float ATTACK_RANGE = 10f;
+    private const float WAIT_TIME = 1f;
+    private const float WALK_SPEED = 5f;
 
     //ranged enemy variables
     [SerializeField] private GameObject bullet;
@@ -40,6 +31,7 @@ public class EnemyActions : MonoBehaviour
     // so that it doesn't have to search through every object in the scene
     private GameObject player;
     private Coroutine meleeCoroutine;
+    private Coroutine rangedCoroutine;
 
 
     // Start is called before the first frame update
@@ -64,23 +56,31 @@ public class EnemyActions : MonoBehaviour
         direction.Normalize();
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (distance <= ATTACK_RANGE)
+        if (distance <= ATTACK_RANGE) // if the enemy is within range of the player
         {
-            switch (enemyType)
+            switch (enemyType) // switch statement for checking type of enemy for modular structure
             {
                 case EnemyTypes.Ranged:
-                    StartCoroutine(RangedAttack());
+                    if (rangedCoroutine == null) // if the coroutine is not running
+                    {
+                        rangedCoroutine = StartCoroutine(RangedAttack()); // start the ranged attack coroutine
+                    }
                     break;
                 default:
                     break;
             }
         }
-        //else
+        else
         {
-            // move towards player
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (2f) * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            if (rangedCoroutine != null)
+            {
+                StopCoroutine(rangedCoroutine); // stop the attack coroutine
+                rangedCoroutine = null;
+            }
         }
+        // move towards player
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, WALK_SPEED * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(Vector3.forward * angle);
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ public class EnemyActions : MonoBehaviour
                 SFXManager.Instance.EnemyBiteSound();
             }
             PlayerHealth.instance.ReceiveDamage(10);
-            yield return new WaitForSeconds(1f); //Attack duration
+            yield return new WaitForSeconds(WAIT_TIME); //Attack duration
         }
     }
 
@@ -106,9 +106,12 @@ public class EnemyActions : MonoBehaviour
     /// <returns></returns>
     private IEnumerator RangedAttack()
     {
-        // attack animation
-        Instantiate(bullet, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1f); //Attack duration
+        while(true)
+        {
+            // attack animation
+            Instantiate(bullet, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(WAIT_TIME); //Attack duration
+        }
     }
 
     /// <summary>
