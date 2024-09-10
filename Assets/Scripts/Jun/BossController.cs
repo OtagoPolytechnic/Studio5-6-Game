@@ -1,5 +1,21 @@
 using UnityEngine;
 
+/*
+* Player enters boss room
+* Player is met with cat trader
+* player is confused, dialogue.
+* cat transforms into evil monster cat
+* phase 1: cat pounce.
+* when the cat is within distance of the player, it will pounce into the player then jump back.
+* phase 2: dodge appearing circles
+* the cat will summon circles that will appear on the ground, the player must dodge them.
+
+*other ideas:
+* cat will summon minions to attack the player
+* cat will circle player and have fake clones appear, player must hit the real cat.
+*/
+
+
 public class BossController : MonoBehaviour
 {
     public int maxHealth = 500;
@@ -17,28 +33,27 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
-        {
-            Move();
+        // if (player != null)
+        // {
+        //     Move();
 
 
-            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer <= attackRange && !isAttacking)
-            {
-                Attack();
-            }
-        }
+        //     float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        //     if (distanceToPlayer <= attackRange && !isAttacking)
+        //     {
+        //         Attack();
+        //     }
+        // }
+
+        Move();
     }
 
     void Move()
     {
-        if (player != null)
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distanceToPlayer > attackRange)
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer > attackRange)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-            }
+            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
         }
     }
 
