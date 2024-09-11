@@ -50,6 +50,13 @@ public class BossController : MonoBehaviour
 
     public bool startFight = false;
 
+    public enum ActionState
+    {
+        Idle,
+        Pounce,
+        Chase
+    }
+
     void Start()
     {
         arenaPos = arenaObj.transform.position;
@@ -64,20 +71,15 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        // if (player != null)
-        // {
-        //     Move();
-
-
-        //     float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        //     if (distanceToPlayer <= attackRange && !isAttacking)
-        //     {
-        //         Attack();
-        //     }
-        // }
 
         //Move();
         HealthUpdate();
+
+        if (startFight)
+        {
+            StartCoroutine(PhaseOne());
+            startFight = false;
+        }
     }
 
     private void HealthUpdate()
@@ -107,14 +109,34 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
-    // void Move()
-    // {
-    //     float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-    //     if (distanceToPlayer > attackRange)
-    //     {
-    //         transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-    //     }
-    // }
+    // if the enemy is outside of an attack range of the player,
+    // it will move towards the player
+    // when the enemy is within the attack range, it will pause for a second
+    // then will lurch forward and return to its original position
+    private void Move()
+    {
+        //if (Vector2.Distance(transform.position, player.position) > attackRange)
+        //{
+            //transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        //}
+        //else
+        //{
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                StartCoroutine(Attack());
+            }
+        //}
+    }
+
+    private IEnumerator Attack()
+    {
+        //transform.position = Vector2.MoveTowards(transform.position, player.position, -moveSpeed * Time.deltaTime);
+        yield return new WaitForSeconds(1.0f);
+        //transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        isAttacking = false;
+    }
+
 
     // public void TakeDamage(int damage)
     // {
@@ -127,10 +149,6 @@ public class BossController : MonoBehaviour
     //     }
     // }
 
-    // void Attack()
-    // {
-    //     isAttacking = true;
-    //     Debug.Log("Boss is attacking the player!");
 
 
     //     Invoke("ResetAttack", 1.0f);
