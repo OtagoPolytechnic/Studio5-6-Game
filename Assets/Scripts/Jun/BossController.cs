@@ -55,7 +55,7 @@ public class BossController : MonoBehaviour
         //     }
         // }
 
-        Move();
+        //Move();
         HealthUpdate();
     }
 
