@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 /*
 * Player enters boss room
@@ -25,10 +28,17 @@ public class BossController : MonoBehaviour
     private Transform player;
     private bool isAttacking = false;
 
+    [SerializeField] private GameObject bossHealthBar;
+    private TextMeshProUGUI bossHealthText;
+    private Image bossHealthBarImage;
+
     void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        bossHealthBarImage = bossHealthBar.transform.GetChild(0).GetComponent<Image>();
+        bossHealthText = bossHealthBar.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -46,6 +56,14 @@ public class BossController : MonoBehaviour
         // }
 
         Move();
+        HealthUpdate();
+    }
+
+    private void HealthUpdate()
+    {
+        float healthFraction = (float)currentHealth / maxHealth;
+        bossHealthBarImage.fillAmount = healthFraction;
+        bossHealthText.text = currentHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
     }
 
     void Move()
