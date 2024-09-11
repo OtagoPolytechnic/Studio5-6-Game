@@ -9,39 +9,86 @@ public class EnemiesSpawner : MonoBehaviour
     public GameObject fastEnemy;
     public GameObject heavyEnemy;
 
-    [SerializeField] private Vector2 spawnRange = new Vector2(5f, 5f); // Range for enemy spawn positions
-    [SerializeField] private int minEnemies = 2; // Minimum number of enemies to spawn
-    [SerializeField] private int maxEnemies = 7; // Maximum number of enemies to spawn
+    public Transform[] spawnPoints; // List of predefined spawn points
+
+    [SerializeField] private int minEnemiesPerPoint = 2; // Ensure a minimum of 2 enemies spawn
+    [SerializeField] private int maxEnemiesPerPoint = 7; // Maximum number of enemies to spawn at each point
+    [SerializeField] private float spawnRadius = 2f; // Radius around the spawn point to space out enemies
+    [SerializeField] private float minimumDistanceBetweenEnemies = 1.5f; // Minimum distance between spawned enemies
+
+    private List<Vector3> usedPositions = new List<Vector3>(); // Track used positions to avoid overlap
 
     void Start()
     {
-        // Ensure all prefabs are assigned
+        // Ensure all prefabs and spawn points are assigned
         if (meeleEnemy == null || rangedEnemy == null || fastEnemy == null || heavyEnemy == null)
         {
             Debug.LogError("One or more enemy prefabs are not assigned.");
             return;
         }
 
-        int numberOfEnemies = Random.Range(minEnemies, maxEnemies);
-
-        for (int i = 0; i < numberOfEnemies; i++)
+        if (spawnPoints.Length == 0)
         {
-            // Randomly choose one of the four enemy types
-            GameObject chosenPrefab = GetRandomEnemyPrefab();
+            Debug.LogError("No spawn points assigned.");
+            return;
+        }
 
-            // Instantiate the chosen enemy
-            GameObject newEnemy = Instantiate(chosenPrefab);
+        // Iterate over each spawn point
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            // Randomly decide how many enemies to spawn at this spawn point
+            int numberOfEnemies = Random.Range(minEnemiesPerPoint, maxEnemiesPerPoint + 1);
 
-            // Set a random position for the enemy
-            Vector2 randomPosition = new Vector2(Random.Range(-spawnRange.x, spawnRange.x), Random.Range(-spawnRange.y, spawnRange.y));
-            newEnemy.transform.position = randomPosition;
+            usedPositions.Clear(); // Clear previous used positions for the current spawn point
+
+            for (int i = 0; i < numberOfEnemies; i++)
+            {
+                // Randomly choose one of the enemy types
+                GameObject chosenPrefab = GetRandomEnemyPrefab();
+
+                // Get a valid random position around the spawn point
+                Vector3 spawnPosition = GetValidSpawnPosition(spawnPoint.position);
+
+                // Instantiate the enemy at the valid position
+                GameObject newEnemy = Instantiate(chosenPrefab, spawnPosition, Quaternion.identity);
+            }
         }
     }
 
     private GameObject GetRandomEnemyPrefab()
     {
-        GameObject[] enemyPrefabs = { meeleEnemy, rangedEnemy, fastEnemy };
+        GameObject[] enemyPrefabs = { meeleEnemy, rangedEnemy, fastEnemy, heavyEnemy };
         int randomIndex = Random.Range(0, enemyPrefabs.Length);
         return enemyPrefabs[randomIndex];
+    }
+
+    private Vector3 GetValidSpawnPosition(Vector3 spawnCenter)
+    {
+        Vector3 spawnPosition;
+        bool validPosition = false;
+
+        // Try to find a valid position
+        do
+        {
+            // Generate a random position within the spawn radius
+            spawnPosition = spawnCenter + (Vector3)Random.insideUnitCircle * spawnRadius;
+
+            // Check if this position is far enough from previously spawned enemies
+            validPosition = true;
+            foreach (Vector3 usedPos in usedPositions)
+            {
+                if (Vector3.Distance(spawnPosition, usedPos) < minimumDistanceBetweenEnemies)
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+
+        } while (!validPosition);
+
+        // Add the valid position to the list of used positions
+        usedPositions.Add(spawnPosition);
+
+        return spawnPosition;
     }
 }
