@@ -123,7 +123,7 @@ MonoBehaviour:
   player: {fileID: 4316639253410503294, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
   speed: 1
   attackRange: 2
-  detectionRange: 5
+  detectionRange: 20
   damage: 50
 --- !u!61 &804430801567072519
 BoxCollider2D:

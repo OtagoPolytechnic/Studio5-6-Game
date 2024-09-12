@@ -164,7 +164,7 @@ MonoBehaviour:
   bulletPosition: {fileID: 5656455699881316956}
   attackRange: 5
   attackInterval: 2
-  detectionRange: 10
+  detectionRange: 20
 --- !u!114 &3801677135667519698
 MonoBehaviour:
   m_ObjectHideFlags: 0
