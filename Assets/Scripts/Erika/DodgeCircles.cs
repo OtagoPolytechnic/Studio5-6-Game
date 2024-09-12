@@ -14,32 +14,46 @@ public class DodgeCircles : MonoBehaviour
     private float alphaSpeed = 0.01f;
 
     private CircleCollider2D circleCollider;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = false;
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = new Color(0.8773585f, 0f, 0f, alpha);
+        StartCoroutine(FadeInCirlce());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (alpha >= 1.0f)
+        {
+            // Check if player is within the circle
+            // If player is within the circle, deal damage to player
+            // If player is not within the circle, destroy the circle
+            StopCoroutine(FadeInCirlce());
+        }
     }
 
-    private void FixedUpdate()
+    private IEnumerator FadeInCirlce()
     {
-        if (alpha < 1.0f)
+        while (alpha < 1.0f)
         {
-            alpha += alphaSpeed;
-            GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, alpha);
+            alpha += alphaSpeed * Time.deltaTime * 60;
+            if (alpha > 1.0f)
+            {
+                alpha = 1.0f;
+            }
+            spriteRenderer.color = new Color(0.8773585f, 0f, 0f, alpha);
+            yield return null;
         }
-        else
-        {
-            circleCollider.enabled = true;
-        }
+
+        circleCollider.enabled = true;
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 
 
@@ -49,10 +63,8 @@ public class DodgeCircles : MonoBehaviour
         {
             // Deal damage to player
             // Destroy the circle
+            Debug.Log("Player has been hit by a circle");
         }
-        else if (collision == null)
-        {
-            Destroy(gameObject);
-        }
+       
     }
 }
