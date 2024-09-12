@@ -5766,7 +5766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1348227428977794, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
       propertyPath: spawnPoints.Array.data[0]
@@ -9482,7 +9482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 798503101}
   m_Layer: 0
-  m_Name: Spawn Point 5
+  m_Name: Spawn Point 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
