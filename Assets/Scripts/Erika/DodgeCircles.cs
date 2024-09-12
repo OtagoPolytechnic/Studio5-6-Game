@@ -20,6 +20,7 @@ public class DodgeCircles : MonoBehaviour
     {
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = false;
+        
     }
 
     // Update is called once per frame

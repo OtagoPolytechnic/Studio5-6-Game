@@ -20,7 +20,6 @@ public class FightTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.CompareTag("Player"))
         {
             bossController.startFight = true;

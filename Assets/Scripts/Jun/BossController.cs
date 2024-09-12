@@ -50,6 +50,13 @@ public class BossController : MonoBehaviour
 
     public bool startFight = false;
 
+    private float distance;
+    private float speed;
+
+    public bool phaseOneEnd = false;
+
+    private const int CIRCLE_SPAWN_AREA = 20;
+
     public enum ActionState
     {
         Idle,
@@ -77,8 +84,13 @@ public class BossController : MonoBehaviour
 
         if (startFight)
         {
-            StartCoroutine(PhaseOne());
             startFight = false;
+            StartCoroutine(PhaseOne());
+            if (phaseOneEnd)
+            {
+                StopCoroutine(PhaseOne());
+                Move();
+            }
         }
     }
 
@@ -100,12 +112,13 @@ public class BossController : MonoBehaviour
             for (int j = 0; j < 20; j++) // 20 circles
             {
                 Vector2 randomPosition = new Vector2(
-                Random.Range(arenaPos.x-20, arenaPos.y+20),
-                Random.Range(arenaPos.x-20, arenaPos.y+20));
+                Random.Range(arenaPos.x-CIRCLE_SPAWN_AREA, arenaPos.x+CIRCLE_SPAWN_AREA),
+                Random.Range(arenaPos.y-CIRCLE_SPAWN_AREA, arenaPos.y+CIRCLE_SPAWN_AREA));
                 Instantiate(circlePrefab, randomPosition, Quaternion.identity);
                 yield return new WaitForSeconds(0.5f);
             }
         }
+        phaseOneEnd = true;
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -115,18 +128,12 @@ public class BossController : MonoBehaviour
     // then will lurch forward and return to its original position
     private void Move()
     {
-        //if (Vector2.Distance(transform.position, player.position) > attackRange)
-        //{
-            //transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        //}
-        //else
-        //{
-            if (!isAttacking)
-            {
-                isAttacking = true;
-                StartCoroutine(Attack());
-            }
-        //}
+        distance = Vector2.Distance(transform.position, player.transform.position);
+        Vector2 direction = player.transform.position - transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (speed ) * Time.deltaTime);
+        transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
     }
 
     private IEnumerator Attack()
