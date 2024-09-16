@@ -17,8 +17,9 @@ public class Key : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Collider2D keyCollider;
-
     
+
+
     void Awake()
     {
         if (KeysManager.Instance == null)
@@ -35,14 +36,14 @@ public class Key : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            if (targetObject == null) //If the key doesn't have a target it will not be able to unlock anything.
+            if (targetObject == null) // If the key doesn't have a target, it will not be able to unlock anything.
             {
                 Debug.LogError("Key does not have a target object.");
                 return;
             }
-            targetObject.UseKey(this); // Uses the key on the target object.
+            targetObject.UseKey(this); // Use the key on the target object.
 
             Debug.Log("Key collected!");
 

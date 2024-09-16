@@ -1,52 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 /// <summary>
 /// This class manages an object that can be unlocked by a key.
 /// </summary>
-/// <remarks>
-/// Author: Chase Bennett-Hill
-/// Date: 29 / 08 / 2024
-/// </remarks>
 public class UnlockableObject : MonoBehaviour
 {
-    /// <summary>
-    /// The set of keys that are required to unlock this object.
-    /// </summary>
-    public List<Key> requiredKeys;
+    public List<Key> requiredKeys = new List<Key>(); // Keys needed to unlock this object
+    public bool isLocked = true; // Whether the object is currently locked
+    [SerializeField] private Sprite unlockedSprite; // Sprite displayed when the object is unlocked
+    [SerializeField] private Sprite lockedSprite; // Sprite displayed when the object is locked
 
-    /// <summary>
-    /// The sprite that is displayed when the object is unlocked.
-    /// </summary>
-    [SerializeField] private Sprite unlockedSprite;
-
-    /// <summary>
-    ///     The sprite that is displayed when the object is locked.
-    /// </summary>
-    [SerializeField] private Sprite lockedSprite;
-
-    /// <summary>
-    /// The sprite renderer component of this object.
-    /// </summary>
     private SpriteRenderer spriteRenderer;
-    /// <summary>
-    /// Whether or not this object is currently locked.
-    /// </summary>
-    public bool isLocked = true;
+    private BoxCollider2D boxCollider;
 
-    void Awake()
-    {
-        KeysManager.Instance.AddUnlockableObject(this); //  Adds this object to the KeysManager list of unlockable objects.
-    }
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
         if (isLocked)
         {
-            spriteRenderer.enabled = true;
-            boxCollider.enabled = true;
-            spriteRenderer.sprite = lockedSprite;
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = lockedSprite;
+            }
+            if (boxCollider != null)
+            {
+                boxCollider.enabled = true;
+            }
         }
 
         foreach (Key key in requiredKeys)
@@ -54,7 +36,6 @@ public class UnlockableObject : MonoBehaviour
             key.targetObject = this;
         }
     }
-
 
     /// <summary>
     /// Uses a key on the object if the key is in the required keys list.
@@ -66,13 +47,15 @@ public class UnlockableObject : MonoBehaviour
         {
             requiredKeys.Remove(key);
             Destroy(key.gameObject);
+
             if (requiredKeys.Count == 0)
             {
                 Unlock();
-
             }
             else
-                Debug.Log("Key Obtained for " + gameObject.name + " " + requiredKeys.Count + " keys remaining.");
+            {
+                Debug.Log("Key obtained for " + gameObject.name + ". " + requiredKeys.Count + " keys remaining.");
+            }
         }
         else
         {
@@ -80,19 +63,22 @@ public class UnlockableObject : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// When all keys are used, the object is unlocked.
     /// </summary>
     public void Unlock()
     {
         isLocked = false;
-        spriteRenderer.enabled = false;
-        if (GetComponent<BoxCollider2D>() != null)
-        {
-            GetComponent<BoxCollider2D>().enabled = false;
-        }
-        Debug.Log("You have unlocked the " + gameObject.name );
 
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = unlockedSprite;
+        }
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = false;
+        }
+
+        Debug.Log("You have unlocked the " + gameObject.name);
     }
 }

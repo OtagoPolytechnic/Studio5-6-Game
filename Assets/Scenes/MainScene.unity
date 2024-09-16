@@ -5842,6 +5842,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9038095, y: 1.9439791}
   m_EdgeRadius: 0
+--- !u!114 &486488987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3748248347884000880, guid: 9d0de8c8f5ef7ab4abf662e43751bda0, type: 3}
+  m_PrefabInstance: {fileID: 1045228508}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486488984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727a291bcd4b2e449a98106926978603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &488021209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9399,6 +9410,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9038095, y: 1.9439791}
   m_EdgeRadius: 0
+--- !u!114 &802993141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3748248347884000880, guid: 9d0de8c8f5ef7ab4abf662e43751bda0, type: 3}
+  m_PrefabInstance: {fileID: 1456093955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802993138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727a291bcd4b2e449a98106926978603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &804383900
 GameObject:
   m_ObjectHideFlags: 0
@@ -11318,6 +11340,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9038095, y: 1.9439791}
   m_EdgeRadius: 0
+--- !u!114 &940565528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3748248347884000880, guid: 9d0de8c8f5ef7ab4abf662e43751bda0, type: 3}
+  m_PrefabInstance: {fileID: 1820943314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940565525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727a291bcd4b2e449a98106926978603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &942016964
 GameObject:
   m_ObjectHideFlags: 0
@@ -13596,6 +13629,7 @@ GameObject:
   - component: {fileID: 1165469529}
   - component: {fileID: 1165469528}
   - component: {fileID: 1165469531}
+  - component: {fileID: 1165469532}
   m_Layer: 0
   m_Name: Boss Room Door
   m_TagString: Untagged
@@ -13672,9 +13706,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isLocked: 1
   unlockedSprite: {fileID: -215080076, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
   lockedSprite: {fileID: 2070863731, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
-  isLocked: 1
 --- !u!4 &1165469530
 Transform:
   m_ObjectHideFlags: 0
@@ -13716,6 +13750,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.14}
   m_EdgeRadius: 0
+--- !u!114 &1165469532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165469527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5f5a8de366ac747bee689ea9762a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredKeys:
+  - {fileID: 802993141}
+  - {fileID: 940565528}
+  - {fileID: 486488987}
+  - {fileID: 1648876508}
+  isLocked: 1
+  unlockedSprite: {fileID: 0}
+  lockedSprite: {fileID: 0}
 --- !u!1 &1174853608
 GameObject:
   m_ObjectHideFlags: 0
@@ -17570,6 +17624,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 95302976199732192, guid: 9d0de8c8f5ef7ab4abf662e43751bda0, type: 3}
   m_PrefabInstance: {fileID: 473738503}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1648876508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3748248347884000880, guid: 9d0de8c8f5ef7ab4abf662e43751bda0, type: 3}
+  m_PrefabInstance: {fileID: 473738503}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648876504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727a291bcd4b2e449a98106926978603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1652475442
 PrefabInstance:
   m_ObjectHideFlags: 0
