@@ -11,10 +11,10 @@ public class EnemiesSpawner : MonoBehaviour
 
     public Transform[] spawnPoints; // List of predefined spawn points
 
-    [SerializeField] private int minEnemiesPerPoint = 2; // Ensure a minimum of 2 enemies spawn
-    [SerializeField] private int maxEnemiesPerPoint = 7; // Maximum number of enemies to spawn at each point
-    [SerializeField] private float spawnRadius = 2f; // Radius around the spawn point to space out enemies
-    [SerializeField] private float minimumDistanceBetweenEnemies = 1.5f; // Minimum distance between spawned enemies
+    private int minEnemiesPerPoint = 2; // Ensure a minimum of 2 enemies spawn
+    private int maxEnemiesPerPoint = 7; // Maximum number of enemies to spawn at each point
+    private float spawnRadius = 2f; // Radius around the spawn point to space out enemies
+    private float minimumDistanceBetweenEnemies = 1.5f; // Minimum distance between spawned enemies
 
     private List<Vector3> usedPositions = new List<Vector3>(); // Track used positions to avoid overlap
 
