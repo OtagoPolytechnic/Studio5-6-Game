@@ -6916,6 +6916,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &549196300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4316639253410503294, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
+  m_PrefabInstance: {fileID: 1353864946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &570462682
 GameObject:
   m_ObjectHideFlags: 0
@@ -13965,6 +13970,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1144043071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144043072}
+  m_Layer: 0
+  m_Name: Cat Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1144043072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144043071}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 25, y: 200, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1146112582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14304,7 +14340,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1177570789
 BoxCollider2D:
@@ -16478,7 +16514,7 @@ Transform:
   - {fileID: 1736304837}
   - {fileID: 1527298599}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1442384260
 MonoBehaviour:
@@ -16498,6 +16534,8 @@ MonoBehaviour:
   arenaObj: {fileID: 1177570787}
   startFight: 0
   phaseOneEnd: 0
+  catPosition: {fileID: 1144043071}
+  player: {fileID: 549196300}
 --- !u!1 &1460133761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6322364310355137675, guid: 93e02c02502cde445a99e55241ef061d, type: 3}

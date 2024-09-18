@@ -36,7 +36,6 @@ public class BossController : MonoBehaviour
     //public float moveSpeed = 3.0f;
     //public float attackRange = 1.5f;
     private int currentHealth;
-    private Transform player;
     private bool isAttacking = false;
 
     [SerializeField] private GameObject bossHealthBar;
@@ -57,6 +56,12 @@ public class BossController : MonoBehaviour
 
     private const int CIRCLE_SPAWN_AREA = 20;
 
+    [SerializeField] private GameObject catPosition;
+
+    [SerializeField] private GameObject player;
+    private bool isReturning = false;
+    private bool isPhaseOneActive = false;
+
     public enum ActionState
     {
         Idle,
@@ -68,7 +73,6 @@ public class BossController : MonoBehaviour
     {
         arenaPos = arenaObj.transform.position;
         currentHealth = maxHealth;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         //arenaCollider = arenaObj.GetComponent<BoxCollider2D>();
 
@@ -82,15 +86,19 @@ public class BossController : MonoBehaviour
         //Move();
         HealthUpdate();
 
-        if (startFight)
+        if (startFight && !isPhaseOneActive && !isReturning)
         {
             startFight = false;
+            isPhaseOneActive = true;
             StartCoroutine(PhaseOne());
-            if (phaseOneEnd)
-            {
-                StopCoroutine(PhaseOne());
-                Move();
-            }
+        }
+
+        if (phaseOneEnd)
+        {
+            phaseOneEnd = false;
+            isPhaseOneActive = false;
+            Debug.Log("Phase One has ended");
+            Move();
         }
     }
 
@@ -103,10 +111,6 @@ public class BossController : MonoBehaviour
 
     public IEnumerator PhaseOne()
     {
-        /*
-        * int range of 20 for the area of fighting
-        * Every 0.5 seconds, a circle prefab will be instantiated at a random position within the range.
-        */
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 20; j++) // 20 circles
@@ -122,55 +126,57 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
-    // if the enemy is outside of an attack range of the player,
-    // it will move towards the player
-    // when the enemy is within the attack range, it will pause for a second
-    // then will lurch forward and return to its original position
     private void Move()
     {
+        Debug.Log("Moving");
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, (speed ) * Time.deltaTime);
         transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
+
+        if (distance <= 1.5f)
+        {
+            isAttacking = true;
+            StartCoroutine(Attack());
+            StartCoroutine(LengthOfAttackPhase());
+        }
     }
 
+    // attack player
     private IEnumerator Attack()
     {
-        //transform.position = Vector2.MoveTowards(transform.position, player.position, -moveSpeed * Time.deltaTime);
-        yield return new WaitForSeconds(1.0f);
-        //transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        isAttacking = false;
+        if (isAttacking)
+        {
+            yield return new WaitForSeconds(1f);
+        }
     }
 
+    private IEnumerator LengthOfAttackPhase()
+    {
+        Debug.Log("Waiting for attack to end");
+        yield return new WaitForSeconds(15.0f);
+        StopCoroutine(Attack());
+        MoveBackToPosition();
+        isReturning = true;
+    }
 
-    // public void TakeDamage(int damage)
-    // {
-    //     currentHealth -= damage;
-    //     Debug.Log("Boss takes damage: " + damage);
+    private void MoveBackToPosition()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, catPosition.transform.position, 2 * Time.deltaTime);
+        if (Vector2.Distance(transform.position, catPosition.transform.position) <= 0.1f)
+        {
+            isReturning = false;
+            startFight = true;
+        }
+    }
 
-    //     if (currentHealth <= 0)
-    //     {
-    //         Die();
-    //     }
-    // }
-
-
-
-    //     Invoke("ResetAttack", 1.0f);
-    // }
-
-    // void ResetAttack()
-    // {
-    //     isAttacking = false;
-    // }
-
-    // void Die()
-    // {
-    //     Debug.Log("Boss is dead!");//hello
-
-
-    //     Destroy(gameObject, 2.0f);
-    // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerHealth>().ReceiveDamage(10);
+        }
+    }
 }
