@@ -10777,7 +10777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348227428977795, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1348227428977797, guid: a178c8a25b20ed24488b398aacb41dac, type: 3}
       propertyPath: m_RootOrder
@@ -14068,7 +14068,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2070863731, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
+  m_Sprite: {fileID: 1391328328, guid: 9bed5a8266e3a5f4cbfcefc15cd231c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14096,8 +14096,8 @@ MonoBehaviour:
   - {fileID: 940565528}
   - {fileID: 486488987}
   - {fileID: 1648876505}
-  unlockedSprite: {fileID: -215080076, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
-  lockedSprite: {fileID: 2070863731, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
+  unlockedSprite: {fileID: -824728982, guid: 9bed5a8266e3a5f4cbfcefc15cd231c3, type: 3}
+  lockedSprite: {fileID: 1391328328, guid: 9bed5a8266e3a5f4cbfcefc15cd231c3, type: 3}
   isLocked: 1
 --- !u!4 &1165469530
 Transform:
@@ -14108,7 +14108,7 @@ Transform:
   m_GameObject: {fileID: 1165469527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.7, y: 176.9, z: -0.18698353}
-  m_LocalScale: {x: 175, y: 175, z: 175}
+  m_LocalScale: {x: 9.704677, y: 9.704677, z: 9.704677}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -14131,7 +14131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.14}
+    oldSize: {x: 3.34, y: 3.34}
     newSize: {x: 0.16, y: 0.14}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
