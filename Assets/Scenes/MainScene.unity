@@ -13626,7 +13626,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1165469530}
-  - component: {fileID: 1165469529}
   - component: {fileID: 1165469528}
   - component: {fileID: 1165469531}
   - component: {fileID: 1165469532}
@@ -13678,7 +13677,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2070863731, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
+  m_Sprite: {fileID: 1391328328, guid: 458de82e131894845adfc5364b063294, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13689,26 +13688,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1165469529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165469527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f5f5a8de366ac747bee689ea9762a18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredKeys:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  isLocked: 1
-  unlockedSprite: {fileID: -215080076, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
-  lockedSprite: {fileID: 2070863731, guid: e98f3569bd05bc64fb3491f7fc82c589, type: 3}
 --- !u!4 &1165469530
 Transform:
   m_ObjectHideFlags: 0
@@ -13717,8 +13696,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165469527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.7, y: 176.9, z: -0.18698353}
-  m_LocalScale: {x: 175, y: 175, z: 175}
+  m_LocalPosition: {x: 25.4, y: 175.2605, z: -0.18698353}
+  m_LocalScale: {x: 10.937154, y: 7.572639, z: 175}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -13741,7 +13720,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.14}
+    oldSize: {x: 3.34, y: 3.34}
     newSize: {x: 0.16, y: 0.14}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13768,8 +13747,8 @@ MonoBehaviour:
   - {fileID: 486488987}
   - {fileID: 1648876508}
   isLocked: 1
-  unlockedSprite: {fileID: 0}
-  lockedSprite: {fileID: 0}
+  unlockedSprite: {fileID: -824728982, guid: 458de82e131894845adfc5364b063294, type: 3}
+  lockedSprite: {fileID: 1391328328, guid: 458de82e131894845adfc5364b063294, type: 3}
 --- !u!1 &1174853608
 GameObject:
   m_ObjectHideFlags: 0
