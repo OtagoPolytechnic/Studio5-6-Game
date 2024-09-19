@@ -60,10 +60,9 @@ public class DodgeCircles : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            // Deal damage to player
-            // Destroy the circle
-            Debug.Log("Player has been hit by a circle");
+        {   
+            collision.GetComponent<PlayerHealth>().ReceiveDamage(10);
+            PlayerHealth.currentHealth -= 10;
         }
        
     }
