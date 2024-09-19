@@ -15910,7 +15910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4316639253410503293, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 153.4
+      value: 183.41
       objectReference: {fileID: 0}
     - target: {fileID: 4316639253410503293, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16492,6 +16492,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1442384259}
   - component: {fileID: 1442384260}
+  - component: {fileID: 1442384261}
+  - component: {fileID: 1442384262}
   m_Layer: 0
   m_Name: Cat Boss
   m_TagString: Untagged
@@ -16529,13 +16531,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 500
-  bossHealthBar: {fileID: 367788180}
   circlePrefab: {fileID: 7361199375307939222, guid: b9d5307f66d2ece45a79eb2b519d591d, type: 3}
+  bossHealthBar: {fileID: 367788180}
   arenaObj: {fileID: 1177570787}
-  startFight: 0
-  phaseOneEnd: 0
   catPosition: {fileID: 1144043071}
   player: {fileID: 549196300}
+  rb: {fileID: 0}
+  startFight: 0
+--- !u!61 &1442384261
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442384258}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5}
+  m_EdgeRadius: 0
+--- !u!50 &1442384262
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442384258}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1460133761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6322364310355137675, guid: 93e02c02502cde445a99e55241ef061d, type: 3}
