@@ -84,8 +84,8 @@ public class HeavyEnemy : MonoBehaviour
         // health -= damageAmount;
         // if (health <= 0)
         // {
-        //     // Destroy the enemy if health is depleted
-        //     Destroy(gameObject);
-        // }
+            // Destroy the enemy if health is depleted
+        //    Destroy(gameObject);
+        //}
     }
 }
