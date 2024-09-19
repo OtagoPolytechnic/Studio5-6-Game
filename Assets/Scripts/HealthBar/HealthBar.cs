@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Text healthText;
-    private Image healthBar;
+    [SerializeField]public Text healthText;
+    [SerializeField]private Image healthBar;
 
     void Start()
     {

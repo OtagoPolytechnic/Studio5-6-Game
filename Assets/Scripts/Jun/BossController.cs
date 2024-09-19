@@ -12,13 +12,12 @@ public class BossController : MonoBehaviour
     private int currentHealth;
 
     [SerializeField] private GameObject circlePrefab;
-    [SerializeField] private GameObject bossHealthBar;
     [SerializeField] private GameObject arenaObj;
     [SerializeField] private GameObject catPosition;
     [SerializeField] private GameObject player;
-    private TextMeshProUGUI bossHealthText;
+    [SerializeField]private TextMeshProUGUI bossHealthText;
     [SerializeField] private Rigidbody2D rb;
-    private Image bossHealthBarImage;
+    [SerializeField]private Image bossHealthBarImage;
 
     //private BoxCollider2D arenaCollider;
     private Vector2 arenaPos;
@@ -37,17 +36,16 @@ public class BossController : MonoBehaviour
     {
         arenaPos = arenaObj.transform.position;
         currentHealth = maxHealth;
-
-        //arenaCollider = arenaObj.GetComponent<BoxCollider2D>();
-
-        bossHealthBarImage = bossHealthBar.transform.GetChild(0).GetComponent<Image>();
-        bossHealthText = bossHealthBar.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        
         rb = GetComponent<Rigidbody2D>();
+
+        currentHealth = maxHealth;
+        bossHealthText.text = currentHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
+
     }
 
     void Update()
     {
-
         HealthUpdate();
 
         if (startFight && !isPhaseOneActive && !isReturning)
@@ -75,7 +73,7 @@ public class BossController : MonoBehaviour
     {
         float healthFraction = (float)currentHealth / maxHealth;
         bossHealthBarImage.fillAmount = healthFraction;
-        //bossHealthText.text = currentHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
+        bossHealthText.text = currentHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
     }
 
     public IEnumerator PhaseOne()
