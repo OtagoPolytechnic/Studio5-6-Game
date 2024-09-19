@@ -52,7 +52,6 @@ public class BossController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         currentHealth = maxHealth;
-        currentHealth = maxHealth;
         bossHealthText.text = currentHealth.ToString("F0") + "/" + maxHealth.ToString("F0");
     }
 
@@ -171,6 +170,7 @@ public class BossController : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
+                bossHealthText.transform.parent.gameObject.SetActive(false);
                 Destroy(gameObject);
                 // Victory
             }
