@@ -18,6 +18,7 @@ public class Key : MonoBehaviour
     void Awake()
     {
         KeysManager.Instance.AddKey(this); // Adds this key to the KeysManager list of keys.
+        ItemSpawnManager.Instance.AddItem(this.gameObject); // Adds this key to the ItemSpawnManager list of items.
     }
 
     private void OnTriggerEnter2D(Collider2D other)

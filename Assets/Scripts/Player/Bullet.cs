@@ -56,7 +56,10 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                other.gameObject.GetComponent<EnemyHealth>().ReceiveDamage((int) PlayerHealth.damage, false);
+                if (other.gameObject.name != "Cat Boss")
+                {
+                    other.gameObject.GetComponent<EnemyHealth>().ReceiveDamage((int) PlayerHealth.damage, false);
+                }
             }
             Destroy(gameObject);
         }

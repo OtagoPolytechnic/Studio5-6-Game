@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
     /// <summary>
-    /// This class will manage all the keys in the level and manages spawning them in the rooms and assigning them to unlockable objects.
+    /// This class will manage all the keys in the level and manages assigning them to unlockable objects.
     /// </summary>
     /// <remarks>
     /// Author: Chase Bennett-Hill
@@ -11,10 +11,6 @@ using UnityEngine;
 
 public class KeysManager : MonoBehaviour
 {
-    /// <summary>
-    /// The parent object that holds all the rooms in the level.
-    /// </summary>
-    [SerializeField] private GameObject roomParent;
 
     /// <summary>
     /// The instance of the KeysManager class that can be referenced in other classes.
@@ -55,12 +51,12 @@ public class KeysManager : MonoBehaviour
             }
         }
 
-        if (!CheckEnoughRooms())
-        {
-            Debug.LogError("Not enough rooms to place keys.");
-            return;
-        }
-       RandomizeKeys();
+    //     if (!CheckEnoughRooms())
+    //     {
+    //         Debug.LogError("Not enough rooms to place keys.");
+    //         return;
+    //     }
+    //    RandomizeKeys();
     }
 
 
@@ -86,35 +82,7 @@ public class KeysManager : MonoBehaviour
         return true;
     }
 
-    /// <summary>
-    /// Checks if there are enough rooms to place the keys. so that one key is placed in one room.
-    /// </summary>
-    /// <returns>True If there are more rooms than keys</returns>
-    private bool CheckEnoughRooms()
-    {
-      return roomParent.transform.childCount >= keys.Count;
-    }
 
-    /// <summary>
-    /// Iterates through all the keys and places them in a random room.
-    /// </summary>
-    private void RandomizeKeys()
-    {
-
-        foreach (Key key in keys)
-        {
-            key.gameObject.transform.position = GetRandomRoom().transform.position;
-        }
-    }
-
-    /// <summary>
-    /// Returns a random room from the room parent.
-    /// </summary>
-    /// <returns>A random child of the rooms parent</returns>
-    private GameObject GetRandomRoom()
-    {
-        return roomParent.transform.GetChild(Random.Range(0, roomParent.transform.childCount)).gameObject;
-    }
 
     /// <summary>
     /// Adds an unlockable object to the list of unlockable objects.

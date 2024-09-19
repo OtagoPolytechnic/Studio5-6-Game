@@ -15,24 +15,31 @@ public class FastEnemy : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Children count: " + gameObject.transform.childCount);
-        if (gameObject.transform.childCount > 0)
-        {
-            Debug.Log("First child: " + gameObject.transform.GetChild(0).name);
-            if (gameObject.transform.GetChild(0).childCount > 0)
-            {
-                Debug.Log("First child of first child: " + gameObject.transform.GetChild(0).GetChild(0).name);
-            }
-        }
         // Find the player object
         player = GameObject.FindGameObjectWithTag("Player");
-        // Get the attack object
-        attack = gameObject.transform.GetChild(0).GetChild(0).gameObject;
+
+        // Try to get the attack object, and log an error if not found
+        if (transform.childCount > 0)
+        {
+            Transform attackTransform = transform.GetChild(0);
+            if (attackTransform.childCount > 0)
+            {
+                attack = attackTransform.GetChild(0).gameObject;
+            }
+            else
+            {
+                Debug.LogError("Attack object not found. Please ensure the hierarchy is correct.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No children found. Please ensure the hierarchy is correct.");
+        }
     }
 
     void Update()
     {
-        if (player == null)
+        if (player == null || attack == null)
             return;
 
         // Calculate the distance to the player
@@ -52,7 +59,7 @@ public class FastEnemy : MonoBehaviour
         if (!attacking)
         {
             // Move towards the player
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             transform.GetChild(0).rotation = Quaternion.Euler(Vector3.forward * angle);
 
             // If within attack range, start the attack
@@ -68,14 +75,21 @@ public class FastEnemy : MonoBehaviour
         attacking = true;
         // Show the attack object and enable its collider
         attack.SetActive(true);
-        attack.GetComponent<BoxCollider2D>().enabled = true;
+        BoxCollider2D attackCollider = attack.GetComponent<BoxCollider2D>();
+        if (attackCollider != null)
+        {
+            attackCollider.enabled = true;
+        }
+        else
+        {
+            Debug.LogError("BoxCollider2D component missing on attack object.");
+        }
 
         yield return new WaitForSeconds(0.5f); // Duration of the attack
 
         // Hide the attack object and stop the attack
         attack.SetActive(false);
         attacking = false;
-        StopCoroutine(Attack());
     }
 
     public void TakeDamage(int damageAmount)

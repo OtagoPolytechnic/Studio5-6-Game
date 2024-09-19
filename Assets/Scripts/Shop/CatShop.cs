@@ -45,6 +45,7 @@ public class CatShop : MonoBehaviour
 
     void Awake()
     {
+        ItemSpawnManager.Instance.AddItem(this.gameObject);
         instance = this;
     }
 
