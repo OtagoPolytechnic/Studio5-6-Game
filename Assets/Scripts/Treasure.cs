@@ -11,6 +11,11 @@ public class Treasure : MonoBehaviour
     [SerializeField]
     private Sprite chestOpen;
 
+    private void Awake()
+    {
+        ItemSpawnManager.Instance.AddItem(this.gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         
