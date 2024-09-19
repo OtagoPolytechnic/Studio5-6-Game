@@ -16483,7 +16483,7 @@ GameObject:
   - component: {fileID: 1442384262}
   m_Layer: 0
   m_Name: Cat Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16522,8 +16522,8 @@ MonoBehaviour:
   arenaObj: {fileID: 1177570787}
   catPosition: {fileID: 1144043071}
   player: {fileID: 549196300}
-  bossHealthText: {fileID: 1690169992}
   rb: {fileID: 0}
+  bossHealthText: {fileID: 1690169992}
   bossHealthBarImage: {fileID: 475905880}
   startFight: 0
 --- !u!61 &1442384261
