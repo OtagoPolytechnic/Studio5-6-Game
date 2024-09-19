@@ -41,9 +41,11 @@ public class BossController : MonoBehaviour
     private bool isPhaseOneActive = false;
     private bool isAttacking = false;
 
+    // Constants
     private const int CIRCLE_SPAWN_AREA = 20;
     private const int SPEED = 5;
     private const float LENGTH_OF_ATTACK_PHASE = 15f;
+
     void Start()
     {
         arenaPos = arenaObj.transform.position;
@@ -159,7 +161,8 @@ public class BossController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player.GetComponent<PlayerHealth>().ReceiveDamage(10);
+            player.GetComponent<PlayerHealth>().ReceiveDamage(20);
+            PlayerHealth.currentHealth -= 20;
         }
 
         if (other.CompareTag("Bullet"))
