@@ -7,11 +7,6 @@ public class SpawnPrincess : MonoBehaviour
     public Princess princess;
 
 
-    public void Start()
-    {
-        InstantiatePrincess();
-    }
-
     //call in Boss script when boss dies
     public void InstantiatePrincess()
     {

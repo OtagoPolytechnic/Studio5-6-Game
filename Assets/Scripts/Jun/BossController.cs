@@ -30,6 +30,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField]private TextMeshProUGUI bossHealthText;
     [SerializeField]private Image bossHealthBarImage;
+    [SerializeField] private SpawnPrincess spawnPrincess;
 
     private Vector2 arenaPos;
 
@@ -172,6 +173,7 @@ public class BossController : MonoBehaviour
                 currentHealth = 0;
                 bossHealthText.transform.parent.gameObject.SetActive(false);
                 Destroy(gameObject);
+                spawnPrincess.InstantiatePrincess();
                 // Victory
             }
         }
