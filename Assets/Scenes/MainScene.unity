@@ -16305,6 +16305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4316639253410503295, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300385405140103751, guid: 729bc25e53437c74b90fcef0935225ac, type: 3}
       propertyPath: playerGold
       value: 0
