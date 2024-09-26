@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -16,24 +17,38 @@ public class EnemyHealth : MonoBehaviour
     public bool bleedTrue;
     public static int bleedAmount = 0;
 
+    public GameObject healthBarUI;
+    private Image healthBarFill;
+
     void Start()
     {
         health = baseHealth;
+        healthBarUI.SetActive(true);
+        healthBarFill = healthBarUI.transform.Find("HealthBar").GetComponent<Image>();
+        UpdateHealthBar();
+        Debug.Log("Health bar initialized for " + gameObject.name);
     }
+
     void Update()
     {
         Bleed();
         if (health <= 0)
         {
+            healthBarUI.SetActive(false);
             SFXManager.Instance.EnemyDieSound();
             EnemySpawner.currentEnemies.Remove(gameObject);
-            Debug.Log("Enemy  died " + gameObject.name);
+            Debug.Log("Enemy died " + gameObject.name);
             Destroy(gameObject);
-            //drop coin on death
             Instantiate(coinDrop, transform.position, Quaternion.identity);
         }
+
+        if (healthBarUI != null)
+        {
+            healthBarUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 2, 0)); // Adjust Y as needed
+        }
     }
-    void Bleed() //this function needs to be reworked to be able to stack bleed on the target
+
+    void Bleed() 
     {
         bleedTick -= Time.deltaTime;
         if (bleedTick <= 0 && bleedTrue)
@@ -42,12 +57,14 @@ public class EnemyHealth : MonoBehaviour
             ReceiveDamage(bleedAmount, false);
         }
     }
+
     public void ReceiveDamage(int damageTaken, bool critTrue)
     {
         if (PlayerHealth.bleedTrue && !bleedTrue)
         {
             bleedTrue = true;
         }
+        
         if (critTrue)
         {
             GameObject critTextInst = Instantiate(critText, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
@@ -60,6 +77,16 @@ public class EnemyHealth : MonoBehaviour
             damageTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString();
             health -= damageTaken;
         }
-        
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBarFill != null)
+        {
+            float healthPercentage = (float)health / baseHealth;
+            healthBarFill.fillAmount = healthPercentage;
+        }
     }
 }
