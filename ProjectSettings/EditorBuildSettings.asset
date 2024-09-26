@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Sprint 5 Scenes/Minimap.unity
+    guid: 0193005ccbcbcfb4eb114ece138f7841
+  - enabled: 1
     path: Assets/Scenes/Main Menu/Titlescreen.unity
     guid: 4c779bdc074401749b4c6e9fe456c0e2
   - enabled: 1
