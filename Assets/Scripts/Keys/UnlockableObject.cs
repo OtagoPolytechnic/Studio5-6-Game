@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 /// <summary>
 /// This class manages an object that can be unlocked by a key.
@@ -8,6 +9,7 @@ using UnityEngine;
 /// Author: Chase Bennett-Hill
 /// Date: 29 / 08 / 2024
 /// </remarks>
+/// 
 public class UnlockableObject : MonoBehaviour
 {
     /// <summary>
@@ -33,6 +35,8 @@ public class UnlockableObject : MonoBehaviour
     /// Whether or not this object is currently locked.
     /// </summary>
     public bool isLocked = true;
+
+    [SerializeField] private TMP_Text keyText;
 
     void Awake()
     {
@@ -72,7 +76,11 @@ public class UnlockableObject : MonoBehaviour
 
             }
             else
+            {
                 Debug.Log("Key Obtained for " + gameObject.name + " " + requiredKeys.Count + " keys remaining.");
+                keyText.text = "Keys remaining: " + requiredKeys.Count;
+            }
+
         }
         else
         {
