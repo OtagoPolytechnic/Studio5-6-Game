@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 /// <summary>
 /// This class manages an object that can be unlocked by a key.
 /// </summary>
@@ -37,6 +38,7 @@ public class UnlockableObject : MonoBehaviour
     public bool isLocked = true;
 
     [SerializeField] private TMP_Text keyText;
+    [SerializeField] private GameObject doorPromptPanel;
 
     void Awake()
     {
@@ -102,5 +104,22 @@ public class UnlockableObject : MonoBehaviour
         }
         Debug.Log("You have unlocked the " + gameObject.name );
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            doorPromptPanel.SetActive(true);
+        }
+      
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            doorPromptPanel.SetActive(false);
+        }
     }
 }
