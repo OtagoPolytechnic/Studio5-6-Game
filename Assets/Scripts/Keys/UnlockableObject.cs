@@ -93,6 +93,11 @@ public class UnlockableObject : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
         }
         Debug.Log("You have unlocked the " + gameObject.name );
+        if (gameObject.name == "Boss Room Door")
+        {
+            MapOverlay.instance.UnlockBossRoom();
+        }
+
 
     }
 }
