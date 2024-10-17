@@ -74,7 +74,7 @@ public class UnlockableObject : MonoBehaviour
             Destroy(key.gameObject);
             if (requiredKeys.Count == 0)
             {
-                keyText.text = "Keys remaining: " + requiredKeys.Count;
+                keyText.text = "Door Unlocked!";
                 Unlock();
 
             }
