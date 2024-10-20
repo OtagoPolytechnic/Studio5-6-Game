@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -17,38 +14,37 @@ public class EnemyHealth : MonoBehaviour
     public bool bleedTrue;
     public static int bleedAmount = 0;
 
-    public GameObject healthBarUI;
-    private Image healthBarFill;
+    // Reference to the health bar UI
+    [SerializeField] private Image healthBarImage;
 
     void Start()
     {
         health = baseHealth;
-        healthBarUI.SetActive(true);
-        healthBarFill = healthBarUI.transform.Find("HealthBar").GetComponent<Image>();
+
+        // Set the health bar position (optional if you're using World Space canvas)
+        healthBarImage.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
+
+        // Update the health bar at the start
         UpdateHealthBar();
-        Debug.Log("Health bar initialized for " + gameObject.name);
     }
 
     void Update()
     {
         Bleed();
+
         if (health <= 0)
         {
-            healthBarUI.SetActive(false);
             SFXManager.Instance.EnemyDieSound();
             EnemySpawner.currentEnemies.Remove(gameObject);
             Debug.Log("Enemy died " + gameObject.name);
             Destroy(gameObject);
-            Instantiate(coinDrop, transform.position, Quaternion.identity);
-        }
 
-        if (healthBarUI != null)
-        {
-            healthBarUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 2, 0)); // Adjust Y as needed
+            // Drop coin on death
+            Instantiate(coinDrop, transform.position, Quaternion.identity);
         }
     }
 
-    void Bleed() 
+    void Bleed()
     {
         bleedTick -= Time.deltaTime;
         if (bleedTick <= 0 && bleedTrue)
@@ -64,29 +60,27 @@ public class EnemyHealth : MonoBehaviour
         {
             bleedTrue = true;
         }
-        
+
+        health -= damageTaken;
+        Debug.Log("Current Health: " + health);
+        UpdateHealthBar();  // Update the health bar after taking damage
+
         if (critTrue)
         {
             GameObject critTextInst = Instantiate(critText, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
             critTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString() + "!";
-            health -= damageTaken;
         }
         else
         {
             GameObject damageTextInst = Instantiate(damageText, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
             damageTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString();
-            health -= damageTaken;
         }
-
-        UpdateHealthBar();
     }
 
-    private void UpdateHealthBar()
+    // Update the health bar to reflect the current health
+    void UpdateHealthBar()
     {
-        if (healthBarFill != null)
-        {
-            float healthPercentage = (float)health / baseHealth;
-            healthBarFill.fillAmount = healthPercentage;
-        }
+        // Use fillAmount for Image-based health bars
+        healthBarImage.fillAmount = (float)health / baseHealth;
     }
 }
