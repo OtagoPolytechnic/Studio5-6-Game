@@ -11,12 +11,6 @@ public class CameraZoom : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-
-        // Ensure the camera is in orthographic mode
-        if (!cam.orthographic)
-        {
-            Debug.LogError("This script only works with orthographic cameras.");
-        }
     }
 
     void Update()
@@ -24,14 +18,14 @@ public class CameraZoom : MonoBehaviour
         // Check if CTRL is held down
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
         {
-            // Get mouse scroll wheel input (positive scrolls up, negative scrolls down)
+            // Get mouse scroll wheel input
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
             if (scroll != 0f)
             {
                 // Adjust the camera's orthographic size based on the scroll input
                 cam.orthographicSize -= scroll * zoomSpeed;
-                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom); // Clamp to keep within min and max zoom limits
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
             }
         }
     }
