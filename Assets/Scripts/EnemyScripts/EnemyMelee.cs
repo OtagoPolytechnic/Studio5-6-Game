@@ -51,7 +51,7 @@ public class EnemyMelee : MonoBehaviour
             }
             else
             {
-                Debug.Log(attackRange + " " + distance);
+                //Debug.Log(attackRange + " " + distance);
             }
         }
     }
