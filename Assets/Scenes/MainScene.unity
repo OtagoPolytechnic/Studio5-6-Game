@@ -7412,7 +7412,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1461954964}
         m_TargetAssemblyTypeName: PauseMenu, Scripts
         m_MethodName: MainMenu
         m_Mode: 1
@@ -13660,7 +13660,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1461954964}
         m_TargetAssemblyTypeName: PauseMenu, Scripts
         m_MethodName: QuitGame
         m_Mode: 1
@@ -35639,7 +35639,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1461954964}
         m_TargetAssemblyTypeName: PauseMenu, Scripts
         m_MethodName: Resume
         m_Mode: 1
