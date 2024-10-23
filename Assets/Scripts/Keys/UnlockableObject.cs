@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 /// <summary>
 /// This class manages an object that can be unlocked by a key.
 /// </summary>
@@ -8,6 +10,7 @@ using UnityEngine;
 /// Author: Chase Bennett-Hill
 /// Date: 29 / 08 / 2024
 /// </remarks>
+/// 
 public class UnlockableObject : MonoBehaviour
 {
     /// <summary>
@@ -33,6 +36,9 @@ public class UnlockableObject : MonoBehaviour
     /// Whether or not this object is currently locked.
     /// </summary>
     public bool isLocked = true;
+
+    [SerializeField] private TMP_Text keyText;
+    [SerializeField] private GameObject doorPromptPanel;
 
     void Awake()
     {
@@ -68,11 +74,16 @@ public class UnlockableObject : MonoBehaviour
             Destroy(key.gameObject);
             if (requiredKeys.Count == 0)
             {
+                keyText.text = "Door Unlocked!";
                 Unlock();
 
             }
             else
+            {
                 Debug.Log("Key Obtained for " + gameObject.name + " " + requiredKeys.Count + " keys remaining.");
+                keyText.text = "Keys remaining: " + requiredKeys.Count;
+            }
+
         }
         else
         {
@@ -93,6 +104,28 @@ public class UnlockableObject : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
         }
         Debug.Log("You have unlocked the " + gameObject.name );
+        if (gameObject.name == "Boss Room Door")
+        {
+            MapOverlay.instance.UnlockBossRoom();
+        }
 
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            doorPromptPanel.SetActive(true);
+        }
+      
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            doorPromptPanel.SetActive(false);
+        }
     }
 }

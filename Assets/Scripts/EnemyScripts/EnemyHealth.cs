@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 
 public class EnemyHealth : MonoBehaviour
@@ -16,24 +14,37 @@ public class EnemyHealth : MonoBehaviour
     public bool bleedTrue;
     public static int bleedAmount = 0;
 
+    // Reference to the health bar UI
+    [SerializeField] private Image healthBarImage;
+
     void Start()
     {
         health = baseHealth;
+
+        // Set the health bar position (optional if you're using World Space canvas)
+        healthBarImage.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
+
+        // Update the health bar at the start
+        UpdateHealthBar();
     }
+
     void Update()
     {
         Bleed();
+
         if (health <= 0)
         {
             SFXManager.Instance.EnemyDieSound();
             EnemySpawner.currentEnemies.Remove(gameObject);
-            Debug.Log("Enemy  died " + gameObject.name);
+            Debug.Log("Enemy died " + gameObject.name);
             Destroy(gameObject);
-            //drop coin on death
+
+            // Drop coin on death
             Instantiate(coinDrop, transform.position, Quaternion.identity);
         }
     }
-    void Bleed() //this function needs to be reworked to be able to stack bleed on the target
+
+    void Bleed()
     {
         bleedTick -= Time.deltaTime;
         if (bleedTick <= 0 && bleedTrue)
@@ -42,24 +53,34 @@ public class EnemyHealth : MonoBehaviour
             ReceiveDamage(bleedAmount, false);
         }
     }
+
     public void ReceiveDamage(int damageTaken, bool critTrue)
     {
         if (PlayerHealth.bleedTrue && !bleedTrue)
         {
             bleedTrue = true;
         }
+
+        health -= damageTaken;
+        Debug.Log("Current Health: " + health);
+        UpdateHealthBar();  // Update the health bar after taking damage
+
         if (critTrue)
         {
             GameObject critTextInst = Instantiate(critText, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
             critTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString() + "!";
-            health -= damageTaken;
         }
         else
         {
             GameObject damageTextInst = Instantiate(damageText, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
             damageTextInst.GetComponent<TextMeshPro>().text = damageTaken.ToString();
-            health -= damageTaken;
         }
-        
+    }
+
+    // Update the health bar to reflect the current health
+    void UpdateHealthBar()
+    {
+        // Use fillAmount for Image-based health bars
+        healthBarImage.fillAmount = (float)health / baseHealth;
     }
 }
