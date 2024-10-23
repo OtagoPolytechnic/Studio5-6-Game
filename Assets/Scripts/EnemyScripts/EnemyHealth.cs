@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public GameObject critText;
     public Coin coinDrop;
     public int baseHealth;
-    public int health;
+    [HideInInspector] public int health;
     public float bleedTick = 1f;
     public float bleedInterval = 1f;
     public bool bleedTrue;

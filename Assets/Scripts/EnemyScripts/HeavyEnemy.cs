@@ -58,6 +58,7 @@ public class HeavyEnemy : MonoBehaviour
             // If within attack range, start the attack
             if (distance <= attackRange)
             {
+                Debug.Log("Heavy enemy attacking");
                 StartCoroutine(Attack());
             }
         }
