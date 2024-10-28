@@ -31,6 +31,8 @@ public class BossController : MonoBehaviour
     [SerializeField]private TextMeshProUGUI bossHealthText;
     [SerializeField]private Image bossHealthBarImage;
     [SerializeField] private SpawnPrincess spawnPrincess;
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private TextMeshProUGUI dialogueText;
 
     private Vector2 arenaPos;
 
@@ -174,8 +176,22 @@ public class BossController : MonoBehaviour
                 bossHealthText.transform.parent.gameObject.SetActive(false);
                 Destroy(gameObject);
                 spawnPrincess.InstantiatePrincess();
+                ShowDialogue("Congratulations! You have defeated the boss and saved the princess.");
                 // Victory
             }
         }
     }
+    private void ShowDialogue(string message)
+    {
+        dialogueBox.SetActive(true);
+        dialogueText.fontSize = 20;
+        dialogueText.text = message;
+    }
+
+    private IEnumerator HideDialogueAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        dialogueBox.SetActive(false);
+    }
+
 }
