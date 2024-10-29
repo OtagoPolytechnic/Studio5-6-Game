@@ -49,6 +49,8 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
+        bossHealthText.transform.parent.gameObject.SetActive(false);
+
         arenaPos = arenaObj.transform.position;
         rb = GetComponent<Rigidbody2D>();
 
@@ -62,6 +64,8 @@ public class BossController : MonoBehaviour
 
         if (startFight && !isPhaseOneActive && !isReturning)
         {
+            bossHealthText.transform.parent.gameObject.SetActive(true);
+
             startFight = false;
             isPhaseOneActive = true;
             StartCoroutine(PhaseOne());
