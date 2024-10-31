@@ -23,7 +23,7 @@ public class Shooting : MonoBehaviour
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
 
         // Rotate firePoint towards mouse position
-        firePoint.rotation = Quaternion.Euler(0, 0, lookAngle);
+       firePoint.rotation = Quaternion.Euler(0, 0, lookAngle);
 
         // Instantiate bullet clone and set its position and rotation
         GameObject bulletClone = Instantiate(bullet);
@@ -36,14 +36,17 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if(CatShop.instance.ShopMenuOpen)
+        if(CatShop.instance != null && CatShop.instance.ShopMenuOpen)
         {
             return;
         }
-        lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        lookDirection = new Vector2(lookDirection.x - transform.position.x, lookDirection.y - transform.position.y);
+        Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+        print("CAM " +cameraPos);
+        lookDirection = new Vector2(cameraPos.x - transform.position.x, cameraPos.y - transform.position.y);
+        print("DIR: " + lookDirection);
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-
+        print("ANGLE: " + lookAngle);
         sprite.rotation = Quaternion.Euler(0, 0, lookAngle);
         HandleShooting();
     }
