@@ -64,7 +64,7 @@ public class HeavyEnemy : MonoBehaviour
     }
 
     IEnumerator Attack()
-    {de
+    {
         attacking = true;
         // Show the attack object and enable its collider
         attack.SetActive(true);
