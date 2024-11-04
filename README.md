@@ -37,11 +37,11 @@ Currently the game is only compatible with Keyboard and Mouse
 
 
 ## Developers
-- Chase Bennett-Hill
-- Erika Stuart
-- Lorna Hart
-- Yousef Altay
-- Jun Xu
+- [Chase Bennett-Hill](https://github.com/ChaseBENNC9)
+- [Erika Stuart](https://github.com/erokasyuart)
+- [Lorna Hart](https://github.com/hartgit)
+- [Yousef Altay](https://github.com/3MKJOE58)
+- [Jun Xu](https://github.com/YJunX)
 
 
 ## How To install 
