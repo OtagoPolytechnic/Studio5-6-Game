@@ -3809,8 +3809,8 @@ MonoBehaviour:
   bossHealthText: {fileID: 783340517}
   bossHealthBarImage: {fileID: 1072617563}
   spawnPrincess: {fileID: 1261381185}
-  dialogueBox: {fileID: 195049063}
-  dialogueText: {fileID: 31998752}
+  dialogueBox: {fileID: 0}
+  dialogueText: {fileID: 0}
   startFight: 0
 --- !u!50 &167710231
 Rigidbody2D:
