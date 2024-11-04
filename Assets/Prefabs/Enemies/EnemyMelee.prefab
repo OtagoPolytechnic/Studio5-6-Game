@@ -455,6 +455,7 @@ Transform:
   - {fileID: 5656455699881316956}
   - {fileID: 7891688468402233937}
   - {fileID: 7524395569297539690}
+  - {fileID: 2262647690177770928}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -533,15 +534,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1000
+  m_LinearDrag: 1000
+  m_AngularDrag: 1000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &5656455699881316957
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +607,7 @@ RectTransform:
   m_Children:
   - {fileID: 378689066793364534}
   m_Father: {fileID: 5656455698361903578}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
