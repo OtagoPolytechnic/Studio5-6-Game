@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 3801677135667519698}
   - component: {fileID: 7915836566139004777}
   m_Layer: 0
-  m_Name: EnemyRanged
+  m_Name: Seagull
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

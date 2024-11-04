@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 69292089992521618}
   - component: {fileID: 4144895722819588711}
   m_Layer: 0
-  m_Name: EnemyMelee
+  m_Name: Ferret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
