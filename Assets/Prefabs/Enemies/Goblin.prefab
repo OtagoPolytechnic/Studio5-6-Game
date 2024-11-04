@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 7049325099746139938}
   m_Father: {fileID: 5345372903632256601}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -345,6 +345,7 @@ Transform:
   - {fileID: 7675069667509796679}
   - {fileID: 5278436802463830311}
   - {fileID: 3778393426986221374}
+  - {fileID: 1399678440130445681}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -531,7 +532,7 @@ GameObject:
   - component: {fileID: 6556344508392378757}
   m_Layer: 0
   m_Name: attack
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
