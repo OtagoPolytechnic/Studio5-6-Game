@@ -186,7 +186,7 @@ public class BossController : MonoBehaviour
         dialogueBox.SetActive(true);
         dialogueText.fontSize = 15;
         dialogueText.text = message;
-        StartCoroutine(HideDialogueAfterDelay(3f));
+        StartCoroutine(HideDialogueAfterDelay(10f));
     }
 
     private IEnumerator HideDialogueAfterDelay(float delay)
