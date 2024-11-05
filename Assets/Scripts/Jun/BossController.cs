@@ -27,10 +27,10 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject arenaObj;
     [SerializeField] private GameObject catPosition;
     [SerializeField] private GameObject player;
-    [SerializeField] private Rigidbody2D rb;
     [SerializeField]private TextMeshProUGUI bossHealthText;
     [SerializeField]private Image bossHealthBarImage;
     [SerializeField] private SpawnPrincess spawnPrincess;
+    private Rigidbody2D rb;
 
     private Vector2 arenaPos;
 
