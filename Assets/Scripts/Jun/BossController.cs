@@ -178,8 +178,11 @@ public class BossController : MonoBehaviour
                 bossHealthText.transform.parent.gameObject.SetActive(false);
                 Destroy(gameObject);
                 spawnPrincess.InstantiatePrincess();
+                Dialgurmanage.i.ShowDialogue("Congratulations! You have defeated the boss and saved the princess.");
                 // Victory
             }
         }
     }
+
+
 }
