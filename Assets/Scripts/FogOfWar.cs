@@ -22,7 +22,6 @@ public class FogOfWar : MonoBehaviour
         {
 
             gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-            Debug.Log("Player entered");
         }
     }
 }

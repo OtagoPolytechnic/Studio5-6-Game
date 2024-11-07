@@ -36,17 +36,6 @@ public class StatsCheckerScript : MonoBehaviour
         initialMaxHelath = PlayerHealth.instance.MaxHealth;
         initialShotgun = PlayerHealth.bulletAmount;
 
-        Debug.Log($"Initial Damage: {initialDamage}");
-        Debug.Log($"Initial Max health: {initialMaxHealth}");
-        Debug.Log($"Initial Speed: {initialMoveSpeed}");
-        Debug.Log($"Initial Regen amount: {initialRegenAmount}");
-        Debug.Log($"Initial Firerate: {initialFirerate}");
-        Debug.Log($"Initial BleedAmount: {initialBleedAmount}");
-        Debug.Log($"Initial LifestealAmount: {initialBleedAmount}");
-        Debug.Log($"Initial ExplosiveBullets: {initialExplosiveBullets}");
-        Debug.Log($"Initial CritChance: {initialCritChance}");
-        Debug.Log($"Initial MaxHelath: {initialMaxHelath}");
-        Debug.Log($"Initial Shotgun: {initialShotgun}");
 
         // Find the ItemController component in the scene
         itemController = FindObjectOfType<ItemController>();
@@ -58,7 +47,6 @@ public class StatsCheckerScript : MonoBehaviour
         else
         {
             initialEggCount = CountEggs();
-            Debug.Log($"Initial Egg count: {initialEggCount}");
 
             // Start the coroutine to wait and then call the method
             StartCoroutine(CallItemPickedAfterDelay());
@@ -89,7 +77,6 @@ public class StatsCheckerScript : MonoBehaviour
         itemController.ItemPicked(11);
         itemController.ItemPicked(12);
         int updatedEggCount = CountEggs();
-        Debug.Log($"Updated Egg count: {updatedEggCount}");
     }
 }
 

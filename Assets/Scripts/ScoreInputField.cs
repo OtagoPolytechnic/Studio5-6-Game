@@ -29,7 +29,6 @@ public class ScoreInputField : MonoBehaviour
             validationText.color = Color.green;
         }
         //currently allows invalid names
-        Debug.Log(playerName);
     }
     public void Show()
     {

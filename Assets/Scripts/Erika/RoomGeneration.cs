@@ -32,7 +32,6 @@ public class RoomGeneration : MonoBehaviour
     /// </summary>
     private GameObject ChooseRoom()
     {
-        Debug.Log("Choosing Room");
         return roomPrefabs[Random.Range(0, roomPrefabs.Length)];
     }
 

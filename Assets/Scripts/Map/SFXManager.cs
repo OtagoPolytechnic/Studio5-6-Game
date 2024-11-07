@@ -25,7 +25,6 @@ public class SFXManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log("SFXManager instance set and will not be destroyed on load.");
         }
         else
         {

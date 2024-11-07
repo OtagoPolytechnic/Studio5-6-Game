@@ -36,7 +36,6 @@ public class EnemyHealth : MonoBehaviour
         {
             SFXManager.Instance.EnemyDieSound();
             EnemySpawner.currentEnemies.Remove(gameObject);
-            Debug.Log("Enemy died " + gameObject.name);
             Destroy(gameObject);
 
             // Drop coin on death
@@ -62,7 +61,6 @@ public class EnemyHealth : MonoBehaviour
         }
 
         health -= damageTaken;
-        Debug.Log("Current Health: " + health);
         UpdateHealthBar();  // Update the health bar after taking damage
 
         if (critTrue)

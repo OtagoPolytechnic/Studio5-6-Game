@@ -24,20 +24,8 @@ public class Dialgurmanage : MonoBehaviour
 
     private IEnumerator HideDialogueAfterDelay(float delay)
     {
-        Debug.Log("bug");
         yield return new WaitForSeconds(5);
-        Debug.Log("bug123");
         dialogueBox.SetActive(false);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

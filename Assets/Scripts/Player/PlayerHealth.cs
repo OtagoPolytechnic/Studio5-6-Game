@@ -140,7 +140,6 @@ public class PlayerHealth : MonoBehaviour
             Destroy(lifeEggs[lifeEggs.Count - 1]);
             lifeEggs.Remove(lifeEggs[lifeEggs.Count - 1]);
         }
-        //Debug.Log("Player health before collisions turned off: " + currentHealth);
         currentHealth = MaxHealth;
         StartCoroutine(DisableCollisionForDuration(2f));
     }
@@ -152,17 +151,14 @@ public class PlayerHealth : MonoBehaviour
 
         // Set the collision matrix to ignore collisions between the player layer and itself for the specified duration
         Physics2D.IgnoreLayerCollision(playerLayer, playerLayer, true);
-        //Debug.Log("Collisions disabled for 2 seconds.");
 
         // Wait for the specified duration
         yield return new WaitForSeconds(duration);
 
         // Re-enable collisions between the player layer and itself
         Physics2D.IgnoreLayerCollision(playerLayer, playerLayer, false);
-        //Debug.Log("Collisions enabled after 2 seconds.");
 
         // Log player health after collisions are turned back on
-        //Debug.Log("Player health after collisions turned back on: " + currentHealth);
     }
     public void ReceiveDamage(int damageTaken)
     {

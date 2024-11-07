@@ -80,14 +80,12 @@ public class UnlockableObject : MonoBehaviour
             }
             else
             {
-                Debug.Log("Key Obtained for " + gameObject.name + " " + requiredKeys.Count + " keys remaining.");
                 keyText.text = "Keys remaining: " + requiredKeys.Count;
             }
 
         }
         else
         {
-            Debug.Log("This key does not unlock this object.");
         }
     }
 
@@ -103,7 +101,6 @@ public class UnlockableObject : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().enabled = false;
         }
-        Debug.Log("You have unlocked the " + gameObject.name );
         if (gameObject.name == "Boss Room Door")
         {
             MapOverlay.instance.UnlockBossRoom();

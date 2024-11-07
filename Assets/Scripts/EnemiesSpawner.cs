@@ -48,7 +48,6 @@ public class EnemiesSpawner : MonoBehaviour
 
                 // Get a valid random position around the spawn point
                 Vector3 spawnPosition = GetValidSpawnPosition(spawnPoint.position);
-                Debug.Log($"Spawning enemy {chosenPrefab.name} at position: {spawnPosition}");
 
                 // Instantiate the enemy at the valid position
                 GameObject newEnemy = Instantiate(chosenPrefab, spawnPosition, Quaternion.identity);
