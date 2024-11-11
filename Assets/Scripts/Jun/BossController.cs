@@ -27,10 +27,10 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject arenaObj;
     [SerializeField] private GameObject catPosition;
     [SerializeField] private GameObject player;
-    [SerializeField] private Rigidbody2D rb;
     [SerializeField]private TextMeshProUGUI bossHealthText;
     [SerializeField]private Image bossHealthBarImage;
     [SerializeField] private SpawnPrincess spawnPrincess;
+    private Rigidbody2D rb;
 
     private Vector2 arenaPos;
 
@@ -49,6 +49,8 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
+        bossHealthText.transform.parent.gameObject.SetActive(false);
+
         arenaPos = arenaObj.transform.position;
         rb = GetComponent<Rigidbody2D>();
 
@@ -62,6 +64,8 @@ public class BossController : MonoBehaviour
 
         if (startFight && !isPhaseOneActive && !isReturning)
         {
+            bossHealthText.transform.parent.gameObject.SetActive(true);
+
             startFight = false;
             isPhaseOneActive = true;
             StartCoroutine(PhaseOne());
@@ -174,8 +178,11 @@ public class BossController : MonoBehaviour
                 bossHealthText.transform.parent.gameObject.SetActive(false);
                 Destroy(gameObject);
                 spawnPrincess.InstantiatePrincess();
+                Dialgurmanage.i.ShowDialogue("Congratulations! You have defeated the boss and saved the princess.");
                 // Victory
             }
         }
     }
+
+
 }

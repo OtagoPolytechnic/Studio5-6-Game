@@ -17,11 +17,9 @@ public class tempscript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision Detected from + " + collision.gameObject.name);
     
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger Detected from + " + collision.gameObject.name);
     }
 }

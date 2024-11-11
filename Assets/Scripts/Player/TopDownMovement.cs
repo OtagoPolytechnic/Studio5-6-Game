@@ -22,7 +22,7 @@ public class TopDownMovement : MonoBehaviour
 
     void Update()
     {
-        if(CatShop.instance.ShopMenuOpen)
+        if(CatShop.instance != null && CatShop.instance.ShopMenuOpen)
         {
             hitBox.velocity = Vector2.zero;
             return;

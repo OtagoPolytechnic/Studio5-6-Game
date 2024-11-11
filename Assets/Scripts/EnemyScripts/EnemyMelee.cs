@@ -47,11 +47,9 @@ public class EnemyMelee : MonoBehaviour
             if (distance <= attackRange)
             {
                 StartCoroutine(Attack());
-                Debug.Log("Attacking player");
             }
             else
             {
-                //Debug.Log(attackRange + " " + distance);
             }
         }
     }

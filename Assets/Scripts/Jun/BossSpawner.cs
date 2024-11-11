@@ -22,7 +22,6 @@ public class BossSpawner : MonoBehaviour
         if (bossPrefab != null && spawnLocation != null)
         {
             Instantiate(bossPrefab, spawnLocation.position, spawnLocation.rotation);
-            Debug.Log("Boss has been spawned!");
         }
         else
         {

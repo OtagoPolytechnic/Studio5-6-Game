@@ -57,45 +57,36 @@ public class ItemController : MonoBehaviour
     //Should be Deleted once all references are removed
     public void ItemPicked(int itemID)
     {
-        Debug.Log(itemID);
 
         switch (itemID)
         {
             case 0:
                 PlayerHealth.damage += 10;
-                Debug.Log($"Damage: {PlayerHealth.damage}");
                 break;
             case 01:
                 float current = PlayerHealth.instance.MaxHealth;
                 PlayerHealth.instance.MaxHealth *= 1.10f;
                 Mathf.RoundToInt(PlayerHealth.instance.MaxHealth);
                 PlayerHealth.currentHealth += PlayerHealth.instance.MaxHealth - current;
-                Debug.Log($"Max health: {PlayerHealth.instance.MaxHealth}");
                 break;
             case 02:
                 TopDownMovement.moveSpeed *= 1.05f;
-                Debug.Log($"Speed: {TopDownMovement.moveSpeed}");
                 break;
             case 03:
                 PlayerHealth.regenAmount += 1f;
-                Debug.Log($"Regen amount: {PlayerHealth.regenAmount}");
                 break;
             case 04:
                 Shooting.firerate *= 0.9f;
-                Debug.Log($"Firerate: {Shooting.firerate}");
                 break;
             case 05:
                 EnemyHealth.bleedAmount += 5;
                 PlayerHealth.bleedTrue = true;
-                Debug.Log($"Bleed amount: {EnemyHealth.bleedAmount}");
                 break;
             case 06:
                 PlayerHealth.lifestealAmount += 1f;
-                Debug.Log($"Lifesteal amount: {PlayerHealth.lifestealAmount}");
                 break;
             case 07:
                 PlayerHealth.explosionSize += 1;
-                Debug.Log($"Explosion size: {PlayerHealth.explosionSize}");
                 break;
             case 08:
                 GameObject newEgg = Instantiate(
@@ -109,7 +100,6 @@ public class ItemController : MonoBehaviour
             case 09:
                 PlayerHealth.CritChance += 0.07f;
 
-                Debug.Log($"Crit Chance: {PlayerHealth.CritChance}");
                 break;
             case 10:
                 PlayerHealth.instance.MaxHealth /= 2f;
@@ -122,14 +112,11 @@ public class ItemController : MonoBehaviour
                     PlayerHealth.currentHealth /= 2f;
                 }
                 PlayerHealth.damage *= 2;
-                Debug.Log(
-                    $"Players max health as been cut in half to:{PlayerHealth.instance.MaxHealth}. Their current health is: {PlayerHealth.currentHealth}. Their damage has been doubled to: {PlayerHealth.damage}"
-                );
+
                 break;
             case 11:
                 PlayerHealth.hasShotgun = true;
                 PlayerHealth.bulletAmount += 2;
-                Debug.Log($"Shotgun bullets: {PlayerHealth.bulletAmount}");
                 break;
             case 12:
                 for (int i = 0; i < 2; i++)
@@ -138,7 +125,6 @@ public class ItemController : MonoBehaviour
                     if (randomRoll == 0)
                     {
                         PlayerHealth.damage += 5;
-                        Debug.Log($"Damage: {PlayerHealth.damage}");
                     }
                     else if (randomRoll == 1)
                     {
@@ -146,34 +132,27 @@ public class ItemController : MonoBehaviour
                         PlayerHealth.instance.MaxHealth *= 1.05f;
                         Mathf.RoundToInt(PlayerHealth.instance.MaxHealth);
                         PlayerHealth.currentHealth += PlayerHealth.instance.MaxHealth - current2;
-                        Debug.Log($"Max health: {PlayerHealth.instance.MaxHealth}");
                     }
                     else if (randomRoll == 2)
                     {
                         TopDownMovement.moveSpeed *= 1.025f;
-                        Debug.Log($"Speed: {TopDownMovement.moveSpeed}");
                     }
                     else if (randomRoll == 3)
                     {
                         Shooting.firerate *= 0.95f;
-                        Debug.Log($"Firerate: {Shooting.firerate}");
                     }
                 }
 
                 break;
             case 13:
                 //PlayerHealth.hasLantern = true;
-                Debug.Log("Player has a lantern");
                 break;
             case 14:
                 //PlayerHealth.coins ++;
 
-                Debug.Log("you picked up a coin");
                 break;
             default:
-                Debug.LogError(
-                    "No item was given to the player, either, the item added to the list was not given a case, or the id does not match a current case."
-                );
+
                 break;
         }
         InventoryPage.itemList[itemID].stacks += 1;
